@@ -423,10 +423,10 @@
                 <label id="nocp-error" class="error invalid-feedback animated fadeInDown" for="nocp"></label>
               </div>
               <div class="form-group">
-                <label for="validationCustom03" class="form-label">Gross Webeight</label>
+                <label for="validationCustom03" class="form-label">Measurment</label>
 
-                <input type="text" class="form-control" name="gross[]" id="validationCustom05" required>
-                <label id="grossweb-error" class="error invalid-feedback animated fadeInDown" for="grossweb"></label>
+                <input type="text" class="form-control" name="mesurment[]" id="validationCustom05" required>
+                <label id="mesurment-error" class="error invalid-feedback animated fadeInDown" for="gromesurmentssweb"></label>
               </div>
             </div>
             <div class="col-md-4 mt-3">
