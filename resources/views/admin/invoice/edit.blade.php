@@ -35,7 +35,7 @@
   </div>
   <div class="col-md-6">
   <div class="form-group">
-    <label for="validationCustom03" class="form-label">shipper Address<span class="text-danger">*</span></label>
+    <label for="validationCustom03" class="form-label">Shipper Address<span class="text-danger">*</span></label>
 
     <textarea rows="4"  class="form-control" cols="50"  id="validationCustom03" name="saddress" required>{{ $invoice->shipper_address	 }}
 </textarea>

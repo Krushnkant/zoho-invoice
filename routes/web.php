@@ -30,12 +30,12 @@ Route::group(['prefix'=>'admin','middleware'=>['auth'],'as'=>'admin.'],function 
   
     Route::get('invoice/list',[\App\Http\Controllers\admin\invoicecontroller::class,'list'])->name('invoice.list');
 
-   Route::post('allInvoicelist',[\App\Http\Controllers\admin\InvoiceController::class,'allInvoicelist'])->name('allInvoicelist');
+   Route::post('allInvoicelist',[\App\Http\Controllers\admin\invoicecontroller::class,'allInvoicelist'])->name('allInvoicelist');
 
-   Route::get('invoice/edit/{id}',[\App\Http\Controllers\admin\InvoiceController::class,'edit'])->name('invoice.edit');
+   Route::get('invoice/edit/{id}',[\App\Http\Controllers\admin\invoicecontroller::class,'edit'])->name('invoice.edit');
 
-   Route::post('invoice/save',[\App\Http\Controllers\admin\InvoiceController::class,'save'])->name('invoice.save');
-   Route::get('invoice/pdf/{id}',[\App\Http\Controllers\admin\InvoiceController::class,'generate_pdf'])->name('invoice.pdf');
+   Route::post('invoice/save',[\App\Http\Controllers\admin\invoicecontroller::class,'save'])->name('invoice.save');
+   Route::get('invoice/pdf/{id}',[\App\Http\Controllers\admin\invoicecontroller::class,'generate_pdf'])->name('invoice.pdf');
 });
 
 Route::get('invoice/create',[\App\Http\Controllers\admin\invoicecontroller::class,'index'])->name('invoice.create');
