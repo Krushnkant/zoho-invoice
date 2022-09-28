@@ -168,8 +168,9 @@ class invoicecontroller extends Controller
         'fpat.required' =>'this field is required',
         'sname.required' =>'this field is required',
     ];
-
+    //dd($request->all());
     $validator = Validator::make($request->all(), [
+        
         'sname' => 'required',
         'saddress' => 'required',
         'cname' => 'required',
@@ -223,8 +224,10 @@ class invoicecontroller extends Controller
         $company->contry_origin = $request->cor;
         $company->freight_charges = $request->freight;
         $company->freight_payable_at = $request->fpat;
-        // $company->shipped_on_board = $request->freight;
-        // $company->mode_of_shipment = $request->fpat;
+         $company->shipped_on_board = $request->ship;
+        $company->mode_of_shipment = $request->mode;
+        $company->place_of_date = $request->pdate;
+        $company->place_of_issue = $request->place;
         $company->save();
 
         foreach ($request->containerno as $key => $item) {
@@ -241,7 +244,7 @@ class invoicecontroller extends Controller
             //}
            
     }
-     // dd($company);
+     //dd($company);
   
 
    
@@ -286,7 +289,7 @@ class invoicecontroller extends Controller
             'saddress.required' =>'Please provide  S address',
             'caddress.required' =>'please provide  C address',
             'naddress.required' =>'Please provide N address',
-            'aname.required' =>'please provide a prefix for A Name',
+            //'aname.required' =>'please provide a prefix for A Name',
             //'agaddress.required' =>'Please provide a address',
             'blading.required' =>'this field is required',
             'vessel.required' =>'this field is required',
@@ -295,8 +298,8 @@ class invoicecontroller extends Controller
             'pod.required' =>'this field is required ',
             'pody.required' =>'this field is required',
             'pcarriageby.required' =>'this field is required ',
-            'por.required' =>'this field is required ',
-            'cor.required' =>'this field is required',
+            'por.required' =>'this field is required ', 
+            'cor.required' =>'this field is required', 
             'containerno.required' =>'this field is required ',
             'countainerpackage.required' =>'this field is required',
             'description.required' =>'this field is required ',
@@ -307,7 +310,7 @@ class invoicecontroller extends Controller
             'podi.required' =>'this field is required',
             'sonboard.required' =>'this field is required ',
             'mode.required' =>'this field is required',
-            'fpat.required' =>'this field is required',
+            //'fpat.required' =>'this field is required',
             'sname.required' =>'this field is required',
         ];
         // dd($request->all());
@@ -318,7 +321,7 @@ class invoicecontroller extends Controller
             'cname' => 'required',
             'caddress' => 'required',
             'naddress' => 'required',
-            'aname' => 'required',
+            //'aname' => 'required',
             //'agaddress' => 'required',
             // 'bnumber' => 'required',
             'blading' => 'required',
@@ -340,7 +343,7 @@ class invoicecontroller extends Controller
             // 'podi' => 'required',
             // 'sonboard' => 'required',
             // 'mode' => 'required',
-            'fpat' => 'required',
+            //'fpat' => 'required',
          
 
         ], $messages);
@@ -449,7 +452,7 @@ class invoicecontroller extends Controller
             $invoice->consignee_name = $request->input('cname');
             $invoice->consignee_address = $request->input('caddress');
             $invoice->notify_address = $request->input('naddress');
-            $invoice->agent_name = $request->input('aname');
+           // $invoice->agent_name = $request->input('aname');
             //$invoice->agent_address = $response1['Vessel'];
             $invoice->bill_number  = "PSLPKLJPR".date('Y-m-d').   $last_id;
             $invoice->Bill_of_lading = $request->input('blading');
@@ -465,24 +468,24 @@ class invoicecontroller extends Controller
             // $invoice->container_package = $request->input('nocp');
             // $invoice->description_goods = $request->input('dog');
             // $invoice->Gross_web  = $request->input('grossweb');
-            // $invoice->Measurment = $request->input('mesurment');
+             $invoice->freight_charges = $request->input('freight');
           
             if($data['freight'] == "prepaid"){
-                $invoice->freight_charges = $var4;
+                $invoice->freight_payable_at = $var4;
             }else{
-                $invoice->freight_charges = $var5;
+                $invoice->freight_payable_at = $var5;
             }
             $invoice->place_of_issue = $request->input('poi');
             $invoice->place_of_date  = $request->input('podi');
-            $invoice->shipped_on_board = $var5;
-            $invoice->mode_of_shipment	 =$var4;
-            $invoice->freight_payable_at = $request->input('fpat');
+            //$invoice->shipped_on_board = $var5;
+        $invoice->mode_of_shipment	="FCL/FCL";
+      
             $invoice->save();
             $invoice->id;
             //dd($invoice);
             foreach ($request->containerno as $key => $item) {
                
-                    // if($item != "" && $item != null){          
+                     //if($item != "" && $item != null){          
                     $item_detail = new item;
                     $item_detail->invoiceid = $invoice->id;
                     $item_detail->container_no = $item;
@@ -593,7 +596,9 @@ class invoicecontroller extends Controller
                 color: #0654b2;
                 font-weight: 500;
             }
-            
+            .align-items-center {
+                align-items: center!important;
+            }
             .border-top {
                 border-top: 1px  solid !important;
             }
@@ -651,6 +656,11 @@ class invoicecontroller extends Controller
             }
             
             .table {
+                border-bottom-color: currentColor;
+                padding: 0.5rem 0.5rem;
+                background-color: var(--bs-table-bg);
+                border-bottom-width: 1px;
+                box-shadow: inset 0 0 0 9999px
                 --bs-table-bg: transparent;
                 --bs-table-accent-bg: transparent;
                 --bs-table-striped-color: #212529;
@@ -776,7 +786,18 @@ class invoicecontroller extends Controller
             .place_date_text {
                 font-weight: 600;
             }
-            
+            .row {
+                --bs-gutter-x: 1.5rem;
+                --bs-gutter-y: 0;
+                display: flex;
+                flex-wrap: wrap;
+                margin-top: calc(var(--bs-gutter-y) * -1);
+                margin-right: calc(var(--bs-gutter-x) * -.5);
+                margin-left: calc(var(--bs-gutter-x) * -.5);
+                padding-right: calc(var(--bs-gutter-x) * .5);
+                padding-left: calc(var(--bs-gutter-x) * .5);
+                margin-top: var(--bs-gutter-y);
+            }
             .freight_payable_at_heading {
                 font-weight: 600;
             }
@@ -784,7 +805,9 @@ class invoicecontroller extends Controller
             .gradient_border_1 {
                 border-bottom: 5px  solid;
             }
-            
+            .align-items-center {
+                align-items: center!important;
+            }
             .gradient_border_2 {
                 border-bottom: 5px  solid;
             }

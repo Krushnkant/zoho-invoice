@@ -201,6 +201,160 @@ $('body').on('click', '#invoice_submit', function () {
             contentType: false,
             // contentType: 'json',
             success: function (res) {
+                if(res.status == 'failed'){
+                    $('#saveInvoiceBtn').prop('disabled',false);
+                    $('#saveInvoiceBtn').find('.loadericonfa').hide();
+                    if (res.errors.sname) {
+                        $('#sname-error').show().text(res.errors.sname);
+                    } else {
+                        $('#sname-error').hide();
+                    }
+
+                    if (res.errors.cname) {
+                        $('#cname-error').show().text(res.errors.cname);
+                    } else {
+                        $('#cname-error').hide();
+                    }
+
+                    if (res.errors.aname) {
+                        $('#aname-error').show().text(res.errors.aname);
+                    } else {
+                        $('#aname-error').hide();
+                    }
+
+                    if (res.errors.saddress) {
+                        $('#saddress-error').show().text(res.errors.saddress);
+                    } else {
+                        $('#saddress-error').hide();
+                    }
+
+                    if (res.errors.caddress) {
+                        $('#caddress-error').show().text(res.errors.caddress);
+                    } else {
+                        $('#caddress-error').hide();
+                    }
+
+                    if (res.errors.naddress) {
+                        $('#naddress-error').show().text(res.errors.naddress);
+                    } else {
+                        $('#naddress-error').hide();
+                    }
+                    if (res.errors.agaddress) {
+                        $('#agaddress-error').show().text(res.errors.agaddress);
+                    } else {
+                        $('#agaddress-error').hide();
+                    }
+
+                    if (res.errors.blading) {
+                        $('#blading-error').show().text(res.errors.blading);
+                    } else {
+                        $('#blading-error').hide();
+                    }
+                    // if (res.errors.vessel) {
+                    //     $('#vessel-error').show().text(res.errors.vessel);
+                    // } else {
+                    //     $('#vessel-error').hide();
+                    // }
+
+                    // if (res.errors.voyage) {
+                    //     $('#voyage-error').show().text(res.errors.voyage);
+                    // } else {
+                    //     $('#voyage-error').hide();
+                    // }
+                    if (res.errors.pcarriageby) {
+                        $('#pcarriageby-error').show().text(res.errors.pcarriageby);
+                    } else {
+                        $('#pcarriageby-error').hide();
+                    }
+
+                    if (res.errors.por) {
+                        $('#por-error').show().text(res.errors.por);
+                    } else {
+                        $('#por-error').hide();
+                    }
+                    // if (res.errors.pol) {
+                    //     $('#pol-error').show().text(res.errors.pol);
+                    // } else {
+                    //     $('#pol-error').hide();
+                    // }
+
+                    // if (res.errors.pod) {
+                    //     $('#pod-error').show().text(res.errors.pod);
+                    // } else {
+                    //     $('#pod-error').hide();
+                    // }
+                    // if (res.errors.pody) {
+                    //     $('#pody-error').show().text(res.errors.pody);
+                    // } else {
+                    //     $('#pody-error').hide();
+                    // }
+
+                    if (res.errors.cor) {
+                        $('#cor-error').show().text(res.errors.cor);
+                    } else {
+                        $('#cor-error').hide();
+                    }
+                    if (res.errors.containerno) {
+                        $('#containerno-error').show().text(res.errors.containerno);
+                    } else {
+                        $('#containerno-error').hide();
+                    }
+
+                    if (res.errors.nocp) {
+                        $('#countainerpackage-error').show().text(res.errors.countainerpackage);
+                    } else {
+                        $('#countainerpackage-error').hide();
+                    }
+                    if (res.errors.dog) {
+                        $('#description-error').show().text(res.errors.description);
+                    } else {
+                        $('#description-error').hide();
+                    }
+
+                    if (res.errors.grossweb) {
+                        $('#gross-error').show().text(res.errors.gross);
+                    } else {
+                        $('#gross-error').hide();
+                    }
+                    if (res.errors.mesurment) {
+                        $('#mesurment-error').show().text(res.errors.mesurment);
+                    } else {
+                        $('#mesurment-error').hide();
+                    }
+
+                    if (res.errors.freight) {
+                        $('#freight-error').show().text(res.errors.freight);
+                    } else {
+                        $('#freight-error').hide();
+                    }
+                    // if (res.errors.poi) {
+                    //     $('#poi-error').show().text(res.errors.poi);
+                    // } else {
+                    //     $('#poi-error').hide();
+                    // }
+                    // if (res.errors.podi) {
+                    //     $('#podi-error').show().text(res.errors.podi);
+                    // } else {
+                    //     $('#podi-error').hide();
+                    // }
+
+                    if (res.errors.fpat) {
+                        $('#fpat-error').show().text(res.errors.fpat);
+                    } else {
+                        $('#fpat-error').hide();
+                    }
+                    if (res.errors.mode) {
+                        $('#mode-error').show().text(res.errors.mode);
+                    } else {
+                        $('#mode-error').hide();
+                    }
+                    if (res.errors.ship) {
+                        $('#ship-error').show().text(res.errors.ship);
+                    } else {
+                        $('#ship-error').hide();
+                    }
+                  
+                }
                 if(res['status']==200){
                     location.href = "{{ route('admin.invoice.list') }}";
                     if(res['Action'] == "add"){

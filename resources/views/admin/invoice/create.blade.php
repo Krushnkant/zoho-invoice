@@ -10,14 +10,14 @@
         </div>
     </div>
 
-    <div class="container-fluid">
-        <div class="row">
+    <div class="container">
+        <div class="row mt-5 mb-5">
             <div class="col-lg-12">
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="card-title">
-                                Add Invoice
-                        </h4>
+                        <center><h1 class="card-title">
+                                 INVOICE
+                        </h1></center>
 
                       
 
@@ -26,7 +26,7 @@
     <form class="row g-3 needs-validation" id="add_invoice_form" novalidate>
     {{ csrf_field() }}
     
-  <div class="col-md-4">
+  <div class="col-md-6">
   <div class="form-group">
     
     <label for="sname" class="form-label">Shipper name <span class="text-danger">*</span></label>
@@ -35,14 +35,14 @@
     <label id="sname-error" class="error invalid-feedback animated fadeInDown" for="sname"></label>
   </div>
   </div>
-  <div class="col-md-4">
+  <div class="col-md-6">
   <div class="form-group">
     <label for="validationCustom02" class="form-label">Consignee name<span class="text-danger">*</span></label>
     <input type="text" class="form-control" name="cname" id="validationCustom02" value="" required>
     <label id="cname-error" class="error invalid-feedback animated fadeInDown" for="cname"></label>
     </div>
   </div>
-  <div class="col-md-4">
+  <!-- <div class="col-md-4">
   <div class="form-group">
     <label for="validationCustomUsername" class="form-label">Agent name<span class="text-danger">*</span></label>
     <div class="input-group has-validation">
@@ -51,7 +51,7 @@
       <label id="aname-error" class="error invalid-feedback animated fadeInDown" for="aname"></label>
     </div>
 </div>
-  </div>
+  </div> -->
   <div class="col-md-6">
   <div class="form-group">
     <label for="validationCustom03" class="form-label">shipper Address<span class="text-danger">*</span></label>
@@ -136,7 +136,7 @@
   </div>
   <div class="col-md-4">
   <div class="form-group">
-    <label for="validationCustom05" class="form-label">pier or port of receipt<span class="text-danger">*</span></label>
+    <label for="validationCustom05" class="form-label">Pier or Port of Receipt<span class="text-danger">*</span></label>
     <input type="text" class="form-control" name= "por" id="validationCustom05" required>
     <label id="por-error" class="error invalid-feedback animated fadeInDown" for="por"></label>
     </div>
@@ -169,7 +169,7 @@
     <label id="cor-error" class="error invalid-feedback animated fadeInDown" for="cor"></label>
     </div>
   </div>
-  <div class="col-md-6">
+  <div class="col-md-12">
   <div class="form-group">
     <label for="validationCustom03" class="form-label">Freight & charges<span class="text-danger">*</span></label>
 
@@ -181,38 +181,38 @@
     <label id="freight-error" class="error invalid-feedback animated fadeInDown" for="freight"></label>
     </div>
   </div>
-  <div class="col-md-6">
+  <!-- <div class="col-md-6">
   <div class="form-group">
     <label for="validationCustom03" class="form-label">Freight_payble_at<span class="text-danger">*</span> </label>
 
     <input type="text" class="form-control" name="fpat" id="validationCustom05" required>
     <label id="fpat-error" class="error invalid-feedback animated fadeInDown" for="fpat"></label>
     </div>
-  </div>
-  <div class="col-md-2">
+  </div> -->
+  <div class="col-md-2 mt-4">
   <div class="form-group">
-    <label for="validationCustom05" class="form-label">Countainer no<span class="text-danger">*</span></label>
+    <label for="validationCustom05" class="form-label">Countainer no/Seal No Marks &  Numbers<span class="text-danger">*</span></label>
     <input type="text" class="form-control" name="containerno[]" id="validationCustom05" required>
     <label id="containerno-error" class="error invalid-feedback animated fadeInDown" for="containerno"></label>
   </div>
   </div>
-  <div class="col-md-2">
+  <div class="col-md-2 mt-4">
   <div class="form-group">
-    <label for="validationCustom05" class="form-label">no of countainer package<span class="text-danger">*</span></label>
+    <label for="validationCustom05" class="form-label">Number of containers or packages<span class="text-danger">*</span></label>
     <input type="text" class="form-control" name="countainerpackage[]" id="validationCustom05" required>
     <label id="countainerpackage-error" class="error invalid-feedback animated fadeInDown" for="countainerpackage"></label>
     </div>
   </div>
-  <div class="col-md-4">
+  <div class="col-md-4 mt-4">
   <div class="form-group">
-    <label for="validationCustom03" class="form-label">description of goods<span class="text-danger">*</span></label>
+    <label for="validationCustom03" class="form-label">Kind of packages/description of goods<span class="text-danger">*</span></label>
 
     <textarea rows="5"  class="form-control" name="description[]" cols="50" id="validationCustom03" name="comment" required>
 </textarea>
 <label id="description-error" class="error invalid-feedback animated fadeInDown" for="description"></label>
     </div>
   </div>
-  <div class="col-md-2">
+  <div class="col-md-2 mt-4">
   <div class="form-group">
     <label for="validationCustom03" class="form-label">Gross Webeight<span class="text-danger">*</span></label>
 
@@ -220,7 +220,7 @@
     <label id="gross-error" class="error invalid-feedback animated fadeInDown" for="gross"></label>
     </div>
   </div>
-  <div class="col-md-2">
+  <div class="col-md-2 mt-4">
   <div class="form-group">
     <label for="validationCustom03" class="form-label">Measurment<span class="text-danger">*</span></label>
 
@@ -228,30 +228,30 @@
     <label id="mesurment-error" class="error invalid-feedback animated fadeInDown" for="mesurment"></label>
     </div>
   </div>
-  <div class="col-md-2">
+  <div class="col-md-2 mt-2">
   <div class="form-group">
-    <label for="validationCustom05" class="form-label">Countainer no<span class="text-danger">*</span></label>
+    <label for="validationCustom05" class="form-label">Countainer no/Seal No Marks &  Numbers<span class="text-danger">*</span></label>
     <input type="text" class="form-control" name="containerno[]" id="validationCustom05" required>
     <label id="cn-error" class="error invalid-feedback animated fadeInDown" for="cn"></label>
   </div>
   </div>
-  <div class="col-md-2">
+  <div class="col-md-2 mt-2">
   <div class="form-group">
-    <label for="validationCustom05" class="form-label">no of countainer package<span class="text-danger">*</span></label>
+    <label for="validationCustom05" class="form-label">Number of containers or packages<span class="text-danger">*</span></label>
     <input type="text" class="form-control" name="countainerpackage[]" id="validationCustom05" required>
     <label id="nocp-error" class="error invalid-feedback animated fadeInDown" for="nocp"></label>
     </div>
   </div>
-  <div class="col-md-4">
+  <div class="col-md-4 mt-3">
   <div class="form-group">
-    <label for="validationCustom03" class="form-label">description of goods<span class="text-danger">*</span></label>
+    <label for="validationCustom03 " class="form-label">Kind of packages/description of goods<span class="text-danger">*</span></label>
 
     <textarea rows="5"  class="form-control" name="description[]" cols="50" id="validationCustom03" name="comment" required>
 </textarea>
 <label id="dog-error" class="error invalid-feedback animated fadeInDown" for="dog"></label>
     </div>
   </div>
-  <div class="col-md-2">
+  <div class="col-md-2 mt-4">
   <div class="form-group">
     <label for="validationCustom03" class="form-label">Gross Webeight<span class="text-danger">*</span></label>
 
@@ -259,7 +259,7 @@
     <label id="grossweb-error" class="error invalid-feedback animated fadeInDown" for="grossweb"></label>
     </div>
   </div>
-  <div class="col-md-2">
+  <div class="col-md-2 mt-4">
   <div class="form-group">
     <label for="validationCustom03" class="form-label">Measurment<span class="text-danger">*</span></label>
 
@@ -267,30 +267,30 @@
     <label id="mesurment-error" class="error invalid-feedback animated fadeInDown" for="gromesurmentssweb"></label>
     </div>
   </div>
-  <div class="col-md-2">
+  <div class="col-md-2 mt-2">
   <div class="form-group">
-    <label for="validationCustom05" class="form-label">Countainer no<span class="text-danger">*</span></label>
+    <label for="validationCustom05" class="form-label">Countainer no/Seal No Marks &  Numbers<span class="text-danger">*</span></label>
     <input type="text" class="form-control" name="containerno[]" id="validationCustom05" required>
     <label id="cn-error" class="error invalid-feedback animated fadeInDown" for="cn"></label>
   </div>
   </div>
-  <div class="col-md-2">
+  <div class="col-md-2 mt-2">
   <div class="form-group">
-    <label for="validationCustom05" class="form-label">no of countainer package<span class="text-danger">*</span></label>
+    <label for="validationCustom05" class="form-label">Number of containers or packages<span class="text-danger">*</span></label>
     <input type="text" class="form-control" name="countainerpackage[]" id="validationCustom05" required>
     <label id="nocp-error" class="error invalid-feedback animated fadeInDown" for="nocp"></label>
     </div>
   </div>
-  <div class="col-md-4">
+  <div class="col-md-4 mt-3">
   <div class="form-group">
-    <label for="validationCustom03" class="form-label">description of goods<span class="text-danger">*</span></label>
+    <label for="validationCustom03" class="form-label">Kind of packages/description of goods<span class="text-danger">*</span></label>
 
     <textarea rows="5"  class="form-control" name="description[]" cols="50" id="validationCustom03" name="comment" required>
 </textarea>
 <label id="dog-error" class="error invalid-feedback animated fadeInDown" for="dog"></label>
     </div>
   </div>
-  <div class="col-md-2">
+  <div class="col-md-2 mt-4">
   <div class="form-group">
     <label for="validationCustom03" class="form-label">Gross Webeight<span class="text-danger">*</span></label>
 
@@ -298,7 +298,7 @@
     <label id="grossweb-error" class="error invalid-feedback animated fadeInDown" for="grossweb"></label>
     </div>
   </div>
-  <div class="col-md-2">
+  <div class="col-md-2 mt-4">
   <div class="form-group">
     <label for="validationCustom03" class="form-label">Measurment<span class="text-danger">*</span></label>
 
@@ -306,30 +306,30 @@
     <label id="mesurment-error" class="error invalid-feedback animated fadeInDown" for="gromesurmentssweb"></label>
     </div>
   </div>
-  <div class="col-md-2">
+  <div class="col-md-2 mt-2">
   <div class="form-group">
-    <label for="validationCustom05" class="form-label">Countainer no<span class="text-danger">*</span></label>
+    <label for="validationCustom05" class="form-label">Countainer no/Seal No Marks &  Numbers<span class="text-danger">*</span></label>
     <input type="text" class="form-control" name="containerno[]" id="validationCustom05" required>
     <label id="cn-error" class="error invalid-feedback animated fadeInDown" for="cn"></label>
   </div>
   </div>
-  <div class="col-md-2">
+  <div class="col-md-2 mt-2">
   <div class="form-group">
-    <label for="validationCustom05" class="form-label">no of countainer package<span class="text-danger">*</span></label>
+    <label for="validationCustom05" class="form-label">Number of containers or packages<span class="text-danger">*</span></label>
     <input type="text" class="form-control" name="countainerpackage[]" id="validationCustom05" required>
     <label id="nocp-error" class="error invalid-feedback animated fadeInDown" for="nocp"></label>
     </div>
   </div>
-  <div class="col-md-4">
+  <div class="col-md-4 mt-3">
   <div class="form-group">
-    <label for="validationCustom03" class="form-label">description of goods<span class="text-danger">*</span></label>
+    <label for="validationCustom03" class="form-label">Kind of packages/description of goods<span class="text-danger">*</span></label>
 
     <textarea rows="5"  class="form-control" name="description[]" cols="50" id="validationCustom03" name="comment" required>
 </textarea>
 <label id="dog-error" class="error invalid-feedback animated fadeInDown" for="dog"></label>
     </div>
   </div>
-  <div class="col-md-2">
+  <div class="col-md-2 mt-4">
   <div class="form-group">
     <label for="validationCustom03" class="form-label">Gross Webeight<span class="text-danger">*</span></label>
 
@@ -337,7 +337,7 @@
     <label id="grossweb-error" class="error invalid-feedback animated fadeInDown" for="grossweb"></label>
     </div>
   </div>
-  <div class="col-md-2">
+  <div class="col-md-2 mt-4">
   <div class="form-group">
     <label for="validationCustom03" class="form-label">Measurment<span class="text-danger">*</span></label>
 
@@ -345,30 +345,30 @@
     <label id="mesurment-error" class="error invalid-feedback animated fadeInDown" for="gromesurmentssweb"></label>
     </div>
   </div>
-  <div class="col-md-2">
+  <div class="col-md-2 mt-2">
   <div class="form-group">
-    <label for="validationCustom05" class="form-label">Countainer no<span class="text-danger">*</span></label>
+    <label for="validationCustom05" class="form-label">Countainer no/Seal No Marks &  Numbers<span class="text-danger">*</span></label>
     <input type="text" class="form-control" name="containerno[]" id="validationCustom05" required>
     <label id="cn-error" class="error invalid-feedback animated fadeInDown" for="cn"></label>
   </div>
   </div>
-  <div class="col-md-2">
+  <div class="col-md-2 mt-2">
   <div class="form-group">
-    <label for="validationCustom05" class="form-label">no of countainer package<span class="text-danger">*</span></label>
+    <label for="validationCustom05" class="form-label">Number of containers or packages<span class="text-danger">*</span></label>
     <input type="text" class="form-control" name="countainerpackage[]" id="validationCustom05" required>
     <label id="nocp-error" class="error invalid-feedback animated fadeInDown" for="nocp"></label>
     </div>
   </div>
-  <div class="col-md-4">
+  <div class="col-md-4 mt-3">
   <div class="form-group">
-    <label for="validationCustom03" class="form-label">description of goods<span class="text-danger">*</span></label>
+    <label for="validationCustom03" class="form-label">Kind of packages/description of goods<span class="text-danger">*</span></label>
 
     <textarea rows="5"  class="form-control" name="description[]" cols="50" id="validationCustom03" name="comment" required>
 </textarea>
 <label id="dog-error" class="error invalid-feedback animated fadeInDown" for="dog"></label>
     </div>
   </div>
-  <div class="col-md-2">
+  <div class="col-md-2 mt-4">
   <div class="form-group">
     <label for="validationCustom03" class="form-label">Gross Webeight<span class="text-danger">*</span></label>
 
@@ -376,7 +376,7 @@
     <label id="grossweb-error" class="error invalid-feedback animated fadeInDown" for="grossweb"></label>
     </div>
   </div>
-  <div class="col-md-2">
+  <div class="col-md-2 mt-4">
   <div class="form-group">
     <label for="validationCustom03" class="form-label">Measurment<span class="text-danger">*</span></label>
 
@@ -442,7 +442,7 @@
     </div>
   </div>
   <div class="col-12">
-    <button class="btn btn-primary" id="saveInvoiceBtn" >Submit form</button>
+    <button class="btn btn-lg btn-primary" id="saveInvoiceBtn" >Submit</button>
   </div>
 </form>
 <script>

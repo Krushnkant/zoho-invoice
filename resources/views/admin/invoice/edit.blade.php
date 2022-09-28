@@ -304,7 +304,7 @@
   <div class="form-group">
     <label for="validationCustom03" class="form-label">place of date<span class="text-danger">*</span></label>
 
-    <input type="text" class="form-control" name="freight" value="{{ $invoice->place_of_date }} " id="validationCustom05" required>
+    <input type="date" class="form-control" name="pdate" value="{{ date('Y/m/d',strtotime($invoice->place_of_date)) }} " id="validationCustom05" required>
     <label id="freight-error" class="error invalid-feedback animated fadeInDown" for="freight"></label>
     </div>
   </div>
@@ -312,7 +312,7 @@
   <div class="form-group">
     <label for="validationCustom03" class="form-label">place of issue<span class="text-danger">*</span></label>
 
-    <input type="text" class="form-control" name="freight" value="{{ $invoice->place_of_issue }} " id="validationCustom05" required>
+    <input type="text" class="form-control" name="place" value="{{ $invoice->place_of_issue }} " id="validationCustom05" required>
     <label id="freight-error" class="error invalid-feedback animated fadeInDown" for="freight"></label>
     </div>
   </div>
@@ -354,7 +354,7 @@
   <div class="form-group">
     <label for="validationCustom03" class="form-label">Mode of Shipment<span class="text-danger">*</span></label>
 
-    <input type="text" class="form-control" name="freight" value="{{ $invoice->mode_of_shipment }} " id="validationCustom05" required>
+    <input type="text" class="form-control" name="mode" value="{{ $invoice->mode_of_shipment }} " id="validationCustom05" required>
     <label id="freight-error" class="error invalid-feedback animated fadeInDown" for="freight"></label>
     </div>
   </div>
@@ -364,7 +364,7 @@
   <div class="form-group">
     <label for="validationCustom03" class="form-label">Shipped on board<span class="text-danger">*</span></label>
 
-    <input type="text" class="form-control" name="freight" value="{{ $invoice->shipped_on_board }} " id="validationCustom05" required>
+    <input type="date" class="form-control" name="ship" value="{{ $invoice->shipped_on_board }} " id="validationCustom05" required>
     <label id="freight-error" class="error invalid-feedback animated fadeInDown" for="freight"></label>
     </div>
   </div>
