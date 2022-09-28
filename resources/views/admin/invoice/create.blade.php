@@ -54,7 +54,7 @@
     </div>
 </div>
   </div> -->
-            <div class="col-md-6">
+            <div class="col-md-6 mt-2">
               <div class="form-group">
                 <label for="validationCustom03" class="form-label">shipper Address<span class="text-danger">*</span></label>
 
@@ -63,7 +63,7 @@
                 <label id="saddress-error" class="error invalid-feedback animated fadeInDown" for="saddress"></label>
               </div>
             </div>
-            <div class="col-md-6">
+            <div class="col-md-6 mt-2">
               <div class="form-group">
                 <label for="validationCustom03" class="form-label">consignee Address<span class="text-danger">*</span></label>
 
@@ -72,7 +72,7 @@
                 <label id="caddress-error" class="error invalid-feedback animated fadeInDown" for="caddress"></label>
               </div>
             </div>
-            <div class="col-md-12">
+            <div class="col-md-12 mt-2">
               <div class="form-group">
                 <label for="validationCustom03" class="form-label">Notify Address<span class="text-danger">*</span></label>
 
@@ -100,14 +100,14 @@
       Please select a valid state.
     </div>
   </div> -->
-            <div class="col-md-6">
+            <div class="col-md-6 mt-2">
               <div class="form-group">
                 <label for="validationCustom05" class="form-label">Bill Number<span class="text-danger">*</span></label>
                 <input type="text" class="form-control" name="bnumber" value="PSLPKLJPR" id="validationCustom05" required>
                 <label id="bnumber-error" class="error invalid-feedback animated fadeInDown" for="bnumber"></label>
               </div>
             </div>
-            <div class="col-md-6">
+            <div class="col-md-6 mt-2">
               <div class="form-group">
                 <label for="validationCustom05" class="form-label">Bill Of Lading<span class="text-danger">*</span></label>
                 <input type="text" class="form-control" name="blading" id="validationCustom05" required>
@@ -129,14 +129,14 @@
     <label id="voyage-error" class="error invalid-feedback animated fadeInDown" for="voyage"></label>
   </div>
   </div> -->
-            <div class="col-md-4">
+            <div class="col-md-4 mt-2">
               <div class="form-group">
                 <label for="validationCustom05" class="form-label">Pre carriage by<span class="text-danger">*</span></label>
                 <input type="text" class="form-control" name="pcarriageby" id="validationCustom05" required>
                 <label id="pcarriageby-error" class="error invalid-feedback animated fadeInDown" for="pcarriageby"></label>
               </div>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-4 mt-2">
               <div class="form-group">
                 <label for="validationCustom05" class="form-label">Pier or Port of Receipt<span class="text-danger">*</span></label>
                 <input type="text" class="form-control" name="por" id="validationCustom05" required>
@@ -164,14 +164,14 @@
     <label id="pody-error" class="error invalid-feedback animated fadeInDown" for="pody"></label>
     </div>
   </div> -->
-            <div class="col-md-4">
+            <div class="col-md-4 mt-2">
               <div class="form-group">
                 <label for="validationCustom05" class="form-label">Country of Origin<span class="text-danger">*</span></label>
                 <input type="text" class="form-control" name="cor" id="validationCustom05" required>
                 <label id="cor-error" class="error invalid-feedback animated fadeInDown" for="cor"></label>
               </div>
             </div>
-            <div class="col-md-12">
+            <div class="col-md-12 mt-2">
               <div class="form-group">
                 <label for="validationCustom03" class="form-label">Freight & charges<span class="text-danger">*</span></label>
 
