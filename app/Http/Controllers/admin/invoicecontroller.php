@@ -161,8 +161,8 @@ class invoicecontroller extends Controller
         'gross.required' =>'this field is required ',
         'mesurment.required' =>'this field is required',
         'freight.required' =>'this field is required ',
-        'poi.required' =>'this field is required ',
-        'podi.required' =>'this field is required',
+        //'poi.required' =>'this field is required ',
+        //'podi.required' =>'this field is required',
         'sonboard.required' =>'this field is required ',
         'mode.required' =>'this field is required',
         'fpat.required' =>'this field is required',
@@ -229,7 +229,7 @@ class invoicecontroller extends Controller
         $company->place_of_date = $request->pdate;
         $company->place_of_issue = $request->place;
         $company->save();
-
+        //dd($company);
         foreach ($request->containerno as $key => $item) {
                
             //if($item != "" && $item != null){          
@@ -508,7 +508,10 @@ class invoicecontroller extends Controller
 
 
     public function generate_pdf($id){
-        $invoice = Invoice::where('id',$id)->first();
+
+              $users = Invoice::with('item')->where('id',$id)->first();
+             // dd($users->item);
+     $invoice = Invoice::where('id',$id)->first();
         $settings = Setting::find(1);
 
         $image = '';
@@ -935,22 +938,21 @@ class invoicecontroller extends Controller
                                 <th class="table_part_heading">Measurement</th>
                             </tr> 
                         </thead>
-                        <tbody>
-                            <tr>
-                                '.$invoice->container_no.'
-                                '.$invoice->container_package.'
-                                '.$invoice->description_goods.'
-                                '.$invoice->Gross_web.'
-                                '.$invoice->Measurment.'</td>
-                                <td>
-                                    <div class="table_bottom_text">
-                                        SHIPPERS LOAD COUNT AND SEAL
-                                    </div>
-                                </td>
-                                <td></td>
-                                <td></td>
-                            </tr>
-                        </tbody>
+                        <tbody>';
+                        
+                        foreach($users->item as $user){
+                          if($user->container_no != ""){
+                            $HTMLContent .='<tr>
+                             <td>'.$user->container_no.'</td>
+                                <td>'.$user->container_package.'</td>
+                                <td>'.$user->description_goods.'</td>
+                                <td>'.$user->Gross_web.'</td>
+                                <td>'.$user->Measurment.'</td>
+                            </tr>';
+                        }
+                    }
+
+                        $HTMLContent .='</tbody>
                     </table>
                     <div class="row table_freight_heading border-top-black px-0">
                         <div class="col-md-6 px-0 border-right-black gradient_border_1">
@@ -1023,7 +1025,7 @@ class invoicecontroller extends Controller
         
 
         $filename = "Invoice_abc.pdf";
-        $mpdf = new Mpdf(["autoScriptToLang" => true, "autoLangToFont" => true, 'mode' => 'utf-8', 'format' => 'A5-P', 'margin_left' => 5, 'margin_right' => 5, 'margin_top' => 5, 'margin_bottom' => 5, 'margin_header' => 0, 'margin_footer' => 0]);
+        $mpdf = new Mpdf(["autoScriptToLang" => true, "autoLangToFont" => true, 'mode' => 'utf-8', 'format' => 'A4', 'margin_left' => 5, 'margin_right' => 5, 'margin_top' => 5, 'margin_bottom' => 5, 'margin_header' => 0, 'margin_footer' => 0]);
         $mpdf->WriteHTML($HTMLContent);
         $mpdf->Output($filename,"I");
     }
