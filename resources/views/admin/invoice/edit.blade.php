@@ -1,7 +1,7 @@
 
 
         
-<div class="row">
+<div class="row col-md-8 col-sm-12 offset-md-2">
     <div id="page-wrap" class="table-textarea">
     <form class="row g-3 needs-validation" id="invoiceForm" novalidate>
     {{ csrf_field() }}
@@ -101,7 +101,7 @@
     </div>
   </div>
 
-  <div class="col-md-2">
+  <div class="col-md-2 mt-4">
   <div class="form-group">
     <label for="validationCustom05" class="form-label">Countainer no</label>
     <input type="text" class="form-control" name="containerno[]" value="{{ $invoice->item[0]->container_no }} "id="validationCustom05" required>
@@ -141,7 +141,7 @@
     </div>
   </div> 
 
-  <div class="col-md-2">
+  <div class="col-md-2 mt-3">
   <div class="form-group">
     <label for="validationCustom05" class="form-label">Countainer no</label>
     <input type="text" class="form-control" name="containerno[]" value="{{  $invoice->item[1]->container_no  }} "id="validationCustom05" required>
@@ -181,7 +181,7 @@
     </div>
   </div> 
 
-  <div class="col-md-2">
+  <div class="col-md-2 mt-3">
   <div class="form-group">
     <label for="validationCustom05" class="form-label">Countainer no</label>
     <input type="text" class="form-control" name="containerno[]" value="{{  $invoice->item[2]->container_no  }} "id="validationCustom05" required>
@@ -221,7 +221,7 @@
     </div>
   </div> 
 
-  <div class="col-md-2">
+  <div class="col-md-2 mt-3">
   <div class="form-group">
     <label for="validationCustom05" class="form-label">Countainer no</label>
     <input type="text" class="form-control" name="containerno[]" value="{{  $invoice->item[3]->container_no  }} "id="validationCustom05" required>
@@ -261,7 +261,7 @@
     </div>
   </div> 
 
-  <div class="col-md-2">
+  <div class="col-md-2 mt-3">
   <div class="form-group">
     <label for="validationCustom05" class="form-label">Countainer no</label>
     <input type="text" class="form-control" name="containerno[]" value="{{   $invoice->item[4]->container_no  }} "id="validationCustom05" required>
@@ -304,8 +304,8 @@
   <div class="form-group">
     <label for="validationCustom03" class="form-label">Place of date<span class="text-danger">*</span></label>
 
-    <input type="date" class="form-control" name="pdate" value="{{ date('Y/m/d',strtotime($invoice->place_of_date)) }} " id="validationCustom05" required>
-    <label id="freight-error" class="error invalid-feedback animated fadeInDown" for="freight"></label>
+    <input type="date" class="form-control" name="pdate" value="{{ date('Y-m-d',strtotime($invoice->place_of_date)) }}" id="validationCustom05" required>
+    <label id="pdate-error" class="error invalid-feedback animated fadeInDown" for="freight"></label>
     </div>
   </div>
   <div class="col-md-6">
@@ -313,7 +313,7 @@
     <label for="validationCustom03" class="form-label">Place of issue<span class="text-danger">*</span></label>
 
     <input type="text" class="form-control" name="place" value="{{ $invoice->place_of_issue }} " id="validationCustom05" required>
-    <label id="freight-error" class="error invalid-feedback animated fadeInDown" for="freight"></label>
+    <label id="place-error" class="error invalid-feedback animated fadeInDown" for="place"></label>
     </div>
   </div>
   <div class="col-md-6">
@@ -365,7 +365,7 @@
     <label for="validationCustom03" class="form-label">Mode of Shipment<span class="text-danger">*</span></label>
 
     <input type="text" class="form-control" name="mode" value="{{ $invoice->mode_of_shipment }} " id="validationCustom05" required>
-    <label id="freight-error" class="error invalid-feedback animated fadeInDown" for="freight"></label>
+    <label id="mode-error" class="error invalid-feedback animated fadeInDown" for="freight"></label>
     </div>
   </div>
 
@@ -374,8 +374,8 @@
   <div class="form-group">
     <label for="validationCustom03" class="form-label">Shipped on board<span class="text-danger">*</span></label>
 
-    <input type="date" class="form-control" name="ship" value="{{ $invoice->shipped_on_board }} " id="validationCustom05" required>
-    <label id="freight-error" class="error invalid-feedback animated fadeInDown" for="freight"></label>
+    <input type="date" class="form-control" name="ship" value="{{ ($invoice->shipped_on_board != "")?date('Y-m-d',strtotime($invoice->shipped_on_board)):"" }}" id="validationCustom05" required>
+    <label id="ship-error" class="error invalid-feedback animated fadeInDown" for="freight"></label>
     </div>
   </div>
  

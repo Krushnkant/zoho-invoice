@@ -11,16 +11,15 @@
         </div>
     </div>
 
-    <div class="container">
+    <div class="container-fluid">
         <div class="row">
             <div class="col-lg-12">
                 <div class="card">
-                    <div class="card-body">
                         <h4 class="card-title">
                             @if(isset($action) && $action=='create')
                                 Add Invoice
                             @elseif(isset($action) && $action=='edit')
-                                Edit Invoice
+                               <center> Edit Invoice </center>
                             @else
                                 Invoice List
                             @endif
@@ -327,16 +326,16 @@ $('body').on('click', '#invoice_submit', function () {
                     } else {
                         $('#freight-error').hide();
                     }
-                    // if (res.errors.poi) {
-                    //     $('#poi-error').show().text(res.errors.poi);
-                    // } else {
-                    //     $('#poi-error').hide();
-                    // }
-                    // if (res.errors.podi) {
-                    //     $('#podi-error').show().text(res.errors.podi);
-                    // } else {
-                    //     $('#podi-error').hide();
-                    // }
+                    if (res.errors.pdate) {
+                        $('#pdate-error').show().text(res.errors.pdate);
+                    } else {
+                        $('#pdate-error').hide();
+                    }
+                    if (res.errors.place) {
+                        $('#place-error').show().text(res.errors.place);
+                    } else {
+                        $('#place-error').hide();
+                    }
 
                     if (res.errors.fpat) {
                         $('#fpat-error').show().text(res.errors.fpat);
