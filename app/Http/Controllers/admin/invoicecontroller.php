@@ -161,12 +161,14 @@ class invoicecontroller extends Controller
         'gross.required' =>'this field is required ',
         'mesurment.required' =>'this field is required',
         'freight.required' =>'this field is required ',
-        //'poi.required' =>'this field is required ',
-        //'podi.required' =>'this field is required',
+        'pdate.required' =>'this field is required ',
+        'place.required' =>'this field is required',
         'sonboard.required' =>'this field is required ',
         'mode.required' =>'this field is required',
         'fpat.required' =>'this field is required',
         'sname.required' =>'this field is required',
+        'ship.required' =>'this field is required',
+        'mode.required' =>'this field is required',
     ];
     //dd($request->all());
     $validator = Validator::make($request->all(), [
@@ -194,11 +196,12 @@ class invoicecontroller extends Controller
     //    'gross' => 'required',
     //    'mesurment' => 'required',
         'freight' => 'required',
-        // 'poi' => 'required',
-        // 'podi' => 'required',
+         'pdate' => 'required',
+         'place' => 'required',
         // 'sonboard' => 'required',
-        // 'mode' => 'required',
+         'mode' => 'required',
         'fpat' => 'required',
+        'ship' => 'required',
      
 
     ], $messages);
@@ -451,8 +454,17 @@ class invoicecontroller extends Controller
             $invoice->shipper_address = $request->input('saddress');
             $invoice->consignee_name = $request->input('cname');
             $invoice->consignee_address = $request->input('caddress');
+            if($data['check_notify'] == "1"){
+            $invoice->notify_address = $request->input('saddress');
+            }
+            elseif($data['check_notify'] == "2"){
+            $invoice->notify_address = $request->input('caddress');
+            }   
+            else{
             $invoice->notify_address = $request->input('naddress');
-           // $invoice->agent_name = $request->input('aname');
+            } 
+
+            // $invoice->agent_name = $request->input('aname');
             //$invoice->agent_address = $response1['Vessel'];
             $invoice->bill_number  = "PSLPKLJPR".date('Y-m-d').   $last_id;
             //$invoice->Bill_of_lading = $request->input('blading');
@@ -967,10 +979,10 @@ class invoicecontroller extends Controller
                             <div class="row border-top-black" style="height: 200px;">
                                 <div class="col-md-4 shipper_heading_collect">
                                     Freight & Charges :
-                                </div>'.$invoice->freight_charges.'
+                                </div><span style="color:black;">'.$invoice->freight_charges.'</span>
                                 <div class="col-md-4 shipper_heading_collect">
                                     prepaid
-                                </div>'.$invoice->freight_charges.'
+                                </div><span style="color:black;">'.$invoice->freight_charges.'</span>
                                 <div class="col-md-4 shipper_heading_collect">
                                     Collect
                                 </div>
@@ -982,14 +994,14 @@ class invoicecontroller extends Controller
                                     </div>
                                 </div>
                                 <div class="border-top pt-3">
-                                    <div class="freight_payable_at_heading">Freight Payable at:</div>'.$invoice->freight_payable_at.'    
+                                    <div class="freight_payable_at_heading">Freight Payable at:</div><span style="color:black;">'.$invoice->freight_payable_at.'</span>    
                                     <div class="row mt-5 px-0">
-                                        <div class="col-md-6 px-0">
+                                        <div class="col-md-6 px-0" >
                                             Mode of Shipment:
-                                        </div>'.$invoice->mode_of_shipment.'
+                                        </div><span style="color:black;">'.$invoice->mode_of_shipment.'</span>
                                         <div class="col-md-6 px-0">
                                             Shipped on board:
-                                        </div>'.$invoice->shipped_on_board.'
+                                        </div><span style="color:black;">'.$invoice->shipped_on_board.'</span>
                                     </div>
                                 </div>
                             </div>

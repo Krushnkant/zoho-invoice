@@ -14,7 +14,7 @@
   <div class="row mt-5 mb-5">
     <div class="col-lg-12">
       <div class="card">
-        <div class="card-body">
+        <div class="card-body" >
           <center>
             <h1 class="">
               INVOICE
@@ -75,13 +75,13 @@
             <div class="col-md-12 mt-2">
               <div class="form-group">
                 <label for="validationCustom03" class="form-label">Notify Address<span class="text-danger">*</span></label><br>
-                <!--   <input type="radio" id="html" name="fav_language" value="1">
+                  <input type="radio" id="select" name="check_notify" value="1" class="check_notify">
                   <label for="html">Same as Shipper Address</label><br>
-                  <input type="radio" id="css" name="fav_language" value="2">
+                  <input type="radio" id="select" name="check_notify" value="2" class="check_notify">
                   <label for="css">Same as Consignee Address</label><br>
-                  <input type="radio" id="javascript" name="fav_language" value="3">
-                  <label for="javascript">Create Notify Address</label> -->
-                <textarea rows="4" class="form-control" cols="50" id="validationCustom03" name="naddress" required>
+                  <input type="radio" id="select" name="check_notify" value="3" class="check_notify">
+                  <label for="javascript">Create Notify Address</label>
+                <textarea rows="4" class="form-control" cols="50" id="naddress" name="naddress" required>
               </textarea>
                 <label id="naddress-error" class="error invalid-feedback animated fadeInDown" for="naddress"></label>
               </div>
@@ -770,24 +770,24 @@
               });
             });
 
-            // $('#select').change(function(){
+            $('.check_notify').change(function(){
+       
+            var textarea = $('#naddress');
+            var select   = $(this).val();
 
-            // var textarea = $('textarea');
-            // var select   = $(this).val();
+            textarea.hide();
 
-            // textarea.hide();
+            if (select == '3'){
+              textarea.show();
+            }
+            if (select == '2'){
+              textarea.hide();
+            }
+            if (select == '1'){
+              textarea.hide();
+            }
 
-            // if (select == '3'){
-            //   textarea.show();
-            // }
-            // if (select == '2'){
-            //   textarea.hide();
-            // }
-            // if (select == '1'){
-            //   textarea.hide();
-            // }
-
-            // });​
+            })
 
           </script>
           

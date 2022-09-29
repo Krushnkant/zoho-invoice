@@ -59,7 +59,7 @@
     <!--**********************************
         Content body start
     ***********************************-->
-     <div class="content-body">
+     <div class="content-body" style="min-height: 1100px;margin-left:auto;">
         @yield('content')
     </div>
     <!--**********************************
