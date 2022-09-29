@@ -1,7 +1,7 @@
 
 
         
-<div class="row col-md-8 col-sm-12 offset-md-2">
+
 <div class="row">
   <div class="col-md-8">
 
@@ -28,7 +28,7 @@
 
 
 
-  <div class="col-md-6">
+  <div class="col-md-6 mt-2">
   <div class="form-group">
     <label for="validationCustom03" class="form-label">Shipper Address <span class="text-danger">*</span></label>
 
@@ -37,7 +37,7 @@
 <label id="saddress-error" class="error invalid-feedback animated fadeInDown" for="saddress"></label>
   </div>
 </div>
-  <div class="col-md-6">
+  <div class="col-md-6 mt-2">
   <div class="form-group">
     <label for="validationCustom03" class="form-label">Consignee Address <span class="text-danger">*</span></label>
 
@@ -46,7 +46,7 @@
 <label id="caddress-error" class="error invalid-feedback animated fadeInDown" for="caddress"></label>
   </div>
 </div>
-  <div class="col-md-12">
+  <div class="col-md-12 mt-2">
   <div class="form-group">
     <label for="validationCustom03" class="form-label">Notify Address <span class="text-danger">*</span></label>
 
@@ -59,14 +59,14 @@
  
  
  
-  <div class="col-md-12">
+  <div class="col-md-12  mt-2">
   <div class="form-group">
     <label for="validationCustom05" class="form-label">Pre carriage by</label>
     <input type="text" class="form-control" name ="pcarriageby" value="{{ $invoice->pre_carriage_by }} " id="validationCustom05" required>
     <label id="pcarriageby-error" class="error invalid-feedback animated fadeInDown" for="pcarriageby"></label>
 </div>
   </div>
-  <div class="col-md-6">
+  <div class="col-md-6  mt-2">
   <div class="form-group">
     <label for="validationCustom05" class="form-label">Pier or port of receipt</label>
     <input type="text" class="form-control" name= "por" value="{{ $invoice->port_of_receipt }} " id="validationCustom05" required>
@@ -74,7 +74,7 @@
     </div>
   </div>
  
-  <div class="col-md-6">
+  <div class="col-md-6  mt-2">
     <div class="form-group">
     <label for="validationCustom05" class="form-label">Country of Origin</label>
     <input type="text" class="form-control" name="cor" value=" {{ $invoice->contry_origin }}" id="validationCustom05" required>
@@ -82,7 +82,7 @@
     </div>
   </div>
 
-  <div class="col-md-3 mt-4">
+  <div class="col-md-3 mt-2">
   <div class="form-group">
     <label for="validationCustom05" class="form-label">Countainer no</label>
     <input type="text" class="form-control" name="containerno[]" value="{{ $invoice->item[0]->container_no }} "id="validationCustom05" required>
@@ -95,7 +95,7 @@
     <label id="grossweb-error" class="error invalid-feedback animated fadeInDown" for="grossweb"></label>
     </div>
   </div>
-  <div class="col-md-3 ">
+  <div class="col-md-3 mt-2">
   <div class="form-group">
     <label for="validationCustom05" class="form-label">No of countainer package</label>
     <input type="text" class="form-control" name="countainerpackage[]" value="{{ $invoice->item[0]->container_package }}  " id="validationCustom05" required>
@@ -108,7 +108,7 @@
     <label id="mesurment-error" class="error invalid-feedback animated fadeInDown" for="gromesurmentssweb"></label>
     </div>
   </div>
-  <div class="col-md-6">
+  <div class="col-md-6 mt-2">
   <div class="form-group">
     <label for="validationCustom03" class="form-label">Description of goods</label>
 
@@ -134,7 +134,7 @@
     </div>
   </div>  -->
 
-  <div class="col-md-3 mt-3">
+  <div class="col-md-3 mt-2">
   <div class="form-group">
     <label for="validationCustom05" class="form-label">Countainer no</label>
     <input type="text" class="form-control" name="containerno[]" value="{{  $invoice->item[1]->container_no  }} "id="validationCustom05" required>
@@ -147,7 +147,7 @@
     <label id="grossweb-error" class="error invalid-feedback animated fadeInDown" for="grossweb"></label>
     </div>
   </div>
-  <div class="col-md-3">
+  <div class="col-md-3 mt-2">
   <div class="form-group">
     <label for="validationCustom05" class="form-label">No of countainer package</label>
     <input type="text" class="form-control" name="countainerpackage[]" value="{{  $invoice->item[1]->container_package  }} " id="validationCustom05" required>
@@ -160,7 +160,7 @@
     <label id="mesurment-error" class="error invalid-feedback animated fadeInDown" for="gromesurmentssweb"></label>
     </div>
   </div>
-  <div class="col-md-6">
+  <div class="col-md-6 mt-2">
   <div class="form-group">
     <label for="validationCustom03" class="form-label">Description of goods</label>
 
@@ -186,7 +186,7 @@
     </div>
   </div>  -->
 
-  <div class="col-md-3 mt-3">
+  <div class="col-md-3  mt-2">
   <div class="form-group">
     <label for="validationCustom05" class="form-label">Countainer no</label>
     <input type="text" class="form-control" name="containerno[]" value="{{  $invoice->item[2]->container_no  }} "id="validationCustom05" required>
@@ -199,7 +199,7 @@
     <label id="grossweb-error" class="error invalid-feedback animated fadeInDown" for="grossweb"></label>
     </div>
   </div>
-  <div class="col-md-3">
+  <div class="col-md-3  mt-2">
   <div class="form-group">
     <label for="validationCustom05" class="form-label">No of countainer package</label>
     <input type="text" class="form-control" name="countainerpackage[]" value="{{  $invoice->item[2]->container_package }}" id="validationCustom05" required>
@@ -212,7 +212,7 @@
     <label id="mesurment-error" class="error invalid-feedback animated fadeInDown" for="gromesurmentssweb"></label>
     </div>
   </div>
-  <div class="col-md-6">
+  <div class="col-md-6  mt-2">
   <div class="form-group">
     <label for="validationCustom03" class="form-label">Description of goods</label>
 
@@ -238,7 +238,7 @@
     </div>
   </div>  -->
 
-  <div class="col-md-3 mt-3">
+  <div class="col-md-3 mt-2">
   <div class="form-group">
     <label for="validationCustom05" class="form-label">Countainer no</label>
     <input type="text" class="form-control" name="containerno[]" value="{{  $invoice->item[3]->container_no  }} "id="validationCustom05" required>
@@ -251,7 +251,7 @@
     <label id="grossweb-error" class="error invalid-feedback animated fadeInDown" for="grossweb"></label>
     </div>
   </div>
-  <div class="col-md-3">
+  <div class="col-md-3  mt-2">
   <div class="form-group">
     <label for="validationCustom05" class="form-label">No of countainer package</label>
     <input type="text" class="form-control" name="countainerpackage[]" value="{{  $invoice->item[3]->container_package  }}" id="validationCustom05" required>
@@ -264,7 +264,7 @@
     <label id="mesurment-error" class="error invalid-feedback animated fadeInDown" for="gromesurmentssweb"></label>
     </div>
   </div>
-  <div class="col-md-6">
+  <div class="col-md-6  mt-2">
   <div class="form-group">
     <label for="validationCustom03" class="form-label">Description of goods</label>
 
@@ -290,7 +290,7 @@
     </div>
   </div>  -->
 
-  <div class="col-md-3 mt-3">
+  <div class="col-md-3  mt-2">
   <div class="form-group">
     <label for="validationCustom05" class="form-label">Countainer no</label>
     <input type="text" class="form-control" name="containerno[]" value="{{   $invoice->item[4]->container_no  }} "id="validationCustom05" required>
@@ -303,7 +303,7 @@
     <label id="grossweb-error" class="error invalid-feedback animated fadeInDown" for="grossweb"></label>
     </div>
   </div>
-  <div class="col-md-3 ">
+  <div class="col-md-3  mt-2">
   <div class="form-group">
     <label for="validationCustom05" class="form-label">No of countainer package</label>
     <input type="text" class="form-control" name="countainerpackage[]" value="{{  $invoice->item[4]->container_package }} " id="validationCustom05" required>
@@ -316,7 +316,7 @@
     <label id="mesurment-error" class="error invalid-feedback animated fadeInDown" for="gromesurmentssweb"></label>
     </div>
   </div>
-  <div class="col-md-6">
+  <div class="col-md-6  mt-2">
   <div class="form-group">
     <label for="validationCustom03" class="form-label">Description of goods</label>
 
@@ -348,6 +348,7 @@
 </div>
 <div class="col-md-4">
 <div class="col-md-12">
+  <center><h3>For Admin</h3></center>
       <div class="form-group">
         <label for="validationCustomUsername" class="form-label">Agent Name <span class="text-danger">*</span></label>
         <div class="input-group has-validation">

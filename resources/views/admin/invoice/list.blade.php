@@ -20,7 +20,7 @@
                             @if(isset($action) && $action=='create')
                                 Add Invoice
                             @elseif(isset($action) && $action=='edit')
-                               <center> Edit Invoice </center>
+                               <center style="font-size:32px"> Edit Invoice </center>
                             @else
                                 Invoice List
                             @endif

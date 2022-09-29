@@ -203,7 +203,7 @@
                 <label id="containerno-error" class="error invalid-feedback animated fadeInDown" for="containerno"></label>
               </div>
               <div class="form-group">
-                <label for="gross" class="form-label">Gross Webeight</label>
+                <label for="gross" class="form-label" style="margin-top:2px">Gross Webeight</label>
 
                 <input type="text" class="form-control" name="gross[]" id="gross" required>
                 <label id="gross-error" class="error invalid-feedback animated fadeInDown" for="gross"></label>
@@ -217,7 +217,7 @@
                 <label id="countainerpackage-error" class="error invalid-feedback animated fadeInDown" for="countainerpackage"></label>
               </div>
               <div class="form-group">
-                <label for="mesurment" class="form-label">Measurment</label>
+                <label for="mesurment" class="form-label" style="margin-top:2px">Measurment</label>
 
                 <input type="text" class="form-control" name="mesurment[]" id="mesurment" required>
                 <label id="mesurment-error" class="error invalid-feedback animated fadeInDown" for="mesurment"></label>
@@ -248,34 +248,34 @@
                 <label id="mesurment-error" class="error invalid-feedback animated fadeInDown" for="mesurment"></label>
               </div>
             </div> -->
-            <div class="col-md-4 mt-2">
+            <div class="col-md-4 mt-4">
               <div class="form-group">
                 <label for="containerno2" class="form-label">Countainer no/Seal No Marks & Numbers</label>
                 <input type="text" class="form-control" name="containerno[]" id="containerno2" required>
                 <label id="cn-error" class="error invalid-feedback animated fadeInDown" for="cn"></label>
               </div>
               <div class="form-group">
-                <label for="gross2" class="form-label">Gross Webeight</label>
+                <label for="gross2" class="form-label" style="margin-top:2px">Gross Webeight</label>
 
                 <input type="text" class="form-control" name="gross[]" id="gross2" required>
                 <label id="gross-error" class="error invalid-feedback animated fadeInDown" for="gross"></label>
               </div>
               
             </div>
-            <div class="col-md-4 mt-2">
+            <div class="col-md-4  mt-4">
               <div class="form-group">
                 <label for="countainerpackage2" class="form-label">Number of containers or packages</label>
                 <input type="text" class="form-control" name="countainerpackage[]" id="countainerpackage2" required>
                 <label id="nocp-error" class="error invalid-feedback animated fadeInDown" for="nocp"></label>
               </div>
               <div class="form-group">
-                <label for="mesurment2" class="form-label">Measurment</label>
+                <label for="mesurment2" class="form-label" style="margin-top:2px">Measurment</label>
 
                 <input type="text" class="form-control" name="mesurment[]" id="mesurment2" required>
                 <label id="mesurment-error" class="error invalid-feedback animated fadeInDown" for="gromesurmentssweb"></label>
               </div>
             </div>
-            <div class="col-md-4 mt-3">
+            <div class="col-md-4 mt-4">
               <div class="form-group">
                 <label for="description2" class="form-label">Kind of packages/description of goods</label>
 
@@ -300,33 +300,33 @@
                 <label id="mesurment-error" class="error invalid-feedback animated fadeInDown" for="gromesurmentssweb"></label>
               </div>
             </div> -->
-            <div class="col-md-4 mt-2">
+            <div class="col-md-4 mt-4">
               <div class="form-group">
                 <label for="containerno3" class="form-label">Countainer no/Seal No Marks & Numbers</label>
                 <input type="text" class="form-control" name="containerno[]" id="containerno3" required>
                 <label id="cn-error" class="error invalid-feedback animated fadeInDown" for="cn"></label>
               </div>
               <div class="form-group">
-                <label for="gross3" class="form-label">Gross Webeight</label>
+                <label for="gross3" class="form-label" style="margin-top:2px">Gross Webeight</label>
 
                 <input type="text" class="form-control" name="gross[]" id="gross3" required>
                 <label id="grossweb-error" class="error invalid-feedback animated fadeInDown" for="grossweb"></label>
               </div>
             </div>
-            <div class="col-md-4 mt-2">
+            <div class="col-md-4 mt-4">
               <div class="form-group">
                 <label for="countainerpackage3" class="form-label">Number of containers or packages</label>
                 <input type="text" class="form-control" name="countainerpackage[]" id="countainerpackage3" required>
                 <label id="nocp-error" class="error invalid-feedback animated fadeInDown" for="nocp"></label>
               </div>
               <div class="form-group">
-                <label for="mesurment3" class="form-label">Measurment</label>
+                <label for="mesurment3" class="form-label" style="margin-top:2px">Measurment</label>
 
                 <input type="text" class="form-control" name="mesurment[]" id="mesurment3" required>
                 <label id="mesurment-error" class="error invalid-feedback animated fadeInDown" for="gromesurmentssweb"></label>
               </div>
             </div>
-            <div class="col-md-4 mt-3">
+            <div class="col-md-4 mt-4">
               <div class="form-group">
                 <label for="description3" class="form-label">Kind of packages/description of goods</label>
 
@@ -351,20 +351,20 @@
                 <label id="mesurment-error" class="error invalid-feedback animated fadeInDown" for="gromesurmentssweb"></label>
               </div>
             </div> -->
-            <div class="col-md-4 mt-2">
+            <div class="col-md-4 mt-4">
               <div class="form-group">
                 <label for="containerno4" class="form-label">Countainer no/Seal No Marks & Numbers</label>
                 <input type="text" class="form-control" name="containerno[]" id="containerno4" required>
                 <label id="cn-error" class="error invalid-feedback animated fadeInDown" for="cn"></label>
               </div>
               <div class="form-group">
-                <label for="gross4" class="form-label">Gross Webeight</label>
+                <label for="gross4" class="form-label" style="margin-top:2px">Gross Webeight</label>
 
                 <input type="text" class="form-control" name="gross[]" id="gross4" required>
                 <label id="grossweb-error" class="error invalid-feedback animated fadeInDown" for="grossweb"></label>
               </div>
             </div>
-            <div class="col-md-4 mt-2">
+            <div class="col-md-4 mt-4">
               <div class="form-group">
                 <label for="countainerpackager4" class="form-label">Number of containers or packages</label>
                 <input type="text" class="form-control" name="countainerpackage[]" id="countainerpackager4" required>
@@ -372,13 +372,13 @@
                 
               </div>
               <div class="form-group">
-                <label for="mesurment4" class="form-label">Measurment</label>
+                <label for="mesurment4" class="form-label" style="margin-top:2px">Measurment</label>
 
                 <input type="text" class="form-control" name="mesurment[]" id="mesurment4" required>
                 <label id="mesurment-error" class="error invalid-feedback animated fadeInDown" for="gromesurmentssweb"></label>
               </div>
             </div>
-            <div class="col-md-4 mt-3">
+            <div class="col-md-4 mt-4">
               <div class="form-group">
                 <label for="description4" class="form-label">Kind of packages/description of goods</label>
 
@@ -403,33 +403,33 @@
                 <label id="mesurment-error" class="error invalid-feedback animated fadeInDown" for="gromesurmentssweb"></label>
               </div>
             </div> -->
-            <div class="col-md-4 mt-2">
+            <div class="col-md-4 mt-4">
               <div class="form-group">
                 <label for="containerno5" class="form-label">Countainer no/Seal No Marks & Numbers</label>
                 <input type="text" class="form-control" name="containerno[]" id="containerno5" required>
                 <label id="cn-error" class="error invalid-feedback animated fadeInDown" for="cn"></label>
               </div>
               <div class="form-group">
-                <label for="gross5" class="form-label">Gross Webeight</label>
+                <label for="gross5" class="form-label" style="margin-top:2px">Gross Webeight</label>
 
                 <input type="text" class="form-control" name="gross[]" id="gross5" required>
                 <label id="grossweb-error" class="error invalid-feedback animated fadeInDown" for="grossweb"></label>
               </div>
             </div>
-            <div class="col-md-4 mt-2">
+            <div class="col-md-4 mt-4">
               <div class="form-group">
                 <label for="countainerpackage5" class="form-label">Number of containers or packages</label>
                 <input type="text" class="form-control" name="countainerpackage[]" id="countainerpackage5" required>
                 <label id="nocp-error" class="error invalid-feedback animated fadeInDown" for="nocp"></label>
               </div>
               <div class="form-group">
-                <label for="mesurment5" class="form-label">Measurment</label>
+                <label for="mesurment5" class="form-label" style="margin-top:2px">Measurment</label>
 
                 <input type="text" class="form-control" name="mesurment[]" id="mesurment5" required>
                 <label id="mesurment-error" class="error invalid-feedback animated fadeInDown" for="gromesurmentssweb"></label>
               </div>
             </div>
-            <div class="col-md-4 mt-3">
+            <div class="col-md-4 mt-4">
               <div class="form-group">
                 <label for="description5" class="form-label">Kind of packages/description of goods</label>
 
