@@ -15,6 +15,7 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="card">
+                <div class="card-body">
                         <h4 class="card-title">
                             @if(isset($action) && $action=='create')
                                 Add Invoice
@@ -23,7 +24,8 @@
                             @else
                                 Invoice List
                             @endif
-                        </h4>                        
+                        </h4>  
+
                         @if(isset($action) && $action=='list')
                             <div class="table-responsive">
                                 <table id="Invoice" class="table zero-configuration customNewtable" style="width:100%">
@@ -71,6 +73,7 @@
                     </div>
                 </div>
             </div>
+    
         </div>
     </div>
 
