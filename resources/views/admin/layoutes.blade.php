@@ -135,11 +135,11 @@
                     </a>
                 </li>
 
-                <li>
+                <!-- <li>
                     <a href="{{ route('admin.settings.list') }}" aria-expanded="false">
                         <i class="fa fa-gear"></i><span class="nav-text">Settings</span>
                     </a>
-                </li>
+                </li> -->
 
             </ul>
         </div>
