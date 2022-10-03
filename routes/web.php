@@ -38,5 +38,6 @@ Route::group(['prefix'=>'admin','middleware'=>['auth'],'as'=>'admin.'],function 
    Route::get('invoice/pdf/{id}',[\App\Http\Controllers\admin\invoicecontroller::class,'generate_pdf'])->name('invoice.pdf');
 });
 
-Route::get('invoice/create',[\App\Http\Controllers\admin\invoicecontroller::class,'index'])->name('invoice.create');
+Route::get('invoice/create/{billno}',[\App\Http\Controllers\admin\invoicecontroller::class,'index'])->name('invoice.create');
 Route::post('invoice/create',[\App\Http\Controllers\admin\invoicecontroller::class,'store'])->name('invoice.add');
+Route::post('invoice/add_row_item',[\App\Http\Controllers\admin\invoicecontroller::class,'add_row_item'])->name('invoice.add_row_item');

@@ -18,8 +18,8 @@ use Illuminate\Support\Facades\Validator;
 
 class invoicecontroller extends Controller
 {
-    public function index(){
-
+    public function index($billno){
+      
        // $client= new GuzzleHttp\Client();
         // $res=
         // $client->request('GET',' https://books.zoho.in/api/v3/salesorders/938173000000186007?organization_id=60015618450');
@@ -36,7 +36,7 @@ class invoicecontroller extends Controller
 //         'Content-Type' => 'application/json' 
 //    ])->get('https://books.zoho.in/api/v3/salesorders/938173000000186007?organization_id=60015618450');
 
-        return view('admin.invoice.create');
+        return view('admin.invoice.create',compact('billno'));
     }
     public function list()
     {
@@ -139,13 +139,13 @@ class invoicecontroller extends Controller
     //handle update data
     public function save(Request $request)
     {   $messages = [
-        'sname.required' =>'Please provide a Prefix For S Name',
-        'cname.required' =>'please provide a prefix for C Name',
-        'saddress.required' =>'Please provide  S address',
-        'caddress.required' =>'please provide  C address',
-        //'naddress.required' =>'Please provide N address',
-        'aname.required' =>'please provide a prefix for A Name',
-        'agaddress.required' =>'Please provide a address',
+        'sname.required' =>'this field is required',
+        'cname.required' =>'this field is required',
+        'saddress.required' =>'this field is required',
+        'caddress.required' =>'this field is required',
+        //'naddress.required' =>'this field is required',
+        'aname.required' =>'this field is required',
+        'agaddress.required' =>'this field is required',
         'blading.required' =>'this field is required',
         'vessel.required' =>'this field is required',
         'voyage.required' =>'this field is required',
@@ -232,7 +232,7 @@ class invoicecontroller extends Controller
         $company->place_of_date = $request->pdate;
         $company->place_of_issue = $request->place;
         $company->save();
-        //dd($company);
+       // dd($company);
         foreach ($request->containerno as $key => $item) {
                
             //if($item != "" && $item != null){          
@@ -247,7 +247,7 @@ class invoicecontroller extends Controller
             //}
            
     }
-     //dd($company);
+    //dd($company);
   
 
    
@@ -268,17 +268,62 @@ class invoicecontroller extends Controller
     public function edit($id)
     {
         	
-    //  $users = Invoice::leftjoin('item_details', 'item_details.invoiceid', '=', 'invoice_data.id')
-    // ->get(['item_details.*', 'invoice_data.container_no']);
+    //   $users = Invoice::leftjoin('item_details', 'item_details.invoiceid', '=', 'invoice_data.id')
+    //  ->get(['item_details.*', 'invoice_data.container_no']);
              
-        //$invoice = Invoice::with('item')->first();
-       //dd($invoice->item[0]->container_no);
+        $invoice = Invoice::with('item')->where('id',$id)->first();
+       //dd($invoice->item[0]);
         $action = "edit";   
-         $invoice = Invoice::where('id',$id)->first();              
+         //$invoice = Invoice::->first();              
         //dd($invoice);
         return view('admin.invoice.list',compact('action','invoice'));     
     }
 
+    public function add_row_item(Request $request){
+        $language = $request->language;
+        $next_item = $request->total_item + 1;
+
+       // $products = invoice::where('estatus',1)->get();
+   
+
+    $html = '<div class="col-md-4 mt-4">
+        <div class="form-group">
+        <label for="containerno5" class="form-label">Container no/Seal No </label>
+        <input type="text" class="form-control contain4" name="containerno[]" id="containerno5" required>
+        <label id="cn-error" class="error invalid-feedback animated fadeInDown" for="cn"></label>
+      </div>
+      <div class="form-group">
+        <label for="gross5" class="form-label" style="margin-top:2px">Gross Weight</label>
+
+        <input type="text" class="form-control contain4" name="gross[]" id="gross5" required>
+        <label id="grossweb-error" class="error invalid-feedback animated fadeInDown" for="grossweb"></label>
+      </div>
+    </div>
+    <div class="col-md-4 mt-4">
+      <div class="form-group">
+        <label for="countainerpackage5" class="form-label">Number of  packages</label>
+        <input type="text" class="form-control contain4" name="countainerpackage[]" id="countainerpackage5" required>
+        <label id="nocp-error" class="error invalid-feedback animated fadeInDown" for="nocp"></label>
+      </div>
+      <div class="form-group">
+        <label for="mesurment5" class="form-label" style="margin-top:2px">Measurment</label>
+
+        <input type="text" class="form-control contain4" name="mesurment[]" id="mesurment5" required>
+        <label id="mesurment-error" class="error invalid-feedback animated fadeInDown" for="gromesurmentssweb"></label>
+      </div>
+    </div>
+    <div class="col-md-4 mt-4">
+      <div class="form-group">
+        <label for="description5" class="form-label">Kind of packages/description of goods</label>
+
+        <textarea rows="5" class="form-control contain4" name="description[]" cols="50" id="description5" name="comment" required>
+        </textarea>
+        <label id="dog-error" class="error invalid-feedback animated fadeInDown" for="dog"></label>
+      </div>
+    </div>';
+
+        return ['html' => $html, 'next_item' => $next_item];
+    }
 
     public function store(Request $request)
     {
@@ -287,10 +332,10 @@ class invoicecontroller extends Controller
     
         //dd($request->containerno);
         $messages = [
-            'sname.required' =>'Please provide a Prefix For S Name',
-            'cname.required' =>'please provide a prefix for C Name',
-            'saddress.required' =>'Please provide  S address',
-            'caddress.required' =>'please provide  C address',
+            'sname.required' =>'this field is required',
+            'cname.required' =>'this field is required',
+            'saddress.required' =>'this field is required',
+            'caddress.required' =>'this field is required',
             //'naddress.required' =>'Please provide N address',
             //'aname.required' =>'please provide a prefix for A Name',
             //'agaddress.required' =>'Please provide a address',
@@ -316,7 +361,7 @@ class invoicecontroller extends Controller
             //'fpat.required' =>'this field is required',
             'sname.required' =>'this field is required',
         ];
-        // dd($request->all());
+         //dd($request->all());
         $data = $request->all();
         $validator = Validator::make($request->all(), [
             'sname' => 'required',
@@ -466,7 +511,7 @@ class invoicecontroller extends Controller
 
             // $invoice->agent_name = $request->input('aname');
             //$invoice->agent_address = $response1['Vessel'];
-            $invoice->bill_number  = "PSLPKLJPR".date('Y-m-d').   $last_id;
+            $invoice->bill_number  =  $request->input('billno').date('Y-m-d').   $last_id;
             //$invoice->Bill_of_lading = $request->input('blading');
             $invoice->vessel =  $var2;
             $invoice->voyage = $var3;
@@ -507,9 +552,9 @@ class invoicecontroller extends Controller
                     $item_detail->Measurment = $request->mesurment[$key];
                     $item_detail->save();
                     // }
-                   
+                  dump( $item_detail);
             }
-
+            //dd("$item_detail");
              return response()->json([
                 'status'=>200,
                 'message'=>'Invoice Added Successfully.'
