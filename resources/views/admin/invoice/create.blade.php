@@ -575,7 +575,7 @@
               var check2=$('#containf').val();
               var check3=$('#containg').val();
               var check4=$('#containd').val();
-              var aboutme = $('#des').val();
+         
               //alert(aboutme);
               var is_valid = true
               if(check == ""){
@@ -598,19 +598,15 @@
                   $('#mesurment-error').show().text('this field is required');
                  
               }
-              if(aboutme == ""){
-                  var is_valid = false; 
-              
-                 
-              }
+            
               if($("#des").val().trim().length < 1)
               {
+                var is_valid = false; 
                 $('#description-error').show().text('this field is required');
-                  return; 
               }
 
               if(is_valid){
-
+                  
 
               $.ajax( {
                 type: 'POST',
@@ -805,6 +801,7 @@
                 }
               });
             }else{
+              
               $('#saveInvoiceBtn').prop('disabled', false);
               $('#saveInvoiceBtn').find('.loadericonfa').hide();
             }
