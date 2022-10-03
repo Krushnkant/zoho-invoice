@@ -81,30 +81,30 @@
     <label id="cor-error" class="error invalid-feedback animated fadeInDown" for="cor"></label>
     </div>
   </div>
-
+@foreach($invoice->item as $item)
   <div class="col-md-3 mt-2">
   <div class="form-group">
     <label for="validationCustom05" class="form-label">Countainer no</label>
-    <input type="text" class="form-control" name="containerno[]" value="{{ $invoice->item[0]->container_no }} "id="validationCustom05" required>
+    <input type="text" class="form-control" name="containerno[]" value="{{ $item->container_no }} "id="validationCustom05" required>
     <label id="cn-error" class="error invalid-feedback animated fadeInDown" for="cn"></label>
   </div>
   <div class="form-group">
     <label for="validationCustom03" class="form-label">Gross Webeight</label>
 
-    <input type="text" class="form-control" name="gross[]" value="{{ $invoice->item[0]->Gross_web }}" id="validationCustom05" required>
+    <input type="text" class="form-control" name="gross[]" value="{{ $item->Gross_web }}" id="validationCustom05" required>
     <label id="grossweb-error" class="error invalid-feedback animated fadeInDown" for="grossweb"></label>
     </div>
   </div>
   <div class="col-md-3 mt-2">
   <div class="form-group">
     <label for="validationCustom05" class="form-label">No of countainer package</label>
-    <input type="text" class="form-control" name="countainerpackage[]" value="{{ $invoice->item[0]->container_package }}  " id="validationCustom05" required>
+    <input type="text" class="form-control" name="countainerpackage[]" value="{{ $item->container_package }}  " id="validationCustom05" required>
     <label id="nocp-error" class="error invalid-feedback animated fadeInDown" for="nocp"></label>
   </div>
   <div class="form-group">
     <label for="validationCustom03" class="form-label">Measurment</label>
 
-    <input type="text" class="form-control" name="mesurment[]" value="{{ $invoice->item[0]->Measurment }} " id="validationCustom05" required>
+    <input type="text" class="form-control" name="mesurment[]" value="{{ $item->Measurment }} " id="validationCustom05" required>
     <label id="mesurment-error" class="error invalid-feedback animated fadeInDown" for="gromesurmentssweb"></label>
     </div>
   </div>
@@ -112,235 +112,13 @@
   <div class="form-group">
     <label for="validationCustom03" class="form-label">Description of goods</label>
 
-    <textarea rows="5"  class="form-control" name="description[]"  cols="50" id="validationCustom03" name="comment" required>{{ $invoice->item[0]->description_goods }} 
+    <textarea rows="5"  class="form-control" name="description[]"  cols="50" id="validationCustom03" name="comment" required>{{ $item->description_goods }} 
 </textarea>
 <label id="dog-error" class="error invalid-feedback animated fadeInDown" for="dog"></label>
     </div>
   </div>
-  <!-- <div class="col-md-2">
-  <div class="form-group">
-    <label for="validationCustom03" class="form-label">Gross Webeight</label>
 
-    <input type="text" class="form-control" name="gross[]" value="{{ $invoice->item[0]->Gross_web }}" id="validationCustom05" required>
-    <label id="grossweb-error" class="error invalid-feedback animated fadeInDown" for="grossweb"></label>
-    </div>
-  </div>
-  <div class="col-md-2">
-  <div class="form-group">
-    <label for="validationCustom03" class="form-label">Measurment</label>
-
-    <input type="text" class="form-control" name="mesurment[]" value="{{ $invoice->item[0]->Measurment }} " id="validationCustom05" required>
-    <label id="mesurment-error" class="error invalid-feedback animated fadeInDown" for="gromesurmentssweb"></label>
-    </div>
-  </div>  -->
-
-  <div class="col-md-3 mt-2">
-  <div class="form-group">
-    <label for="validationCustom05" class="form-label">Countainer no</label>
-    <input type="text" class="form-control" name="containerno[]" value="{{  $invoice->item[1]->container_no  }} "id="validationCustom05" required>
-    <label id="cn-error" class="error invalid-feedback animated fadeInDown" for="cn"></label>
-  </div>
-  <div class="form-group">
-    <label for="validationCustom03" class="form-label">Gross Webeight</label>
-
-    <input type="text" class="form-control" name="gross[]" value=" {{  $invoice->item[1]->Gross_web  }}" id="validationCustom05" required>
-    <label id="grossweb-error" class="error invalid-feedback animated fadeInDown" for="grossweb"></label>
-    </div>
-  </div>
-  <div class="col-md-3 mt-2">
-  <div class="form-group">
-    <label for="validationCustom05" class="form-label">No of countainer package</label>
-    <input type="text" class="form-control" name="countainerpackage[]" value="{{  $invoice->item[1]->container_package  }} " id="validationCustom05" required>
-    <label id="nocp-error" class="error invalid-feedback animated fadeInDown" for="nocp"></label>
-    </div>
-    <div class="form-group">
-    <label for="validationCustom03" class="form-label">Measurment</label>
-
-    <input type="text" class="form-control" name="mesurment[]" value="{{  $invoice->item[1]->Measurment  }} " id="validationCustom05" required>
-    <label id="mesurment-error" class="error invalid-feedback animated fadeInDown" for="gromesurmentssweb"></label>
-    </div>
-  </div>
-  <div class="col-md-6 mt-2">
-  <div class="form-group">
-    <label for="validationCustom03" class="form-label">Description of goods</label>
-
-    <textarea rows="5"  class="form-control" name="description[]"  cols="50" id="validationCustom03" name="comment" required>{{$invoice->item[1]->description_goods}}
-</textarea>
-    <label id="dog-error" class="error invalid-feedback animated fadeInDown" for="dog"></label>
-    </div>
-  </div>
-  <!-- <div class="col-md-2">
-  <div class="form-group">
-    <label for="validationCustom03" class="form-label">Gross Webeight</label>
-
-    <input type="text" class="form-control" name="gross[]" value=" {{  $invoice->item[1]->Gross_web  }}" id="validationCustom05" required>
-    <label id="grossweb-error" class="error invalid-feedback animated fadeInDown" for="grossweb"></label>
-    </div>
-  </div>
-  <div class="col-md-2">
-  <div class="form-group">
-    <label for="validationCustom03" class="form-label">Measurment</label>
-
-    <input type="text" class="form-control" name="mesurment[]" value="{{  $invoice->item[1]->Measurment  }} " id="validationCustom05" required>
-    <label id="mesurment-error" class="error invalid-feedback animated fadeInDown" for="gromesurmentssweb"></label>
-    </div>
-  </div>  -->
-
-  <div class="col-md-3  mt-2">
-  <div class="form-group">
-    <label for="validationCustom05" class="form-label">Countainer no</label>
-    <input type="text" class="form-control" name="containerno[]" value="{{  $invoice->item[2]->container_no  }} "id="validationCustom05" required>
-    <label id="cn-error" class="error invalid-feedback animated fadeInDown" for="cn"></label>
-  </div>
-  <div class="form-group">
-    <label for="validationCustom03" class="form-label">Gross Webeight</label>
-
-    <input type="text" class="form-control" name="gross[]" value=" {{  $invoice->item[2]->Gross_web  }}" id="validationCustom05" required>
-    <label id="grossweb-error" class="error invalid-feedback animated fadeInDown" for="grossweb"></label>
-    </div>
-  </div>
-  <div class="col-md-3  mt-2">
-  <div class="form-group">
-    <label for="validationCustom05" class="form-label">No of countainer package</label>
-    <input type="text" class="form-control" name="countainerpackage[]" value="{{  $invoice->item[2]->container_package }}" id="validationCustom05" required>
-    <label id="nocp-error" class="error invalid-feedback animated fadeInDown" for="nocp"></label>
-    </div>
-    <div class="form-group">
-    <label for="validationCustom03" class="form-label">Measurment</label>
-
-    <input type="text" class="form-control" name="mesurment[]" value="{{  $invoice->item[2]->Measurment  }} " id="validationCustom05" required>
-    <label id="mesurment-error" class="error invalid-feedback animated fadeInDown" for="gromesurmentssweb"></label>
-    </div>
-  </div>
-  <div class="col-md-6  mt-2">
-  <div class="form-group">
-    <label for="validationCustom03" class="form-label">Description of goods</label>
-
-    <textarea rows="5"  class="form-control" name="description[]"  cols="50" id="validationCustom03" name="comment" required>{{  $invoice->item[2]->description_goods }}
-</textarea>
-    <label id="dog-error" class="error invalid-feedback animated fadeInDown" for="dog"></label>
-    </div>
-  </div>
-  <!-- <div class="col-md-2">
-  <div class="form-group">
-    <label for="validationCustom03" class="form-label">Gross Webeight</label>
-
-    <input type="text" class="form-control" name="gross[]" value=" {{  $invoice->item[2]->Gross_web  }}" id="validationCustom05" required>
-    <label id="grossweb-error" class="error invalid-feedback animated fadeInDown" for="grossweb"></label>
-    </div>
-  </div>
-  <div class="col-md-2">
-  <div class="form-group">
-    <label for="validationCustom03" class="form-label">Measurment</label>
-
-    <input type="text" class="form-control" name="mesurment[]" value="{{  $invoice->item[2]->Measurment  }} " id="validationCustom05" required>
-    <label id="mesurment-error" class="error invalid-feedback animated fadeInDown" for="gromesurmentssweb"></label>
-    </div>
-  </div>  -->
-
-  <div class="col-md-3 mt-2">
-  <div class="form-group">
-    <label for="validationCustom05" class="form-label">Countainer no</label>
-    <input type="text" class="form-control" name="containerno[]" value="{{  $invoice->item[3]->container_no  }} "id="validationCustom05" required>
-    <label id="cn-error" class="error invalid-feedback animated fadeInDown" for="cn"></label>
-  </div>
-  <div class="form-group">
-    <label for="validationCustom03" class="form-label">Gross Webeight</label>
-
-    <input type="text" class="form-control" name="gross[]" value=" {{ $invoice->item[3]->Gross_web}}" id="validationCustom05" required>
-    <label id="grossweb-error" class="error invalid-feedback animated fadeInDown" for="grossweb"></label>
-    </div>
-  </div>
-  <div class="col-md-3  mt-2">
-  <div class="form-group">
-    <label for="validationCustom05" class="form-label">No of countainer package</label>
-    <input type="text" class="form-control" name="countainerpackage[]" value="{{  $invoice->item[3]->container_package  }}" id="validationCustom05" required>
-    <label id="nocp-error" class="error invalid-feedback animated fadeInDown" for="nocp"></label>
-    </div>
-    <div class="form-group">
-    <label for="validationCustom03" class="form-label">Measurment</label>
-
-    <input type="text" class="form-control" name="mesurment[]" value="{{$invoice->item[3]->Measurment }} " id="validationCustom05" required>
-    <label id="mesurment-error" class="error invalid-feedback animated fadeInDown" for="gromesurmentssweb"></label>
-    </div>
-  </div>
-  <div class="col-md-6  mt-2">
-  <div class="form-group">
-    <label for="validationCustom03" class="form-label">Description of goods</label>
-
-    <textarea rows="5"  class="form-control" name="description[]"  cols="50" id="validationCustom03" name="comment" required>{{  $invoice->item[3]->description_goods }}
-</textarea>
-<label id="dog-error" class="error invalid-feedback animated fadeInDown" for="dog"></label>
-    </div>
-  </div>
-  <!-- <div class="col-md-2">
-  <div class="form-group">
-    <label for="validationCustom03" class="form-label">Gross Webeight</label>
-
-    <input type="text" class="form-control" name="gross[]" value=" {{ $invoice->item[3]->Gross_web}}" id="validationCustom05" required>
-    <label id="grossweb-error" class="error invalid-feedback animated fadeInDown" for="grossweb"></label>
-    </div>
-  </div>
-  <div class="col-md-2">
-  <div class="form-group">
-    <label for="validationCustom03" class="form-label">Measurment</label>
-
-    <input type="text" class="form-control" name="mesurment[]" value="{{$invoice->item[3]->Measurment }} " id="validationCustom05" required>
-    <label id="mesurment-error" class="error invalid-feedback animated fadeInDown" for="gromesurmentssweb"></label>
-    </div>
-  </div>  -->
-
-  <div class="col-md-3  mt-2">
-  <div class="form-group">
-    <label for="validationCustom05" class="form-label">Countainer no</label>
-    <input type="text" class="form-control" name="containerno[]" value="{{   $invoice->item[4]->container_no  }} "id="validationCustom05" required>
-    <label id="cn-error" class="error invalid-feedback animated fadeInDown" for="cn"></label>
-  </div>
-  <div class="form-group">
-    <label for="validationCustom03" class="form-label">Gross Webeight</label>
-
-    <input type="text" class="form-control" name="gross[]" value=" {{ $invoice->item[4]->Gross_web}}" id="validationCustom05" required>
-    <label id="grossweb-error" class="error invalid-feedback animated fadeInDown" for="grossweb"></label>
-    </div>
-  </div>
-  <div class="col-md-3  mt-2">
-  <div class="form-group">
-    <label for="validationCustom05" class="form-label">No of countainer package</label>
-    <input type="text" class="form-control" name="countainerpackage[]" value="{{  $invoice->item[4]->container_package }} " id="validationCustom05" required>
-    <label id="nocp-error" class="error invalid-feedback animated fadeInDown" for="nocp"></label>
-    </div>
-    <div class="form-group">
-    <label for="validationCustom03" class="form-label">Measurment</label>
-
-    <input type="text" class="form-control" name="mesurment[]" value="{{$invoice->item[4]->Measurment }}" id="validationCustom05" required>
-    <label id="mesurment-error" class="error invalid-feedback animated fadeInDown" for="gromesurmentssweb"></label>
-    </div>
-  </div>
-  <div class="col-md-6  mt-2">
-  <div class="form-group">
-    <label for="validationCustom03" class="form-label">Description of goods</label>
-
-    <textarea rows="5"  class="form-control" name="description[]"  cols="50" id="validationCustom03" name="comment" required>{{  $invoice->item[4]->description_goods }}
-</textarea>
-<label id="dog-error" class="error invalid-feedback animated fadeInDown" for="dog"></label>
-    </div>
-  </div>
-  <!-- <div class="col-md-2">
-  <div class="form-group">
-    <label for="validationCustom03" class="form-label">Gross Webeight</label>
-
-    <input type="text" class="form-control" name="gross[]" value=" {{ $invoice->item[4]->Gross_web}}" id="validationCustom05" required>
-    <label id="grossweb-error" class="error invalid-feedback animated fadeInDown" for="grossweb"></label>
-    </div>
-  </div>
-  <div class="col-md-2">
-  <div class="form-group">
-    <label for="validationCustom03" class="form-label">Measurment</label>
-
-    <input type="text" class="form-control" name="mesurment[]" value="{{$invoice->item[4]->Measurment }}" id="validationCustom05" required>
-    <label id="mesurment-error" class="error invalid-feedback animated fadeInDown" for="gromesurmentssweb"></label>
-    </div>
-  </div>  -->
+@endforeach
  
  
         <button type="button" class="btn btn-primary mt-3" id="invoice_submit" name="invoice_submit" action="update">Save <i class="fa fa-circle-o-notch fa-spin loadericonfa" style="display:none;"></i></button>
