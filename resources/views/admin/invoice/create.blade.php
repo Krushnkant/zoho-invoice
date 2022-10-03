@@ -17,7 +17,7 @@
         <div class="card-body">
           <center>
             <h1 class="">
-              BILL OF LANDINCH
+              BILL OF LANDING
             </h1>
           </center>
 
@@ -196,10 +196,11 @@
     <label id="fpat-error" class="error invalid-feedback animated fadeInDown" for="fpat"></label>
     </div>
   </div> -->
-                <div class="row" id="itemstbody">
+                <div class="row" id="itemstbody" style="margin-left: initial;">
+                  
             <div class="col-lg-4 mt-4">
 
-
+            
               <div class="form-group">
                 <label for="containerno" class="form-label">Container no/Seal No </label>
                 <input type="text" class="form-control" name="containerno[]" id="contain1" required>
@@ -230,9 +231,10 @@
               <div class="form-group">
                 <label for="description" class="form-label">Kind of packages/description of goods</label>
 
-                <textarea rows="5" class="form-control" name="description[]" cols="50" id="contains" name="comment" required>
+                <textarea rows="5" class="form-control" name="description[]" cols="45" id="des" name="comment" required>
                 </textarea>
                 <label id="description-error" class="error invalid-feedback animated fadeInDown" for="description"></label>
+                
               </div>
             </div>
 </div>
@@ -508,9 +510,9 @@
     </div>
   </div> -->
                 <div class="col-12">
-                <button type="button" class="btn btn-light list" id="addrow">Add row</button>
+                <button type="button" class="btn btn-light list" id="addrow">Add row</button><br>
             </div>
-            <div class="col-12">
+            <div class="col-12" style="margin-top: 20px;">
               <div class="form-group">
                 <div class="form-check">
                   <input class="form-check-input" type="checkbox" value="" id="invalidCheck" required>
@@ -519,36 +521,16 @@
                   </label>
                   <div class="invalid-feedback">
                     You must agree before submitting.
-                  </div>
+                  </div><br>
                 </div>
               </div>
             </div>
+            
             <div class="col-12 mt-4">
-              <button class="btn btn-lg btn-primary" id="saveInvoiceBtn">Save <i class=" fa fa-circle-o-notch fa-spin loadericonfa" style="display:none;"></i></button>
+              <button type="button" class="btn btn-lg btn-primary" id="saveInvoiceBtn">Save <i class=" fa fa-circle-o-notch fa-spin loadericonfa" style="display:none;"></i></button>
             </div>
           </form>
-          <script>
-            // Example starter JavaScript for disabling form submissions if there are invalid fields
-            (function() {
-              'use strict'
-
-              // Fetch all the forms we want to apply custom Bootstrap validation styles to
-              var forms = document.querySelectorAll('.needs-validation')
-
-              // Loop over them and prevent submission
-              Array.prototype.slice.call(forms)
-                .forEach(function(form) {
-                  form.addEventListener('submit', function(event) {
-                    if (!form.checkValidity()) {
-                      event.preventDefault()
-                      event.stopPropagation()
-                    }
-
-                    form.classList.add('was-validated')
-                  }, false)
-                })
-            })()
-          </script>
+         
           <script>
             // $(function() {
 
@@ -581,6 +563,7 @@
             //     });
             //   });
             // });
+            
           </script>
           <script>
             $('body').on('click', '#saveInvoiceBtn', function() {
@@ -588,8 +571,48 @@
               $('#saveInvoiceBtn').prop('disabled', true);
               $('#saveInvoiceBtn').find('.loadericonfa').show();
               var formData = new FormData($("#add_invoice_form")[0]);
+              var check=$('#contain1').val();
+              var check2=$('#containf').val();
+              var check3=$('#containg').val();
+              var check4=$('#containd').val();
+              var aboutme = $('#des').val();
+              //alert(aboutme);
+              var is_valid = true
+              if(check == ""){
+                  var is_valid = false; 
+                  $('#containerno-error').show().text('this field is required');
+                 
+              }
+              if(check2 == ""){
+                  var is_valid = false; 
+                  $('#gross-error').show().text('this field is required');
+                 
+              }
+              if(check3 == ""){
+                  var is_valid = false; 
+                  $('#countainerpackage-error').show().text('this field is required');
+                 
+              }
+              if(check4 == ""){
+                  var is_valid = false; 
+                  $('#mesurment-error').show().text('this field is required');
+                 
+              }
+              if(aboutme == ""){
+                  var is_valid = false; 
+              
+                 
+              }
+              if($("#des").val().trim().length < 1)
+              {
+                $('#description-error').show().text('this field is required');
+                  return; 
+              }
 
-              $.ajax({
+              if(is_valid){
+
+
+              $.ajax( {
                 type: 'POST',
                 url: "{{ url('invoice/create') }}",
                 data: formData,
@@ -695,18 +718,18 @@
                       $('#containerno-error').hide();
                     }
 
-                    if (res.errors.nocp) {
+                    if (res.errors.countainerpackage) {
                       $('#countainerpackage-error').show().text(res.errors.countainerpackage);
                     } else {
                       $('#countainerpackage-error').hide();
                     }
-                    if (res.errors.dog) {
+                    if (res.errors.description) {
                       $('#description-error').show().text(res.errors.description);
                     } else {
                       $('#description-error').hide();
                     }
 
-                    if (res.errors.grossweb) {
+                    if (res.errors.gross) {
                       $('#gross-error').show().text(res.errors.gross);
                     } else {
                       $('#gross-error').hide();
@@ -781,6 +804,10 @@
                   });
                 }
               });
+            }else{
+              $('#saveInvoiceBtn').prop('disabled', false);
+              $('#saveInvoiceBtn').find('.loadericonfa').hide();
+            }
             });
 
             $('.check_notify').change(function() {

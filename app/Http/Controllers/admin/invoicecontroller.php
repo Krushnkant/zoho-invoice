@@ -235,7 +235,7 @@ class invoicecontroller extends Controller
        // dd($company);
         foreach ($request->containerno as $key => $item) {
                
-            //if($item != "" && $item != null){          
+            if($item != "" && $item != null){          
             $item_detail = new item;
             $item_detail->invoiceid = $request->invoice_id;
             $item_detail->container_no = $item;
@@ -244,7 +244,7 @@ class invoicecontroller extends Controller
             $item_detail->Gross_web  = $request->gross[$key];
             $item_detail->Measurment = $request->mesurment[$key];
             $item_detail->save();
-            //}
+            }
            
     }
     //dd($company);
@@ -361,7 +361,7 @@ class invoicecontroller extends Controller
             //'fpat.required' =>'this field is required',
             'sname.required' =>'this field is required',
         ];
-         //dd($request->all());
+     
         $data = $request->all();
         $validator = Validator::make($request->all(), [
             'sname' => 'required',
@@ -381,17 +381,13 @@ class invoicecontroller extends Controller
            // 'pcarriageby' => 'required',
             //'por' => 'required',
             //'cor' => 'required',
-        //     'containerno' => 'required',
-        //    'countainerpackage' => 'required',
-        //     'description' => 'required',
-        //    'gross' => 'required',
-        //    'mesurment' => 'required',
+            'containerno' => 'required|array',
+           'countainerpackage' => 'required',
+            'description' => 'required|array',
+           'gross' => 'required',
+           'mesurment' => 'required',
             'freight' => 'required',
-            // 'poi' => 'required',
-            // 'podi' => 'required',
-            // 'sonboard' => 'required',
-            // 'mode' => 'required',
-            //'fpat' => 'required',
+
          
 
         ], $messages);
@@ -542,7 +538,7 @@ class invoicecontroller extends Controller
             //dd($invoice);
             foreach ($request->containerno as $key => $item) {
                
-                     //if($item != "" && $item != null){          
+                     if($item != "" && $item != null){          
                     $item_detail = new item;
                     $item_detail->invoiceid = $invoice->id;
                     $item_detail->container_no = $item;
@@ -551,7 +547,7 @@ class invoicecontroller extends Controller
                     $item_detail->Gross_web  = $request->gross[$key];
                     $item_detail->Measurment = $request->mesurment[$key];
                     $item_detail->save();
-                    // }
+                     }
                  // dump( $item_detail);
             }
             //dd("$item_detail");
