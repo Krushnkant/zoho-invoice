@@ -552,7 +552,7 @@ class invoicecontroller extends Controller
                     $item_detail->Measurment = $request->mesurment[$key];
                     $item_detail->save();
                     // }
-                  dump( $item_detail);
+                 // dump( $item_detail);
             }
             //dd("$item_detail");
              return response()->json([
