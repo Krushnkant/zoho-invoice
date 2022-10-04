@@ -416,10 +416,10 @@ class invoicecontroller extends Controller
         //dd($responsetoken);
         $accessToken = $responsetoken['access_token'];
 
-
+        $bill = $request->input('billno');
         $curl = curl_init();
         curl_setopt_array($curl, array(
-        CURLOPT_URL => 'https://books.zoho.in/api/v3/salesorders/938173000000186007?organization_id=60015618450',
+        CURLOPT_URL => 'https://books.zoho.in/api/v3/salesorders/'.$bill.'?organization_id=60015618450',
         CURLOPT_RETURNTRANSFER => true,
         CURLOPT_ENCODING => '',
         CURLOPT_MAXREDIRS => 10,
@@ -535,7 +535,7 @@ class invoicecontroller extends Controller
       
             $invoice->save();
             $invoice->id;
-            //dd($invoice);
+            dd($invoice);
             foreach ($request->containerno as $key => $item) {
                
                      if($item != "" && $item != null){          
