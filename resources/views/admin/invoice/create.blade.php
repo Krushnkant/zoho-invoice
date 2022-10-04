@@ -16,7 +16,7 @@
       <div class="card">
         <div class="card-body">
           <center>
-            <h1 class="">
+            <h1 class="" style="margin-bottom:25px;">
               BILL OF LANDING
             </h1>
           </center>
@@ -59,7 +59,7 @@
                 <label for="saddress" class="form-label">Shipper Address <span class="text-danger">*</span></label>
 
                 <textarea rows="4" class="form-control" cols="50" id="saddress" name="saddress" required>
-</textarea>
+                </textarea>
                 <label id="saddress-error" class="error invalid-feedback animated fadeInDown" for="saddress"></label>
               </div>
             </div>
@@ -78,8 +78,8 @@
                 <!--   <input type="radio" id="select" name="check_notify" value="1" class="check_notify">
                   <label for="html">Same as Shipper Address</label> -->
                   <input type="radio" id="select" name="check_notify" value="2" class="check_notify">
-                  <label for="css">Same as Consignee </label>
-                  <input type="radio" id="select" name="check_notify" value="3" class="check_notify">
+                  <label for="select">Same as Consignee </label>
+                  <input type="radio" id="javascript" name="check_notify" value="3" class="check_notify" checked>
                   <label for="javascript">Create Notify Address</label>
                 <textarea rows="4" class="form-control" cols="50" id="naddress" name="naddress" required>
               </textarea>
@@ -202,12 +202,12 @@
 
             
               <div class="form-group">
-                <label for="containerno" class="form-label">Container no/Seal No </label>
+                <label for="contain1" class="form-label">Container no/Seal No </label>
                 <input type="text" class="form-control" name="containerno[]" id="contain1" required>
                 <label id="containerno-error" class="error invalid-feedback animated fadeInDown" for="containerno"></label>
               </div>
               <div class="form-group">
-                <label for="gross" class="form-label" style="margin-top:2px">Gross Weight</label>
+                <label for="containf" class="form-label" style="margin-top:2px">Gross Weight</label>
 
                 <input type="text" class="form-control" name="gross[]" id="containf" required>
                 <label id="gross-error" class="error invalid-feedback animated fadeInDown" for="gross"></label>
@@ -216,12 +216,12 @@
 
             <div class="col-lg-4 mt-4">
               <div class="form-group">
-                <label for="countainerpackage" class="form-label">Number of packages</label>
+                <label for="containg" class="form-label">Number of packages</label>
                 <input type="text" class="form-control" name="countainerpackage[]" id="containg" required>
                 <label id="countainerpackage-error" class="error invalid-feedback animated fadeInDown" for="countainerpackage"></label>
               </div>
               <div class="form-group">
-                <label for="mesurment" class="form-label" style="margin-top:2px">Measurment</label>
+                <label for="containd" class="form-label" style="margin-top:2px">Measurment</label>
 
                 <input type="text" class="form-control" name="mesurment[]" id="containd" required>
                 <label id="mesurment-error" class="error invalid-feedback animated fadeInDown" for="mesurment"></label>
@@ -229,8 +229,7 @@
             </div>
             <div class="col-md-4 mt-4">
               <div class="form-group">
-                <label for="description" class="form-label">Kind of packages/description of goods</label>
-
+                <label for="des" class="form-label">Kind of packages/description of goods</label>
                 <textarea rows="5" class="form-control" name="description[]" cols="45" id="des" name="comment" required>
                 </textarea>
                 <label id="description-error" class="error invalid-feedback animated fadeInDown" for="description"></label>
@@ -575,7 +574,7 @@
               var check2=$('#containf').val();
               var check3=$('#containg').val();
               var check4=$('#containd').val();
-              var aboutme = $('#des').val();
+         
               //alert(aboutme);
               var is_valid = true
               if(check == ""){
@@ -598,19 +597,15 @@
                   $('#mesurment-error').show().text('this field is required');
                  
               }
-              if(aboutme == ""){
-                  var is_valid = false; 
-              
-                 
-              }
+            
               if($("#des").val().trim().length < 1)
               {
+                var is_valid = false; 
                 $('#description-error').show().text('this field is required');
-                  return; 
               }
 
               if(is_valid){
-
+                  
 
               $.ajax( {
                 type: 'POST',
@@ -805,6 +800,7 @@
                 }
               });
             }else{
+              
               $('#saveInvoiceBtn').prop('disabled', false);
               $('#saveInvoiceBtn').find('.loadericonfa').hide();
             }
