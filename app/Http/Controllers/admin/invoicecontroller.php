@@ -621,7 +621,7 @@ class invoicecontroller extends Controller
                      }
                  // dump( $item_detail);
             }
-            dd("$item_detail");
+            //.dd("$item_detail");
              return response()->json([
                 'status'=>200,
                 'message'=>'Invoice Added Successfully.'

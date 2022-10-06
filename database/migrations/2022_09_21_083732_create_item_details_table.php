@@ -17,7 +17,10 @@ class CreateItemDetailsTable extends Migration
             $table->id();
             $table->integer('invoiceid');
             $table->string('container_no');
+            $table->string('seal_no');
+            $table->string('container_type');
             $table->string('container_package');
+            $table->string('net_weight');
             $table->string('description_goods');
             $table->string('Gross_web');
             $table->string('Measurment');
