@@ -58,8 +58,7 @@
               <div class="form-group">
                 <label for="saddress" class="form-label">Shipper Address <span class="text-danger">*</span></label>
 
-                <textarea rows="4" class="form-control" cols="50" id="saddress" name="saddress" required>
-                </textarea>
+                <textarea rows="4" class="form-control" cols="50" id="saddress" name="saddress" required></textarea>
                 <label id="saddress-error" class="error invalid-feedback animated fadeInDown" for="saddress"></label>
               </div>
             </div>
@@ -81,8 +80,7 @@
                   <label for="select">Same as Consignee </label>
                   <input type="radio" id="javascript" name="check_notify" value="3" class="check_notify" checked>
                   <label for="javascript">Create Notify Address</label>
-                <textarea rows="4" class="form-control" cols="50" id="naddress" name="naddress" required>
-              </textarea>
+                <textarea rows="4" class="form-control" cols="50" id="naddress" name="naddress" required></textarea>
                 <label id="naddress-error" class="error invalid-feedback animated fadeInDown" for="naddress"></label>
               </div>
             </div>
@@ -210,10 +208,9 @@
         
 
               <div class="form-group">
-                <label for="containf" class="form-label" style="margin-top:2px">seal no</label>
-
-                <input type="text" class="form-control" name="seal[]" id="containseal" required>
-                <label id="seal-error" class="error invalid-feedback animated fadeInDown" for="gross"></label>
+                <label for="containg" class="form-label">Number of packages</label>
+                <input type="text" class="form-control" name="countainerpackage[]" id="containg" required>
+                <label id="countainerpackage-error" class="error invalid-feedback animated fadeInDown" for="countainerpackage"></label>
               </div>
             </div>
             <div class="col-lg-2 mt-4">
@@ -235,18 +232,22 @@
 </div>
 </div>
             <div class="col-lg-2 mt-4">
+            
+              
               <div class="form-group">
-                <label for="containg" class="form-label">Number of packages</label>
-                <input type="text" class="form-control" name="countainerpackage[]" id="containg" required>
-                <label id="countainerpackage-error" class="error invalid-feedback animated fadeInDown" for="countainerpackage"></label>
+                <label for="containf" class="form-label" style="margin-top:2px">seal no</label>
+
+                <input type="text" class="form-control" name="seal[]" id="containseal" required>
+                <label id="seal-error" class="error invalid-feedback animated fadeInDown" for="gross"></label>
               </div>
               <div class="form-group">
-                <label for="netwt" class="form-label">NET WT</label>
+                <label for="netwt" class="form-label">Net Weight</label>
                 <input type="text" class="form-control" name="netwt[]" id="containet" required>
                 <label id="netwt-error" class="error invalid-feedback animated fadeInDown" for="countainerpackage"></label>
               </div>
             </div> 
             <div class="col-lg-2 mt-4">
+              
               <div class="form-group">
                 <label for="containd" class="form-label" style="margin-top:2px">Measurment</label>
 
