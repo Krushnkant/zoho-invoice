@@ -82,25 +82,49 @@
     </div>
   </div>
 @foreach($invoice->item as $item)
-  <div class="col-md-3 mt-2">
+  <div class="col-md-2 mt-2">
   <div class="form-group">
     <label for="validationCustom05" class="form-label">Countainer no</label>
     <input type="text" class="form-control" name="containerno[]" value="{{ $item->container_no }} "id="validationCustom05" required>
     <label id="cn-error" class="error invalid-feedback animated fadeInDown" for="cn"></label>
   </div>
+  
+  <div class="form-group">
+    <label for="validationCustom03" class="form-label">seal no</label>
+
+    <input type="text" class="form-control" name="gross[]" value="{{ $item->seal_no }}" id="validationCustom05" required>
+    <label id="grossweb-error" class="error invalid-feedback animated fadeInDown" for="grossweb"></label>
+    </div>
+    
+  </div>
+  <div class="col-md-2 mt-2">
+  <div class="form-group">
+    <label for="validationCustom05" class="form-label">Countainer type</label>
+    <input type="text" class="form-control" name="containerno[]" value="{{ $item->container_type }} "id="validationCustom05" required>
+    <label id="cn-error" class="error invalid-feedback animated fadeInDown" for="cn"></label>
+  </div>
+  
   <div class="form-group">
     <label for="validationCustom03" class="form-label">Gross Webeight</label>
 
     <input type="text" class="form-control" name="gross[]" value="{{ $item->Gross_web }}" id="validationCustom05" required>
     <label id="grossweb-error" class="error invalid-feedback animated fadeInDown" for="grossweb"></label>
     </div>
+    
   </div>
-  <div class="col-md-3 mt-2">
+  <div class="col-md-2 mt-2">
   <div class="form-group">
-    <label for="validationCustom05" class="form-label">No of countainer package</label>
+    <label for="validationCustom05" class="form-label">No of  package</label>
     <input type="text" class="form-control" name="countainerpackage[]" value="{{ $item->container_package }}  " id="validationCustom05" required>
     <label id="nocp-error" class="error invalid-feedback animated fadeInDown" for="nocp"></label>
   </div>
+  <div class="form-group">
+    <label for="validationCustom05" class="form-label">NET WT</label>
+    <input type="text" class="form-control" name="countainerpackage[]" value="{{ $item->net_weight }}  " id="validationCustom05" required>
+    <label id="nocp-error" class="error invalid-feedback animated fadeInDown" for="nocp"></label>
+  </div>
+</div>
+<div class="col-md-2 mt-2">
   <div class="form-group">
     <label for="validationCustom03" class="form-label">Measurment</label>
 
@@ -108,7 +132,8 @@
     <label id="mesurment-error" class="error invalid-feedback animated fadeInDown" for="gromesurmentssweb"></label>
     </div>
   </div>
-  <div class="col-md-6 mt-2">
+  
+  <div class="col-md-4 mt-2">
   <div class="form-group">
     <label for="validationCustom03" class="form-label">Description of goods</label>
 

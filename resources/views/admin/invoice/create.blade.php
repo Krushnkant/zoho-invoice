@@ -198,28 +198,55 @@
   </div> -->
                 <div class="row" id="itemstbody" style="margin-left: initial;">
                   
-            <div class="col-lg-4 mt-4">
+            <div class="col-lg-2 mt-4">
 
             
               <div class="form-group">
-                <label for="contain1" class="form-label">Container no/Seal No </label>
+                <label for="contain1" class="form-label">Container no </label>
                 <input type="text" class="form-control" name="containerno[]" id="contain1" required>
                 <label id="containerno-error" class="error invalid-feedback animated fadeInDown" for="containerno"></label>
               </div>
-              <div class="form-group">
-                <label for="containf" class="form-label" style="margin-top:2px">Gross Weight</label>
 
-                <input type="text" class="form-control" name="gross[]" id="containf" required>
-                <label id="gross-error" class="error invalid-feedback animated fadeInDown" for="gross"></label>
+        
+
+              <div class="form-group">
+                <label for="containf" class="form-label" style="margin-top:2px">seal no</label>
+
+                <input type="text" class="form-control" name="seal[]" id="containseal" required>
+                <label id="seal-error" class="error invalid-feedback animated fadeInDown" for="gross"></label>
               </div>
             </div>
+            <div class="col-lg-2 mt-4">
 
-            <div class="col-lg-4 mt-4">
+            
+<div class="form-group">
+  <label for="contain1" class="form-label">Container type </label>
+  <input type="text" class="form-control" name="containertype[]" id="containtype" required>
+  <label id="containertype-error" class="error invalid-feedback animated fadeInDown" for="containerno"></label>
+</div>
+
+
+
+<div class="form-group">
+  <label for="containf" class="form-label" style="margin-top:2px">Gross Weight</label>
+
+  <input type="text" class="form-control" name="gross[]" id="containf" required>
+  <label id="gross-error" class="error invalid-feedback animated fadeInDown" for="gross"></label>
+</div>
+</div>
+            <div class="col-lg-2 mt-4">
               <div class="form-group">
                 <label for="containg" class="form-label">Number of packages</label>
                 <input type="text" class="form-control" name="countainerpackage[]" id="containg" required>
                 <label id="countainerpackage-error" class="error invalid-feedback animated fadeInDown" for="countainerpackage"></label>
               </div>
+              <div class="form-group">
+                <label for="netwt" class="form-label">NET WT</label>
+                <input type="text" class="form-control" name="netwt[]" id="containet" required>
+                <label id="netwt-error" class="error invalid-feedback animated fadeInDown" for="countainerpackage"></label>
+              </div>
+            </div> 
+            <div class="col-lg-2 mt-4">
               <div class="form-group">
                 <label for="containd" class="form-label" style="margin-top:2px">Measurment</label>
 
@@ -574,6 +601,9 @@
               var check2=$('#containf').val();
               var check3=$('#containg').val();
               var check4=$('#containd').val();
+              var check5=$('#containseal').val();
+              var check6=$('#containtype').val();
+              var check7=$('#containet').val();
          
               //alert(aboutme);
               var is_valid = true
@@ -597,7 +627,21 @@
                   $('#mesurment-error').show().text('this field is required');
                  
               }
-            
+              if(check5 == ""){
+                  var is_valid = false; 
+                  $('#seal-error').show().text('this field is required');
+                 
+              }
+              if(check6 == ""){
+                  var is_valid = false; 
+                  $('#netwt-error').show().text('this field is required');
+                 
+              }
+              if(check7 == ""){
+                  var is_valid = false; 
+                  $('#containertype-error').show().text('this field is required');
+                 
+              }
               if($("#des").val().trim().length < 1)
               {
                 var is_valid = false; 
