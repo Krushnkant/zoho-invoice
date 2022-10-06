@@ -20,23 +20,59 @@ class invoicecontroller extends Controller
 {
     public function index($billno){
       
-       // $client= new GuzzleHttp\Client();
-        // $res=
-        // $client->request('GET',' https://books.zoho.in/api/v3/salesorders/938173000000186007?organization_id=60015618450');
-        // echo $res->getBody();
+        $curl = curl_init();
+        curl_setopt_array($curl, array(
+        CURLOPT_URL => 'https://accounts.zoho.in/oauth/v2/token?refresh_token=1000.ff46e1048cddd9a9b86ba4abe804c4ba.a923be1535a22a81dde6b032a96baf63&client_id=1000.F998L05TJ3JSGW0RE7NWAJZ7WYB9YV&client_secret=492623e95cbb29a2953d664489c565b018e088f20e&grant_type=refresh_token',
+        CURLOPT_RETURNTRANSFER => true,
+        CURLOPT_ENCODING => '',
+        CURLOPT_MAXREDIRS => 10,
+        CURLOPT_TIMEOUT => 0,
+        CURLOPT_FOLLOWLOCATION => true,
+        CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+        CURLOPT_CUSTOMREQUEST => 'POST',
+        CURLOPT_HTTPHEADER => array(
+            'Cookie: 6e73717622=4440853cd702ab2a51402c119608ee85; _zcsr_tmp=4e12e670-8911-4bb6-81ae-1112e8bef96d; iamcsr=4e12e670-8911-4bb6-81ae-1112e8bef96d'
+        ),
+        ));
+        $response = curl_exec($curl);
+        curl_close($curl);
+        $responsetoken = json_decode($response,true);
+        //dd($responsetoken);
+        $accessToken = $responsetoken['access_token'];
+       
+        $bill = $billno;
+        $curl = curl_init();
+        curl_setopt_array($curl, array(
+        CURLOPT_URL => 'https://books.zoho.in/api/v3/salesorders/'.$bill.'?organization_id=60015618450',
+        CURLOPT_RETURNTRANSFER => true,
+        CURLOPT_ENCODING => '',
+        CURLOPT_MAXREDIRS => 10,
+        CURLOPT_TIMEOUT => 0,
+        CURLOPT_FOLLOWLOCATION => true,
+        CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+        CURLOPT_CUSTOMREQUEST => 'GET',
+        CURLOPT_HTTPHEADER => array(
+            'Authorization: Zoho-oauthtoken ' . $accessToken,
+            'Content-Type: application/json',
+            'Cookie: BuildCookie_60015618450=1; 54900d29bf=6546c601cb473cceb7511983f377761e; JSESSIONID=4165A10F45BF9DC696D33277DEC05C7F; _zcsr_tmp=0b60f2e4-8676-4c08-b641-640f8c42997f; zbcscook=0b60f2e4-8676-4c08-b641-640f8c42997f'
+        ),
+        ));
 
-    //     $response = 
-    //         Http::get('https://books.zoho.in/api/v3/salesorders/938173000000186007?organization_id=60015618450');
-    //$response = Http::accept('application/json')->get('https://books.zoho.in/api/v3/salesorders/938173000000186007?organization_id=60015618450');
-    //       dd($response);
-    //    return response()->json($response);
-
-//     $response=  Http::withHeaders([
-//         'Authorization' =>  'Zoho-oauthtoken ' . $accessToken,
-//         'Content-Type' => 'application/json' 
-//    ])->get('https://books.zoho.in/api/v3/salesorders/938173000000186007?organization_id=60015618450');
-
-        return view('admin.invoice.create',compact('billno'));
+        $response = curl_exec($curl);
+        curl_close($curl);
+        $response1 = json_decode($response,true);
+        //dd($response1);
+        //dd($billno);
+        //dd($response1['salesorder']['salesorder_id']);
+        if($response1['salesorder']['salesorder_id']==$billno)
+        {   
+            return view('admin.invoice.create',compact('billno'));
+        }
+        else
+        {
+            echo "bill number is wrong";
+        }
+        //return view('admin.invoice.create',compact('billno'));
     }
     public function list()
     {
@@ -286,41 +322,73 @@ class invoicecontroller extends Controller
        // $products = invoice::where('estatus',1)->get();
    
 
-    $html = '<div class="col-md-4 mt-4">
-        <div class="form-group">
-        <label for="containerno5" class="form-label">Container no/Seal No </label>
-        <input type="text" class="form-control contain4" name="containerno[]" id="containerno5" required>
-        <label id="cn-error" class="error invalid-feedback animated fadeInDown" for="cn"></label>
+    $html = '       
+    <div class="col-lg-2 mt-4">
+
+    
+      <div class="form-group">
+        <label for="contain1" class="form-label">Container no </label>
+        <input type="text" class="form-control" name="containerno[]" id="contain1" required>
+        <label id="containerno-error" class="error invalid-feedback animated fadeInDown" for="containerno"></label>
+      </div>
+
+
+
+      <div class="form-group">
+        <label for="containf" class="form-label" style="margin-top:2px">seal no</label>
+
+        <input type="text" class="form-control" name="seal[]" id="containseal" required>
+        <label id="seal-error" class="error invalid-feedback animated fadeInDown" for="gross"></label>
+      </div>
+    </div>
+    <div class="col-lg-2 mt-4">
+
+    
+<div class="form-group">
+<label for="contain1" class="form-label">Container type </label>
+<input type="text" class="form-control" name="containertype[]" id="containtype" required>
+<label id="containertype-error" class="error invalid-feedback animated fadeInDown" for="containerno"></label>
+</div>
+
+
+
+<div class="form-group">
+<label for="containf" class="form-label" style="margin-top:2px">Gross Weight</label>
+
+<input type="text" class="form-control" name="gross[]" id="containf" required>
+<label id="gross-error" class="error invalid-feedback animated fadeInDown" for="gross"></label>
+</div>
+</div>
+    <div class="col-lg-2 mt-4">
+      <div class="form-group">
+        <label for="containg" class="form-label">Number of packages</label>
+        <input type="text" class="form-control" name="countainerpackage[]" id="containg" required>
+        <label id="countainerpackage-error" class="error invalid-feedback animated fadeInDown" for="countainerpackage"></label>
       </div>
       <div class="form-group">
-        <label for="gross5" class="form-label" style="margin-top:2px">Gross Weight</label>
+        <label for="netwt" class="form-label">NET WT</label>
+        <input type="text" class="form-control" name="netwt[]" id="containet" required>
+        <label id="netwt-error" class="error invalid-feedback animated fadeInDown" for="countainerpackage"></label>
+      </div>
+    </div> 
+    <div class="col-lg-2 mt-4">
+      <div class="form-group">
+        <label for="containd" class="form-label" style="margin-top:2px">Measurment</label>
 
-        <input type="text" class="form-control contain4" name="gross[]" id="gross5" required>
-        <label id="grossweb-error" class="error invalid-feedback animated fadeInDown" for="grossweb"></label>
+        <input type="text" class="form-control" name="mesurment[]" id="containd" required>
+        <label id="mesurment-error" class="error invalid-feedback animated fadeInDown" for="mesurment"></label>
       </div>
     </div>
     <div class="col-md-4 mt-4">
       <div class="form-group">
-        <label for="countainerpackage5" class="form-label">Number of  packages</label>
-        <input type="text" class="form-control contain4" name="countainerpackage[]" id="countainerpackage5" required>
-        <label id="nocp-error" class="error invalid-feedback animated fadeInDown" for="nocp"></label>
-      </div>
-      <div class="form-group">
-        <label for="mesurment5" class="form-label" style="margin-top:2px">Measurment</label>
-
-        <input type="text" class="form-control contain4" name="mesurment[]" id="mesurment5" required>
-        <label id="mesurment-error" class="error invalid-feedback animated fadeInDown" for="gromesurmentssweb"></label>
-      </div>
-    </div>
-    <div class="col-md-4 mt-4">
-      <div class="form-group">
-        <label for="description5" class="form-label">Kind of packages/description of goods</label>
-
-        <textarea rows="5" class="form-control contain4" name="description[]" cols="50" id="description5" name="comment" required>
+        <label for="des" class="form-label">Kind of packages/description of goods</label>
+        <textarea rows="5" class="form-control" name="description[]" cols="45" id="des" name="comment" required>
         </textarea>
-        <label id="dog-error" class="error invalid-feedback animated fadeInDown" for="dog"></label>
+        <label id="description-error" class="error invalid-feedback animated fadeInDown" for="description"></label>
+        
       </div>
-    </div>';
+    </div>
+</div>';
 
         return ['html' => $html, 'next_item' => $next_item];
     }
@@ -535,14 +603,17 @@ class invoicecontroller extends Controller
       
             $invoice->save();
             $invoice->id;
-            dd($invoice);
+            //dd($invoice);
             foreach ($request->containerno as $key => $item) {
                
                      if($item != "" && $item != null){          
                     $item_detail = new item;
                     $item_detail->invoiceid = $invoice->id;
                     $item_detail->container_no = $item;
+                    $item_detail->seal_no = $request->seal[$key];
+                    $item_detail->container_type = $request->containertype[$key];
                     $item_detail->container_package = $request->countainerpackage[$key];
+                    $item_detail->net_weight = $request->netwt[$key];
                     $item_detail->description_goods = $request->description[$key];
                     $item_detail->Gross_web  = $request->gross[$key];
                     $item_detail->Measurment = $request->mesurment[$key];
@@ -550,7 +621,7 @@ class invoicecontroller extends Controller
                      }
                  // dump( $item_detail);
             }
-            //dd("$item_detail");
+            dd("$item_detail");
              return response()->json([
                 'status'=>200,
                 'message'=>'Invoice Added Successfully.'
@@ -986,7 +1057,8 @@ class invoicecontroller extends Controller
                             <tr>
                                 <th class="table_part_heading">Container No. / Seal No. <br> Marks & Numbers</th>
                                 <th class="table_part_heading">Number of <br>containers or <br> Kind of packages</th>
-                                <th class="table_part_heading">Kind of packages / description of goods</th>
+                                <th class="table_part_heading">Kind of packages / description of goods <br>8 X 20 GP CONTAINER STC:
+                            </th>
                                 <th class="table_part_heading">Gross Weight</th>
                                 <th class="table_part_heading">Measurement</th>
                             </tr> 
@@ -998,6 +1070,7 @@ class invoicecontroller extends Controller
                             $HTMLContent .='<tr>
                              <td>'.$user->container_no.'</td>
                                 <td>'.$user->container_package.'</td>
+                                
                                 <td>'.$user->description_goods.'</td>
                                 <td>'.$user->Gross_web.'</td>
                                 <td>'.$user->Measurment.'</td>
