@@ -63,8 +63,8 @@ class invoicecontroller extends Controller
         $response1 = json_decode($response,true);
         //dd($response1);
         //dd($billno);
-        //dd($response1['salesorder']['salesorder_id']);
-        if($response1['salesorder']['salesorder_id']==$billno)
+        //dd($response1);
+        if($response1['message'] == "success")
         {   
             return view('admin.invoice.create',compact('billno'));
         }
@@ -154,10 +154,10 @@ class invoicecontroller extends Controller
                     $nestedData['contry_origin'] = $Invoice->contry_origin;
                     $nestedData['Action'] = $action;
 
-  
+
 
                     $data[] = $nestedData;
-                    
+
                 }
             }
            // dd($data);
@@ -335,7 +335,7 @@ class invoicecontroller extends Controller
 
 
       <div class="form-group">
-        <label for="containf" class="form-label" style="margin-top:2px">seal no</label>
+        <label for="containf" class="form-label" style="margin-top:2px">Seal no</label>
 
         <input type="text" class="form-control" name="seal[]" id="containseal" required>
         <label id="seal-error" class="error invalid-feedback animated fadeInDown" for="gross"></label>
@@ -366,7 +366,7 @@ class invoicecontroller extends Controller
         <label id="countainerpackage-error" class="error invalid-feedback animated fadeInDown" for="countainerpackage"></label>
       </div>
       <div class="form-group">
-        <label for="netwt" class="form-label">NET WT</label>
+        <label for="netwt" class="form-label">Net Weight</label>
         <input type="text" class="form-control" name="netwt[]" id="containet" required>
         <label id="netwt-error" class="error invalid-feedback animated fadeInDown" for="countainerpackage"></label>
       </div>
@@ -379,9 +379,9 @@ class invoicecontroller extends Controller
         <label id="mesurment-error" class="error invalid-feedback animated fadeInDown" for="mesurment"></label>
       </div>
     </div>
-    <div class="col-md-4 mt-4">
+    <div class="col-md-4 mt-2">
       <div class="form-group">
-        <label for="des" class="form-label">Kind of packages/description of goods</label>
+        <label for="des" class="form-label">Marks & numbers/Kind of packages/description of goods</label>
         <textarea rows="5" class="form-control" name="description[]" cols="45" id="des" name="comment" required>
         </textarea>
         <label id="description-error" class="error invalid-feedback animated fadeInDown" for="description"></label>
