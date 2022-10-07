@@ -88,13 +88,12 @@
     <input type="text" class="form-control" name="containerno[]" value="{{ $item->container_no }} "id="validationCustom05" required>
     <label id="cn-error" class="error invalid-feedback animated fadeInDown" for="cn"></label>
   </div>
-  
   <div class="form-group">
-    <label for="validationCustom03" class="form-label">seal no</label>
-
-    <input type="text" class="form-control" name="gross[]" value="{{ $item->seal_no }}" id="validationCustom05" required>
-    <label id="grossweb-error" class="error invalid-feedback animated fadeInDown" for="grossweb"></label>
-    </div>
+    <label for="validationCustom05" class="form-label">No of  package</label>
+    <input type="text" class="form-control" name="countainerpackage[]" value="{{ $item->container_package }}  " id="validationCustom05" required>
+    <label id="nocp-error" class="error invalid-feedback animated fadeInDown" for="nocp"></label>
+  </div>
+  
     
   </div>
   <div class="col-md-2 mt-2">
@@ -114,12 +113,14 @@
   </div>
   <div class="col-md-2 mt-2">
   <div class="form-group">
-    <label for="validationCustom05" class="form-label">No of  package</label>
-    <input type="text" class="form-control" name="countainerpackage[]" value="{{ $item->container_package }}  " id="validationCustom05" required>
-    <label id="nocp-error" class="error invalid-feedback animated fadeInDown" for="nocp"></label>
-  </div>
+
+<label for="validationCustom03" class="form-label">Seal no</label>
+
+<input type="text" class="form-control" name="gross[]" value="{{ $item->seal_no }}" id="validationCustom05" required>
+<label id="grossweb-error" class="error invalid-feedback animated fadeInDown" for="grossweb"></label>
+</div>
   <div class="form-group">
-    <label for="validationCustom05" class="form-label">NET WT</label>
+    <label for="validationCustom05" class="form-label">Net Weight</label>
     <input type="text" class="form-control" name="countainerpackage[]" value="{{ $item->net_weight }}  " id="validationCustom05" required>
     <label id="nocp-error" class="error invalid-feedback animated fadeInDown" for="nocp"></label>
   </div>

@@ -325,25 +325,24 @@ class invoicecontroller extends Controller
     $html = '       
     <div class="col-lg-2 mt-4">
 
-    
-      <div class="form-group">
-        <label for="contain1" class="form-label">Container no </label>
-        <input type="text" class="form-control" name="containerno[]" id="contain1" required>
-        <label id="containerno-error" class="error invalid-feedback animated fadeInDown" for="containerno"></label>
-      </div>
-
-
-
-      <div class="form-group">
-        <label for="containf" class="form-label" style="margin-top:2px">Seal no</label>
-
-        <input type="text" class="form-control" name="seal[]" id="containseal" required>
-        <label id="seal-error" class="error invalid-feedback animated fadeInDown" for="gross"></label>
-      </div>
+            
+    <div class="form-group">
+      <label for="contain1" class="form-label">Container no </label>
+      <input type="text" class="form-control" name="containerno[]" id="contain1" required>
+      <label id="containerno-error" class="error invalid-feedback animated fadeInDown" for="containerno"></label>
     </div>
-    <div class="col-lg-2 mt-4">
 
-    
+
+
+    <div class="form-group">
+      <label for="containg" class="form-label">Number of packages</label>
+      <input type="text" class="form-control" name="countainerpackage[]" id="containg" required>
+      <label id="countainerpackage-error" class="error invalid-feedback animated fadeInDown" for="countainerpackage"></label>
+    </div>
+  </div>
+  <div class="col-lg-2 mt-4">
+
+  
 <div class="form-group">
 <label for="contain1" class="form-label">Container type </label>
 <input type="text" class="form-control" name="containertype[]" id="containtype" required>
@@ -359,35 +358,39 @@ class invoicecontroller extends Controller
 <label id="gross-error" class="error invalid-feedback animated fadeInDown" for="gross"></label>
 </div>
 </div>
-    <div class="col-lg-2 mt-4">
-      <div class="form-group">
-        <label for="containg" class="form-label">Number of packages</label>
-        <input type="text" class="form-control" name="countainerpackage[]" id="containg" required>
-        <label id="countainerpackage-error" class="error invalid-feedback animated fadeInDown" for="countainerpackage"></label>
-      </div>
-      <div class="form-group">
-        <label for="netwt" class="form-label">Net Weight</label>
-        <input type="text" class="form-control" name="netwt[]" id="containet" required>
-        <label id="netwt-error" class="error invalid-feedback animated fadeInDown" for="countainerpackage"></label>
-      </div>
-    </div> 
-    <div class="col-lg-2 mt-4">
-      <div class="form-group">
-        <label for="containd" class="form-label" style="margin-top:2px">Measurment</label>
+  <div class="col-lg-2 mt-4">
+  
+    
+    <div class="form-group">
+      <label for="containf" class="form-label" style="margin-top:2px">Seal no</label>
 
-        <input type="text" class="form-control" name="mesurment[]" id="containd" required>
-        <label id="mesurment-error" class="error invalid-feedback animated fadeInDown" for="mesurment"></label>
-      </div>
+      <input type="text" class="form-control" name="seal[]" id="containseal" required>
+      <label id="seal-error" class="error invalid-feedback animated fadeInDown" for="gross"></label>
     </div>
-    <div class="col-md-4 mt-2">
-      <div class="form-group">
-        <label for="des" class="form-label">Marks & numbers/Kind of packages/description of goods</label>
-        <textarea rows="5" class="form-control" name="description[]" cols="45" id="des" name="comment" required>
-        </textarea>
-        <label id="description-error" class="error invalid-feedback animated fadeInDown" for="description"></label>
-        
-      </div>
+    <div class="form-group">
+      <label for="netwt" class="form-label">Net Weight</label>
+      <input type="text" class="form-control" name="netwt[]" id="containet" required>
+      <label id="netwt-error" class="error invalid-feedback animated fadeInDown" for="countainerpackage"></label>
     </div>
+  </div> 
+  <div class="col-lg-2 mt-4">
+    
+    <div class="form-group">
+      <label for="containd" class="form-label" style="margin-top:2px">Measurment</label>
+
+      <input type="text" class="form-control" name="mesurment[]" id="containd" required>
+      <label id="mesurment-error" class="error invalid-feedback animated fadeInDown" for="mesurment"></label>
+    </div>
+  </div>
+  <div class="col-md-4 mt-2">
+    <div class="form-group">
+      <label for="des" class="form-label">Marks & numbers/Kind of packages/description of goods</label>
+      <textarea rows="5" class="form-control" name="description[]" cols="45" id="des" name="comment" required>
+      </textarea>
+      <label id="description-error" class="error invalid-feedback animated fadeInDown" for="description"></label>
+      
+    </div>
+  </div>
 </div>';
 
         return ['html' => $html, 'next_item' => $next_item];
