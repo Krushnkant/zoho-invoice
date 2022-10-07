@@ -61,15 +61,15 @@
  
   <div class="col-md-12  mt-2">
   <div class="form-group">
-    <label for="validationCustom05" class="form-label">Pre carriage by</label>
-    <input type="text" class="form-control" name ="pcarriageby" value="{{ $invoice->pre_carriage_by }} " id="validationCustom05" required>
+    <label for="pre" class="form-label">Pre carriage by</label>
+    <input type="text" class="form-control" name ="pcarriageby" value="{{ $invoice->pre_carriage_by }} " id="pre" required>
     <label id="pcarriageby-error" class="error invalid-feedback animated fadeInDown" for="pcarriageby"></label>
 </div>
   </div>
   <div class="col-md-6  mt-2">
   <div class="form-group">
-    <label for="validationCustom05" class="form-label">Pier or port of receipt</label>
-    <input type="text" class="form-control" name= "por" value="{{ $invoice->port_of_receipt }} " id="validationCustom05" required>
+    <label for="pier" class="form-label">Pier or port of receipt</label>
+    <input type="text" class="form-control" name= "por" value="{{ $invoice->port_of_receipt }} " id="pier" required>
     <label id="por-error" class="error invalid-feedback animated fadeInDown" for="por"></label>
     </div>
   </div>
@@ -84,12 +84,12 @@
 @foreach($invoice->item as $item)
   <div class="col-md-2 mt-2">
   <div class="form-group">
-    <label for="validationCustom05" class="form-label">Countainer no</label>
+    <label for="validationCustom05" class="form-label">Container no</label>
     <input type="text" class="form-control" name="containerno[]" value="{{ $item->container_no }} "id="validationCustom05" required>
     <label id="cn-error" class="error invalid-feedback animated fadeInDown" for="cn"></label>
   </div>
   <div class="form-group">
-    <label for="validationCustom05" class="form-label">No of  package</label>
+    <label for="validationCustom05" class="form-label">No of package</label>
     <input type="text" class="form-control" name="countainerpackage[]" value="{{ $item->container_package }}  " id="validationCustom05" required>
     <label id="nocp-error" class="error invalid-feedback animated fadeInDown" for="nocp"></label>
   </div>
@@ -98,13 +98,13 @@
   </div>
   <div class="col-md-2 mt-2">
   <div class="form-group">
-    <label for="validationCustom05" class="form-label">Countainer type</label>
-    <input type="text" class="form-control" name="containerno[]" value="{{ $item->container_type }} "id="validationCustom05" required>
+    <label for="validationCustom05" class="form-label">Container type</label>
+    <input type="text" class="form-control" name="containertype[]" value="{{ $item->container_type }} "id="validationCustom05" required>
     <label id="cn-error" class="error invalid-feedback animated fadeInDown" for="cn"></label>
   </div>
   
   <div class="form-group">
-    <label for="validationCustom03" class="form-label">Gross Webeight</label>
+    <label for="validationCustom03" class="form-label">Gross Weight</label>
 
     <input type="text" class="form-control" name="gross[]" value="{{ $item->Gross_web }}" id="validationCustom05" required>
     <label id="grossweb-error" class="error invalid-feedback animated fadeInDown" for="grossweb"></label>
@@ -116,12 +116,12 @@
 
 <label for="validationCustom03" class="form-label">Seal no</label>
 
-<input type="text" class="form-control" name="gross[]" value="{{ $item->seal_no }}" id="validationCustom05" required>
+<input type="text" class="form-control" name="seal[]" value="{{ $item->seal_no }}" id="validationCustom05" required>
 <label id="grossweb-error" class="error invalid-feedback animated fadeInDown" for="grossweb"></label>
 </div>
   <div class="form-group">
     <label for="validationCustom05" class="form-label">Net Weight</label>
-    <input type="text" class="form-control" name="countainerpackage[]" value="{{ $item->net_weight }}  " id="validationCustom05" required>
+    <input type="text" class="form-control" name="netwt[]" value="{{ $item->net_weight }}  " id="validationCustom05" required>
     <label id="nocp-error" class="error invalid-feedback animated fadeInDown" for="nocp"></label>
   </div>
 </div>
@@ -154,26 +154,25 @@
 <div class="col-md-12">
   <center><h3>For Admin</h3></center>
       <div class="form-group">
-        <label for="validationCustomUsername" class="form-label">Agent Name <span class="text-danger">*</span></label>
+        <label for="name" class="form-label">Agent Name <span class="text-danger">*</span></label>
         <div class="input-group has-validation">
-          <input type="text" class="form-control" name="aname" value="{{ $invoice->agent_name }} " id="validationCustomUsername" aria-describedby="inputGroupPrepend" required>
+          <input type="text" class="form-control" name="aname" value="{{ $invoice->agent_name }}" id="name" aria-describedby="inputGroupPrepend" required>
           <label id="aname-error" class="error invalid-feedback animated fadeInDown" for="aname"></label>
         </div>
       </div>
     </div>
     <div class="col-md-12 mt-4">
   <div class="form-group">
-    <label for="validationCustom03" class="form-label">Agent Address <span class="text-danger">*</span></label>
+    <label for="agent" class="form-label">Agent Address <span class="text-danger">*</span></label>
 
-    <textarea rows="4"  class="form-control" cols="50"  id="validationCustom03" name="agaddress" required>{{ $invoice->agent_address }}
-    </textarea>
+    <textarea rows="4"  class="form-control" cols="50"  id="agent" name="agaddress" required>{{ $invoice->agent_address }}</textarea>
 <label id="agaddress-error" class="error invalid-feedback animated fadeInDown" for="agaddress"></label>
   </div>
 </div>
 <div class="col-md-12 mt-4">
   <div class="form-group">
-    <label for="validationCustom05" class="form-label">Bill Of Lading <span class="text-danger">*</span></label>
-    <input type="text" class="form-control" name="blading" value=" {{ $invoice->Bill_of_lading }}"id="validationCustom05" required>
+    <label for="bill" class="form-label">Bill Of Lading <span class="text-danger">*</span></label>
+    <input type="text" class="form-control" name="blading" value=" {{ $invoice->Bill_of_lading }}"id="bill" required>
     <label id="blading-error" class="error invalid-feedback animated fadeInDown" for="blading"></label>
   </div>
   </div>
@@ -187,9 +186,9 @@
   </div>
   <div class="col-md-12 mt-4">
   <div class="form-group">
-    <label for="validationCustom03" class="form-label">Place of issue <span class="text-danger">*</span></label>
+    <label for="placeissue" class="form-label">Place of issue <span class="text-danger">*</span></label>
 
-    <input type="text" class="form-control" name="place" value="{{ $invoice->place_of_issue }} " id="validationCustom05" required>
+    <input type="text" class="form-control" name="place" value="{{ $invoice->place_of_issue }} " id="placeissue" required>
     <label id="place-error" class="error invalid-feedback animated fadeInDown" for="place"></label>
     </div>
   </div>

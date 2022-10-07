@@ -275,7 +275,10 @@ class invoicecontroller extends Controller
             $item_detail = new item;
             $item_detail->invoiceid = $request->invoice_id;
             $item_detail->container_no = $item;
+            $item_detail->seal_no = $request->seal[$key];
+            $item_detail->container_type = $request->containertype[$key];
             $item_detail->container_package = $request->countainerpackage[$key];
+            $item_detail->net_weight = $request->netwt[$key];
             $item_detail->description_goods = $request->description[$key];
             $item_detail->Gross_web  = $request->gross[$key];
             $item_detail->Measurment = $request->mesurment[$key];
