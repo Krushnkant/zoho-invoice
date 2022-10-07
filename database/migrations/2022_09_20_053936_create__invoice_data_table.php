@@ -29,9 +29,9 @@ class CreateInvoiceDataTable extends Migration
             $table->string('port_of_loading')->nullable();
             $table->string('port_of_dischange')->nullable();
             $table->string('delivery_place')->nullable();
-            $table->string('pre_carriage_by');
-            $table->string('port_of_receipt');
-            $table->string('contry_origin');
+            $table->string('pre_carriage_by')->nullable();
+            $table->string('port_of_receipt')->nullable();
+            $table->string('contry_origin')->nullable();
             $table->string('container_no')->nullable();
             $table->string('seal_no')->nullable();
             $table->string('container_type')->nullable();

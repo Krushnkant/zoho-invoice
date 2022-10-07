@@ -258,8 +258,7 @@
             <div class="col-md-4 mt-2">
               <div class="form-group">
                 <label for="des" class="form-label">Marks & numbers/Kind of packages/description of goods</label>
-                <textarea rows="5" class="form-control" name="description[]" cols="45" id="des" name="comment" required>
-                </textarea>
+                <textarea rows="5" class="form-control" name="description[]" cols="45" id="des" name="comment" required></textarea>
                 <label id="description-error" class="error invalid-feedback animated fadeInDown" for="description"></label>
                 
               </div>
