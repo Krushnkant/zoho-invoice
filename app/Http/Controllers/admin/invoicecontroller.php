@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\admin;
 
+use App\Http\Controllers\admin\session;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\invoice;
@@ -10,6 +11,7 @@ use App\Models\Setting;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\DB;
 use Mpdf\Mpdf;
+
 use Spipu\Html2Pdf\Exception\ExceptionFormatter;
 use Spipu\Html2Pdf\Exception\Html2PdfException;
 use Spipu\Html2Pdf\Html2Pdf;
@@ -18,26 +20,73 @@ use Illuminate\Support\Facades\Validator;
 
 class invoicecontroller extends Controller
 {
-    public function index()
+     public function accesstoken(Request $request)
     {
+        $curl = curl_init();
+        curl_setopt_array($curl, array(
+        CURLOPT_URL => 'https://accounts.zoho.in/oauth/v2/token?refresh_token=1000.ff46e1048cddd9a9b86ba4abe804c4ba.a923be1535a22a81dde6b032a96baf63&client_id=1000.F998L05TJ3JSGW0RE7NWAJZ7WYB9YV&client_secret=492623e95cbb29a2953d664489c565b018e088f20e&grant_type=refresh_token',
+        CURLOPT_RETURNTRANSFER => true,
+        CURLOPT_ENCODING => '',
+        CURLOPT_MAXREDIRS => 10,
+        CURLOPT_TIMEOUT => 0,
+        CURLOPT_FOLLOWLOCATION => true,
+        CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+        CURLOPT_CUSTOMREQUEST => 'POST',
+        CURLOPT_HTTPHEADER => array(
+            'Cookie: 6e73717622=4440853cd702ab2a51402c119608ee85; _zcsr_tmp=4e12e670-8911-4bb6-81ae-1112e8bef96d; iamcsr=4e12e670-8911-4bb6-81ae-1112e8bef96d'
+        ),
+        ));
 
-        // $client= new GuzzleHttp\Client();
-        // $res=
-        // $client->request('GET',' https://books.zoho.in/api/v3/salesorders/938173000000186007?organization_id=60015618450');
-        // echo $res->getBody();
+        $response = curl_exec($curl);
+        curl_close($curl);
+        $data = json_decode($response,true);
+        dd($data);
+        $request->session()->put('access_token',$data['access_token']);
 
-        //     $response = 
-        //         Http::get('https://books.zoho.in/api/v3/salesorders/938173000000186007?organization_id=60015618450');
-        //$response = Http::accept('application/json')->get('https://books.zoho.in/api/v3/salesorders/938173000000186007?organization_id=60015618450');
-        //       dd($response);
-        //    return response()->json($response);
+    }
+    public function index(Request $request ,$billno){
+        
+       $value = $request->session()->get('access_token');
+      
+        $bill = $billno;
+        $curl = curl_init();
+        curl_setopt_array($curl, array(
+        CURLOPT_URL => 'https://books.zoho.in/api/v3/salesorders/'.$bill.'?organization_id=60015618450',
+        CURLOPT_RETURNTRANSFER => true,
+        CURLOPT_ENCODING => '',
+        CURLOPT_MAXREDIRS => 10,
+        CURLOPT_TIMEOUT => 0,
+        CURLOPT_FOLLOWLOCATION => true,
+        CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+        CURLOPT_CUSTOMREQUEST => 'GET',
+        CURLOPT_HTTPHEADER => array(
+            'Authorization: Zoho-oauthtoken ' . $value,
+            'Content-Type: application/json',
+            'Cookie: BuildCookie_60015618450=1; 54900d29bf=6546c601cb473cceb7511983f377761e; JSESSIONID=4165A10F45BF9DC696D33277DEC05C7F; _zcsr_tmp=0b60f2e4-8676-4c08-b641-640f8c42997f; zbcscook=0b60f2e4-8676-4c08-b641-640f8c42997f'
+        ),
+        ));
 
-        //     $response=  Http::withHeaders([
-        //         'Authorization' =>  'Zoho-oauthtoken ' . $accessToken,
-        //         'Content-Type' => 'application/json' 
-        //    ])->get('https://books.zoho.in/api/v3/salesorders/938173000000186007?organization_id=60015618450');
+        $response = curl_exec($curl);
+        curl_close($curl);
+        $response1 = json_decode($response,true);
+    
+        if($response1['code'] == 14 || $response1['code'] == 57)
+        {
+            $this->accesstoken($request);
+            $this->index($request ,$billno);
+        }
+        else
+        {   
+            if($response1['message'] == "success")
+            {   
+                return view('admin.invoice.create',compact('billno'));
+            }
+            else
+            {
+                echo $response1['message'];
+            }
+        }
 
-        return view('admin.invoice.create');
     }
     public function list()
     {
@@ -133,12 +182,12 @@ class invoicecontroller extends Controller
     public function save(Request $request)
     {
         $messages = [
-            'sname.required' => 'Please provide a Prefix For S Name',
-            'cname.required' => 'please provide a prefix for C Name',
+            'sname.required' => 'this field is required',
+            'cname.required' => 'this field is required',
             'saddress.required' => 'Please provide  S address',
             'caddress.required' => 'please provide  C address',
             //'naddress.required' =>'Please provide N address',
-            'aname.required' => 'please provide a prefix for A Name',
+            'aname.required' => 'this field is required',
             'agaddress.required' => 'Please provide a address',
             'blading.required' => 'this field is required',
             'vessel.required' => 'this field is required',
@@ -179,9 +228,9 @@ class invoicecontroller extends Controller
             // 'pol' => 'required',
             // 'pod' => 'required',
             // 'pody' => 'required',
-            'pcarriageby' => 'required',
-            'por' => 'required',
-            'cor' => 'required',
+            // 'pcarriageby' => 'required',
+            // 'por' => 'required',
+            // 'cor' => 'required',
             //     'containerno' => 'required',
             //    'countainerpackage' => 'required',
             //     'description' => 'required',
@@ -344,27 +393,27 @@ class invoicecontroller extends Controller
             return response()->json(['errors' => $validator->errors(), 'status' => 'failed']);
         }
         //dd("hehh");
-        $curl = curl_init();
-        curl_setopt_array($curl, array(
-            CURLOPT_URL => 'https://accounts.zoho.in/oauth/v2/token?refresh_token=1000.ff46e1048cddd9a9b86ba4abe804c4ba.a923be1535a22a81dde6b032a96baf63&client_id=1000.F998L05TJ3JSGW0RE7NWAJZ7WYB9YV&client_secret=492623e95cbb29a2953d664489c565b018e088f20e&grant_type=refresh_token',
-            CURLOPT_RETURNTRANSFER => true,
-            CURLOPT_ENCODING => '',
-            CURLOPT_MAXREDIRS => 10,
-            CURLOPT_TIMEOUT => 0,
-            CURLOPT_FOLLOWLOCATION => true,
-            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-            CURLOPT_CUSTOMREQUEST => 'POST',
-            CURLOPT_HTTPHEADER => array(
-                'Cookie: 6e73717622=4440853cd702ab2a51402c119608ee85; _zcsr_tmp=4e12e670-8911-4bb6-81ae-1112e8bef96d; iamcsr=4e12e670-8911-4bb6-81ae-1112e8bef96d'
-            ),
-        ));
-        $response = curl_exec($curl);
-        curl_close($curl);
-        $responsetoken = json_decode($response, true);
-        //dd($responsetoken);
-        $accessToken = $responsetoken['access_token'];
+        // $curl = curl_init();
+        // curl_setopt_array($curl, array(
+        //     CURLOPT_URL => 'https://accounts.zoho.in/oauth/v2/token?refresh_token=1000.ff46e1048cddd9a9b86ba4abe804c4ba.a923be1535a22a81dde6b032a96baf63&client_id=1000.F998L05TJ3JSGW0RE7NWAJZ7WYB9YV&client_secret=492623e95cbb29a2953d664489c565b018e088f20e&grant_type=refresh_token',
+        //     CURLOPT_RETURNTRANSFER => true,
+        //     CURLOPT_ENCODING => '',
+        //     CURLOPT_MAXREDIRS => 10,
+        //     CURLOPT_TIMEOUT => 0,
+        //     CURLOPT_FOLLOWLOCATION => true,
+        //     CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+        //     CURLOPT_CUSTOMREQUEST => 'POST',
+        //     CURLOPT_HTTPHEADER => array(
+        //         'Cookie: 6e73717622=4440853cd702ab2a51402c119608ee85; _zcsr_tmp=4e12e670-8911-4bb6-81ae-1112e8bef96d; iamcsr=4e12e670-8911-4bb6-81ae-1112e8bef96d'
+        //     ),
+        // ));
+        // $response = curl_exec($curl);
+        // curl_close($curl);
+        // $responsetoken = json_decode($response, true);
+        // //dd($responsetoken);
+        // $accessToken = $responsetoken['access_token'];
 
-
+        $value = $request->session()->get('access_token');
         $curl = curl_init();
         curl_setopt_array($curl, array(
             CURLOPT_URL => 'https://books.zoho.in/api/v3/salesorders/938173000000186007?organization_id=60015618450',
@@ -376,7 +425,7 @@ class invoicecontroller extends Controller
             CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
             CURLOPT_CUSTOMREQUEST => 'GET',
             CURLOPT_HTTPHEADER => array(
-                'Authorization: Zoho-oauthtoken ' . $accessToken,
+                'Authorization: Zoho-oauthtoken ' . $value.
                 'Content-Type: application/json',
                 'Cookie: BuildCookie_60015618450=1; 54900d29bf=6546c601cb473cceb7511983f377761e; JSESSIONID=4165A10F45BF9DC696D33277DEC05C7F; _zcsr_tmp=0b60f2e4-8676-4c08-b641-640f8c42997f; zbcscook=0b60f2e4-8676-4c08-b641-640f8c42997f'
             ),
@@ -385,6 +434,13 @@ class invoicecontroller extends Controller
         $response = curl_exec($curl);
         curl_close($curl);
         $response1 = json_decode($response, true);
+        
+        
+        if($response1['code'] == 14 || $response1['code'] == 57)
+        {
+            $this->accesstoken($request);
+            $this->store($request);
+        }
         //dd($response1['salesorder']['custom_fields']);
         $var  = "";
         $var2  = "";
@@ -490,9 +546,10 @@ class invoicecontroller extends Controller
 
 
 
-
+ 
     public function generate_pdf($id)
     {
+        $users = Invoice::with('item')->where('id',$id)->first();
         $invoice = Invoice::where('id', $id)->first();
         $settings = Setting::find(1);
 
@@ -824,7 +881,7 @@ class invoicecontroller extends Controller
                             <div class="col-md-12 border-top">
                                 <div class="">
                                     <div class="shipper_heading" style="height:211px;">
-                                        <img src="image/logo.jpg" alt="" class="bill_logo">
+                                        <img src="'. url("public/images/invoice/logo.jpg") .'" alt="" class="bill_logo">
                                     </div>
                                 </div>  
                             </div>
@@ -857,8 +914,8 @@ class invoicecontroller extends Controller
                     <tr>
                         <td class="" style="width:50%;padding-top:5px;">' . $invoice->voyage . '</td>  
                         <td  style="width:50%;border-left:1px solid #0654b2;padding-left:10px;padding-bottom:5px;">' . $invoice->vessel . '</td>
-                        <td class="" style="padding-left:10px;width:50%;border-left:1px solid #0654b2;">' . $invoice->bill_number . '</td>
-                        <td style="border-left:1px solid #0654b2;padding-left:10px;width:50%;">' . $invoice->Bill_of_lading . '</td>
+                        <td class="" style="padding-left:10px;width:50%;border-left:1px solid #0654b2;">' . $invoice->pre_carriage_by . '</td>
+                        <td style="border-left:1px solid #0654b2;padding-left:10px;width:50%;">' . $invoice->port_of_receipt . '</td>
                     </tr>
                     <tr style="">
                         <td class="shipper_heading" style="width:50%;border-top:1px solid #0654b2;padding-top:5px;">Port of Loading</td>
@@ -888,23 +945,43 @@ class invoicecontroller extends Controller
                             <tr style="font-size:12px;">
                                 <th class="table_part_heading" style="border-bottom:1px solid #0654b2;">Container No. / Seal No. <br> Marks & Numbers</th>
                                 <th class="table_part_heading" style="border-bottom:1px solid #0654b2;">Number of <br>containers or <br> Kind of packages</th>
-                                <th class="table_part_heading" style="border-bottom:1px solid #0654b2;">Kind of packages / description of goods</th>
+                                <th class="table_part_heading" style="border-bottom:1px solid #0654b2;">Kind of packages / description of goods<br>8 X 20 GP CONTAINER STC:</th>
                                 <th class="table_part_heading" style="border-bottom:1px solid #0654b2;">Gross Weight</th>
                                 <th class="table_part_heading" style="border-bottom:1px solid #0654b2;">Measurement</th>
                             </tr> 
                         </thead>
-                        <tbody style="border-bottom:1px solid #0654b2;">
-                            <tr>
-                                <td>
-                                ' . $invoice->container_no . '
-                                ' . $invoice->container_package . '
-                                ' . $invoice->description_goods . '
-                                ' . $invoice->Gross_web . '
-                                ' . $invoice->Measurment . '
-                                </td>
-                               
-                           </tr>
-                           <tr style="border-bottom:1px solid #0654b2;">
+                        <tbody style="border-bottom:1px solid #0654b2;">';
+
+
+
+                        foreach($users->item as $user){
+                            if($user->container_no != ""){
+                              $HTMLContent .='<tr>
+                               <td>'.$user->container_no.'</td>
+                                  <td>'.$user->container_package.'</td>
+                                  
+                                  <td>'.$user->description_goods.'</td>
+                                  <td>'.$user->Gross_web.'</td>
+                                  <td>'.$user->Measurment.'</td>
+                              </tr>';
+                          }
+                      }
+                      $count = count($users->item);
+                     
+                      for($user=$count;$user<103;$user++){
+                        $HTMLContent .='<tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                     
+                        
+                        </tr>';
+                      
+
+                      }
+                      $HTMLContent .= ' <tr style="border-bottom:1px solid #0654b2;">
                                 <td style="">
                                             
                                 </td>
@@ -912,7 +989,7 @@ class invoicecontroller extends Controller
                                     
                                 </td>
                                 <td class="" style="text-align:center;">
-                                    SHIPPERS LOAD COUNT AND SEAL
+                                  
                                 </td>
                                 <td style=""></td>
                                 <td style="border-right:0;"></td>
@@ -921,7 +998,7 @@ class invoicecontroller extends Controller
                     </table>
                     
                     <div class="row table_freight_heading  px-0">
-                            <div class="col-md-6 border-right-black gradient_border_1" style="width:42%;border-bottom:5px solid #40475f;height:280px;">
+                            <div class="col-md-6 border-right-black gradient_border_1" style="width:42%;border-bottom:5px solid #40475f;height:290px;">
                                 <div class="row align-items-center">
                                     <div class="col-md-6" style="width:35%;float:left;border-top:1px solid #0654b2;">
                                         Freight & Charges :
@@ -943,6 +1020,7 @@ class invoicecontroller extends Controller
                                         Collect
                                     </div>
                                     <div class="row align-items-center px-0">
+                                    <div class="" style="color:black; margin-left:150px">'.$invoice->freight_charges.'</div>
                                         <div class="col-md-2" style="width:20%;float:left;">
                                             <div class="total_heading">Total:</div>
                                         </div>
@@ -950,17 +1028,26 @@ class invoicecontroller extends Controller
                                             <div class=""> </div>
                                         </div>
                                     </div>
-                                    <div class="border-top pt-3">
+                                    <div class="border-top pt-3 ">
                                         <div class="freight_payable_at_heading col-md-6">Freight Payable at:</div>
-                                        <div class="col-md-6">' . $invoice->freight_payable_at . '</div>
-                                        <div class="shipper_heading col-md-6" style="width:50%;margin-top:10px;">Mode of Shipment:</div>
-                                        <div class="shipper_heading col-md-6" style="width:50%;margin-top:10px;">Shipped on board:</div>
-                                        <div class="" style="color:black;">FCL/FCL</div>
+                                        <div class="col-md-6" style="color:black;">' . $invoice->freight_payable_at . '</div>
+                                        <div class="row">
+                                            <div class=" col-md-6" style="width:50%;margin-top:10px;">
+                                               <div class="shipper_heading"> Mode of Shipment:</div>
+                                               <div style="color:black;">FCL/FCL</div>
+                                            </div>
+                                           
+                                            <div class="col-md-6" style="width:50%;">
+                                                <div class="shipper_headings">Shipped on board:</div>
+                                                <div style="color:black;">' . $invoice->shipped_on_board . '</div>
+                                            </div>
+                                            
+                                        </div>
                                         <div></div>
                                     </div>
                                 </div>
                             </div> 
-                            <div class="col-md-6 gradient_border_2 shipper_place_text" style="width:57.5%;border-bottom:5px solid #0654b2;height:280px;">
+                            <div class="col-md-6 gradient_border_2 shipper_place_text" style="width:57.5%;border-bottom:5px solid #0654b2;height:290px;">
                                 <div style="font-size:11px;padding-left:15px;border-top:1px solid #0654b2;padding-top:10px;">
                                     Received by the carrier the Goods as specified above in apparent good order and condition unless otherwise stated, to be transported to such place as agreed, authorised or permitted herein and subject to all the terms and conditions appearing on the front
                                     and reverse of this bill of lading to which the merchant agrees by accepting the bill of lading, any local privileges and customs notwithstanding, The particulars given above stated by the shipper and the weight, measure, quantity,
@@ -968,7 +1055,7 @@ class invoicecontroller extends Controller
                                     required by the carrier one (1) original bill of lading must be surrendered duly endorsed in exchange for the Goods or delivery order.
                                     <div class="place_date_text mt-3">
                                     <div style="font-weight:bold;"> Place and date of issue :</div>
-                                    </div>' . $invoice->place_of_issue . '' . $invoice->place_of_date . '
+                                    </div><div style="color:black;">' . $invoice->place_of_issue . ' ' . $invoice->place_of_date . '</div>
                                     <div class="mt-5" style="text-align:left;margin-top:15px;">
                                         <div>Signed as Agents of the Carrier / Agents</div>
                                     </div>
@@ -987,6 +1074,7 @@ class invoicecontroller extends Controller
         </html>';
 
 
+      
 
         $filename = "Invoice_abc.pdf";
         $mpdf = new Mpdf(["autoScriptToLang" => true, "autoLangToFont" => true, 'mode' => 'utf-8', 'format' => 'A4', 'margin_left' => 5, 'margin_right' => 5, 'margin_top' => 5, 'margin_bottom' => 5, 'margin_header' => 0, 'margin_footer' => 0]);

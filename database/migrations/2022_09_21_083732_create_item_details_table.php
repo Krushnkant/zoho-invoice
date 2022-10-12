@@ -16,14 +16,14 @@ class CreateItemDetailsTable extends Migration
         Schema::create('item_details', function (Blueprint $table) {
             $table->id();
             $table->integer('invoiceid');
-            $table->string('container_no');
-            $table->string('seal_no');
-            $table->string('container_type');
-            $table->string('container_package');
-            $table->string('net_weight');
-            $table->string('description_goods');
-            $table->string('Gross_web');
-            $table->string('Measurment');
+            $table->string('container_no')->nullable();
+            $table->string('seal_no')->nullable();
+            $table->string('container_type')->nullable();
+            $table->string('container_package')->nullable();
+            $table->string('net_weight')->nullable();
+            $table->string('description_goods')->nullable();
+            $table->string('Gross_web')->nullable();
+            $table->string('Measurment')->nullable();
             $table->timestamps();
         });
     }
