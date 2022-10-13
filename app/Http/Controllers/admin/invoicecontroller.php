@@ -23,8 +23,9 @@ class invoicecontroller extends Controller
      public function accesstoken(Request $request)
     {
         $curl = curl_init();
+
         curl_setopt_array($curl, array(
-        CURLOPT_URL => 'https://accounts.zoho.in/oauth/v2/token?refresh_token=1000.ff46e1048cddd9a9b86ba4abe804c4ba.a923be1535a22a81dde6b032a96baf63&client_id=1000.F998L05TJ3JSGW0RE7NWAJZ7WYB9YV&client_secret=492623e95cbb29a2953d664489c565b018e088f20e&grant_type=refresh_token',
+        CURLOPT_URL => 'https://accounts.zoho.in/oauth/v2/token?&refresh_token=1000.ff46e1048cddd9a9b86ba4abe804c4ba.a923be1535a22a81dde6b032a96baf63&client_id=1000.F998L05TJ3JSGW0RE7NWAJZ7WYB9YV&client_secret=492623e95cbb29a2953d664489c565b018e088f20e&grant_type=refresh_token',
         CURLOPT_RETURNTRANSFER => true,
         CURLOPT_ENCODING => '',
         CURLOPT_MAXREDIRS => 10,
@@ -33,14 +34,15 @@ class invoicecontroller extends Controller
         CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
         CURLOPT_CUSTOMREQUEST => 'POST',
         CURLOPT_HTTPHEADER => array(
-            'Cookie: 6e73717622=4440853cd702ab2a51402c119608ee85; _zcsr_tmp=4e12e670-8911-4bb6-81ae-1112e8bef96d; iamcsr=4e12e670-8911-4bb6-81ae-1112e8bef96d'
+            'Cookie: 6e73717622=3bcf233c3836eb7934b6f3edc257f951; _zcsr_tmp=83aca140-5259-497f-a2b5-da5bcf6fa5c4; iamcsr=83aca140-5259-497f-a2b5-da5bcf6fa5c4'
         ),
         ));
 
         $response = curl_exec($curl);
+
         curl_close($curl);
         $data = json_decode($response,true);
-        dd($data);
+        //dd($data);
         $request->session()->put('access_token',$data['access_token']);
 
     }
@@ -317,6 +319,86 @@ class invoicecontroller extends Controller
         return view('admin.invoice.list', compact('action', 'invoice'));
     }
 
+    public function add_row_item(Request $request){
+        $language = $request->language;
+        $next_item = $request->total_item + 1;
+
+       // $products = invoice::where('estatus',1)->get();
+   
+
+    $html = '       
+    <div class="col-lg-2 mt-4">
+
+            
+    <div class="form-group">
+      <label for="contain1" class="form-label">Container no </label>
+      <input type="text" class="form-control" name="containerno[]" id="contain1" required>
+      <label id="containerno-error" class="error invalid-feedback animated fadeInDown" for="containerno"></label>
+    </div>
+
+
+
+    <div class="form-group">
+      <label for="containg" class="form-label">Number of packages</label>
+      <input type="text" class="form-control" name="countainerpackage[]" id="containg" required>
+      <label id="countainerpackage-error" class="error invalid-feedback animated fadeInDown" for="countainerpackage"></label>
+    </div>
+  </div>
+  <div class="col-lg-2 mt-4">
+
+  
+<div class="form-group">
+<label for="contain1" class="form-label">Container type </label>
+<input type="text" class="form-control" name="containertype[]" id="containtype" required>
+<label id="containertype-error" class="error invalid-feedback animated fadeInDown" for="containerno"></label>
+</div>
+
+
+
+<div class="form-group">
+<label for="containf" class="form-label" style="margin-top:2px">Gross Weight</label>
+
+<input type="text" class="form-control" name="gross[]" id="containf" required>
+<label id="gross-error" class="error invalid-feedback animated fadeInDown" for="gross"></label>
+</div>
+</div>
+  <div class="col-lg-2 mt-4">
+  
+    
+    <div class="form-group">
+      <label for="containf" class="form-label" style="margin-top:2px">Seal no</label>
+
+      <input type="text" class="form-control" name="seal[]" id="containseal" required>
+      <label id="seal-error" class="error invalid-feedback animated fadeInDown" for="gross"></label>
+    </div>
+    <div class="form-group">
+      <label for="netwt" class="form-label">Net Weight</label>
+      <input type="text" class="form-control" name="netwt[]" id="containet" required>
+      <label id="netwt-error" class="error invalid-feedback animated fadeInDown" for="countainerpackage"></label>
+    </div>
+  </div> 
+  <div class="col-lg-2 mt-4">
+    
+    <div class="form-group">
+      <label for="containd" class="form-label" style="margin-top:2px">Measurment</label>
+
+      <input type="text" class="form-control" name="mesurment[]" id="containd" required>
+      <label id="mesurment-error" class="error invalid-feedback animated fadeInDown" for="mesurment"></label>
+    </div>
+  </div>
+  <div class="col-md-4 mt-2">
+    <div class="form-group">
+      <label for="des" class="form-label">Marks & numbers/Kind of packages/description of goods</label>
+      <textarea rows="5" class="form-control" name="description[]" cols="45" id="des" name="comment" required>
+      </textarea>
+      <label id="description-error" class="error invalid-feedback animated fadeInDown" for="description"></label>
+      
+    </div>
+  </div>
+</div>';
+
+        return ['html' => $html, 'next_item' => $next_item];
+    }
 
     public function store(Request $request)
     {
@@ -600,7 +682,7 @@ class invoicecontroller extends Controller
             }
             
             .header {
-                background-color: #0654b2;
+                background-color: #00306A;
             }
             
             .bill_of_heading {
@@ -623,26 +705,27 @@ class invoicecontroller extends Controller
             }
             
             .shipper_heading {
-                color: #0654b2;
+                color: #00306A;
                 font-weight: 500;
+                padding: 2px 5px;
             }
             .align-items-center {
                 align-items: center!important;
             }
             .border-top {
-                border-top: 1px  solid #0654b2;
+                border-top: 1px solid #00306A;
             }
             
             .border-left {
-                border-left: 1px  solid #0654b2;
+                border-left: 1px solid #00306A;
             }
             
             .border-right {
-                border-right: 1px  solid #0654b2;
+                border-right: 1px solid #00306A;
             }
             
             .border-bottom {
-                border-bottom: 1px  solid #0654b2;
+                border-bottom: 1px solid #00306A;
             }
             
             .bill_logo {
@@ -656,14 +739,14 @@ class invoicecontroller extends Controller
             }
             
             .table_part_heading {
-                color: #0654b2;
+                color: #00306A;
                 font-weight: 500;
             }
             
             .table_part th {
                 text-align: center;
                 vertical-align: middle;
-                border-left: 1px  solid #0654b2 !important;
+                border-left: 1px solid #00306A !important;
             }
             
             .table_part th:first-child {
@@ -671,7 +754,7 @@ class invoicecontroller extends Controller
             }
             
             .table_part td {
-                border-right: 1px  solid #0654b2 !important;
+                border-right: 1px solid #00306A !important;
             }
             
             .table_bottom_text {
@@ -712,7 +795,7 @@ class invoicecontroller extends Controller
                 caption-side: bottom;
                 border-collapse: collapse;
             }
-            *, ::after, ::before {
+            *,::after,::before {
                 box-sizing: border-box;
             }
             user agent stylesheet
@@ -745,7 +828,7 @@ class invoicecontroller extends Controller
                 -webkit-text-size-adjust: 100%;
                 -webkit-tap-highlight-color: transparent;
             }
-            :root {
+           :root {
                 --bs-blue: #0d6efd;
                 --bs-indigo: #6610f2;
                 --bs-purple: #6f42c1;
@@ -771,23 +854,23 @@ class invoicecontroller extends Controller
                 --bs-font-monospace: SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace;
                 --bs-gradient: linear-gradient(180deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0));
             }
-            *, ::after, ::before {
+            *,::after,::before {
                 box-sizing: border-box;
             }
-            *, ::after, ::before {
+            *,::after,::before {
                 box-sizing: border-box;
             }
 
             .table_freight_heading {
-                color: #0654b2;
+                color: #00306A;
             }
             
             .border-left-black {
-                border-left: 1px  solid #0654b2 !important;
+                border-left: 1px solid #00306A !important;
             }
             
             .border-right-black {
-                border-right: 1px solid  #0654b2 !important;
+                border-right: 1px solid  #00306A !important;
             }
             .shipper_heading_collect {
                 text-transform: capitalize;
@@ -796,7 +879,8 @@ class invoicecontroller extends Controller
             }
             
             .total_heading {
-                color: #0654b2;
+                color: #00306A;
+                padding: 2px 5px;
             }
             
             .place_date_text {
@@ -804,6 +888,7 @@ class invoicecontroller extends Controller
             }
             .freight_payable_at_heading {
                 font-weight: 600;
+                padding: 2px 5px;
             }
             
             .gradient_border_1 {
@@ -818,6 +903,12 @@ class invoicecontroller extends Controller
             
             .shipper_place_text {
                 font-size: 15px;
+            }
+            .itemTable tr td, .itemTable tr th {
+                padding: 3px 5px;
+            }
+            .text-val {
+                padding: 0 5px 5px;
             }
             </style>
             <title></title>
@@ -845,19 +936,19 @@ class invoicecontroller extends Controller
                 </div>
                 <div class="row mt-1 border-top">
                     <div class="col-md-6 pe-0" style="">
-                        <div class="border-right">
-                            <div class="shipper_heading" style="">Shipper</div>
-                            <div style="">' . $invoice->shipper_address . '</div>
+                        <div class="border-right" style="height: 85px;">
+                            <div class="shipper_heading">Shipper</div>
+                            <div class="text-val" style="">' . $invoice->shipper_address . '</div>
                         </div>
-                        <div class="border-top border-right" style="height: 150px;">
+                        <div class="border-top border-right" style="height: 85px;">
                             <div class="shipper_heading" style="">Consignee</div>
-                            <div style="">' . $invoice->consignee_address . '</div>
+                            <div class="text-val" style="">' . $invoice->consignee_address . '</div>
                         </div>
                         <div class="border-top border-right" style="height: 150px;">
                             <div class="shipper_heading" style="">
-                                Notify Address (it is agreed that no responsibility shall attach to the carrier<br> or its Agents for failure to notify)
+                                Notify Address (it is agreed that no responsibility shall attach to the carrier or its Agents for failure to notify)
                             </div>
-                            <div style="">' . $invoice->notify_address . '</div>
+                            <div class="text-val" style="">' . $invoice->notify_address . '</div>
                         </div>
 
 
@@ -868,12 +959,12 @@ class invoicecontroller extends Controller
                         <div class="row" style="display:flex;width:100%;">
                             <table>
                             <tr>
-                                <td class="shipper_heading" style="padding-left:10px;width:50%;">Bill / Lading Number :</td>
-                                <td class="shipper_heading" style="border-left:1px solid #0654b2;padding-left:10px;width:50%;">No of Original Bill of Lading :</td>
+                                <td class="shipper_heading" style="padding-left:10px;width:50%;">Bill / Lading Number:</td>
+                                <td class="shipper_heading" style="border-left:1px solid #00306A;padding-left:10px;width:50%;">No of Original Bill of Lading:</td>
                             </tr>
                             <tr>
                                 <td class="" style="padding-left:10px;">' . $invoice->bill_number . '</td>
-                                <td style="border-left:1px solid #0654b2;padding-left:10px;">' . $invoice->Bill_of_lading . '</td>
+                                <td style="border-left:1px solid #00306A;padding-left:10px;">' . $invoice->Bill_of_lading . '</td>
                             </tr>
                             </table>
                         </div>
@@ -887,11 +978,11 @@ class invoicecontroller extends Controller
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-md-12 border-top">
+                            <div class="col-md-12 border-top border-top">
                                 <div class="">
-                                    <div class="col-md-6  agent_details_heading" style="height:89px;padding-left:10px;">
+                                    <div class="col-md-6  agent_details_heading" style="height:70px;">
                                         <div class="shipper_heading">AGENT DETAILS</div>
-                                        <div>
+                                        <div class="text-val">
                                             ' . $invoice->agent_address . '
                                         </div>
                                     </div>
@@ -903,31 +994,30 @@ class invoicecontroller extends Controller
                     </div>
         
                 </div>
-                <table style="border-top:1px solid #0654b2;">
+                <table style="border-top:1px solid #00306A;">
                     <tr>
-                        <td class="shipper_heading" style="width:50%;padding-top:5px;">Vessel</td>
-                        <td class="shipper_heading" style="width:50%;border-left:1px solid #0654b2;padding-bottom:5px;padding-left:10px;">Voyage</td>
-                        <td class="shipper_heading" style="padding-left:10px;width:50%;border-left:1px solid #0654b2;">Pre-carriage by </td>
-                        <td class="shipper_heading" style="border-left:1px solid #0654b2;padding-left:10px;width:50%;">Pier or Port of Receipt</td>
-                    
+                        <td class="shipper_heading" style="width:25%;">Vessel</td>
+                        <td class="shipper_heading" style="width:25%;border-left:1px solid #00306A;padding-bottom:5px;">Voyage</td>
+                        <td class="shipper_heading" style="width:25%;border-left:1px solid #00306A;">Pre-carriage by </td>
+                        <td class="shipper_heading" style="border-left:1px solid #00306A;width:25%;">Pier or Port of Receipt</td>
                     </tr>
                     <tr>
-                        <td class="" style="width:50%;padding-top:5px;">' . $invoice->voyage . '</td>  
-                        <td  style="width:50%;border-left:1px solid #0654b2;padding-left:10px;padding-bottom:5px;">' . $invoice->vessel . '</td>
-                        <td class="" style="padding-left:10px;width:50%;border-left:1px solid #0654b2;">' . $invoice->pre_carriage_by . '</td>
-                        <td style="border-left:1px solid #0654b2;padding-left:10px;width:50%;">' . $invoice->port_of_receipt . '</td>
+                        <td class="text-val" style="width:25%;">' . $invoice->voyage . '</td>  
+                        <td class="text-val" style="width:25%; border-left:1px solid #00306A;">' . $invoice->vessel . '</td>
+                        <td class="text-val" style="width:25%; border-left:1px solid #00306A;">' . $invoice->pre_carriage_by . '</td>
+                        <td class="text-val" style="border-left:1px solid #00306A; width:25%;">' . $invoice->port_of_receipt . '</td>
                     </tr>
                     <tr style="">
-                        <td class="shipper_heading" style="width:50%;border-top:1px solid #0654b2;padding-top:5px;">Port of Loading</td>
-                        <td class="shipper_heading" style="width:50%;border-left:1px solid #0654b2;padding-left:10px;border-top:1px solid #0654b2;padding-bottom:5px;">Port of Discharge</td>
-                        <td class="shipper_heading" style="padding-left:10px;width:50%;border-top:1px solid #0654b2;border-left:1px solid #0654b2;">Place of Delivery / Final Destination</td>
-                        <td class="shipper_heading" style="border-left:1px solid bl#0654b2ack;padding-left:10px;width:50%;border-top:1px solid #0654b2;"> Country of Origin</td>
+                        <td class="shipper_heading" style="width:25%;border-top:1px solid #00306A;">Port of Loading</td>
+                        <td class="shipper_heading" style="width:25%;border-left:1px solid #00306A;border-top:1px solid #00306A;">Port of Discharge</td>
+                        <td class="shipper_heading" style="width:25%;border-top:1px solid #00306A;border-left:1px solid #00306A;">Place of Delivery / Final Destination</td>
+                        <td class="shipper_heading" style="border-left:1px solid #00306A;width:25%;border-top:1px solid #00306A;"> Country of Origin</td>
                     </tr>
-                    <tr style="border-top:1px solid #0654b2;">
-                        <td class="" style="width:50%;padding-top:5px;">' . $invoice->port_of_loading . '</td>
-                        <td style="border-left:1px solid #0654b2;width:50%;padding-left:10px;padding-bottom:5px;">' . $invoice->port_of_dischange . '</td>
-                        <td class="" style="padding-left:10px;width:50%;border-left:1px solid #0654b2;">' . $invoice->delivery_place . '</td>
-                        <td style="border-left:1px solid #0654b2;padding-left:10px;width:50%;">' . $invoice->contry_origin . '</td>
+                    <tr style="border-top:1px solid #00306A;">
+                        <td class="text-val" style="width:25%;">' . $invoice->port_of_loading . '</td>
+                        <td class="text-val" style="border-left:1px solid #00306A; width:25%;">' . $invoice->port_of_dischange . '</td>
+                        <td class="text-val" style="width:25%;border-left:1px solid #00306A;">' . $invoice->delivery_place . '</td>
+                        <td class="text-val" style="border-left:1px solid #00306A; width:25%;">' . $invoice->contry_origin . '</td>
                     </tr>
                 </table>
                 <div class="header py-2" style="">
@@ -940,17 +1030,17 @@ class invoicecontroller extends Controller
                     </div>
                 </div>
                 <div class="row ">
-                    <table class="table table_part" style="margin-bottom:0px;">
+                    <table class="table table_part itemTable" style="margin-bottom:0px;">
                         <thead>
                             <tr style="font-size:12px;">
-                                <th class="table_part_heading" style="border-bottom:1px solid #0654b2;">Container No. / Seal No. <br> Marks & Numbers</th>
-                                <th class="table_part_heading" style="border-bottom:1px solid #0654b2;">Number of <br>containers or <br> Kind of packages</th>
-                                <th class="table_part_heading" style="border-bottom:1px solid #0654b2;">Kind of packages / description of goods<br>8 X 20 GP CONTAINER STC:</th>
-                                <th class="table_part_heading" style="border-bottom:1px solid #0654b2;">Gross Weight</th>
-                                <th class="table_part_heading" style="border-bottom:1px solid #0654b2;">Measurement</th>
+                                <th class="table_part_heading" style="border-bottom:1px solid #00306A;border-left:0px !important">Container No. / Seal No. <br> Marks & Numbers</th>
+                                <th class="table_part_heading" style="border-bottom:1px solid #00306A;">Number of <br>containers or <br> Kind of packages</th>
+                                <th class="table_part_heading" style="border-bottom:1px solid #00306A;">Kind of packages / description of goods<br>8 X 20 GP CONTAINER STC:</th>
+                                <th class="table_part_heading" style="border-bottom:1px solid #00306A;">Gross Weight</th>
+                                <th class="table_part_heading" style="border-bottom:1px solid #00306A;">Measurement</th>
                             </tr> 
                         </thead>
-                        <tbody style="border-bottom:1px solid #0654b2;">';
+                        <tbody>';
 
 
 
@@ -962,36 +1052,30 @@ class invoicecontroller extends Controller
                                   
                                   <td>'.$user->description_goods.'</td>
                                   <td>'.$user->Gross_web.'</td>
-                                  <td>'.$user->Measurment.'</td>
+                                  <td style="border-right:0;">'.$user->Measurment.'</td>
                               </tr>';
                           }
                       }
                       $count = count($users->item);
                      
-                      for($user=$count;$user<103;$user++){
+                      for($user=$count;$user<35;$user++){
                         $HTMLContent .='<tr>
                         <td></td>
                         <td></td>
                         <td></td>
                         <td></td>
-                        <td></td>
-                     
-                        
+                        <td style="border-right:0;"></td>
                         </tr>';
                       
 
                       }
-                      $HTMLContent .= ' <tr style="border-bottom:1px solid #0654b2;">
-                                <td style="">
-                                            
-                                </td>
-                                <td style="">
-                                    
-                                </td>
-                                <td class="" style="text-align:center;">
-                                  
-                                </td>
-                                <td style=""></td>
+                      
+                      
+                      $HTMLContent .= ' <tr style="border-bottom:1px solid #00306A;">
+                                <td></td>
+                                <td></td>
+                                <td class="" style="text-align:center; color:#00306A;">SHIPPER LOAD COUNT AND SEAL</td>
+                                <td></td>
                                 <td style="border-right:0;"></td>
                            </tr>
                         </tbody>
@@ -1000,18 +1084,18 @@ class invoicecontroller extends Controller
                     <div class="row table_freight_heading  px-0">
                             <div class="col-md-6 border-right-black gradient_border_1" style="width:42%;border-bottom:5px solid #40475f;height:290px;">
                                 <div class="row align-items-center">
-                                    <div class="col-md-6" style="width:35%;float:left;border-top:1px solid #0654b2;">
-                                        Freight & Charges :
+                                    <div class="col-md-6 " style="width:34%;float:left;border-top:1px solid #00306A; padding-left: 5px;">
+                                        Freight & Charges:
                                     </div>
                                     <div class="col-md-6 border-left-black" style="width:64%;">
-                                        <div style="border-top:1px solid #0654b2;padding-left:10px;padding-right:10px;">
+                                        <div style="border-top:1px solid #00306A;padding-left:10px;padding-right:10px;">
                                             Cargo shall not delivered unless freight and charges not paid
                                         </div>
                                     </div>
                                 </div>
-                                <div class="row border-top-black" style="height: 200px;border-top:1px solid #0654b2;">
+                                <div class="row border-top-black" style="height: 200px;border-top:1px solid #00306A;">
                                     <div class="col-md-4 shipper_heading_collect">
-                                        Freight & Charges :
+                                        Freight & Charges:
                                     </div>
                                     <div class="col-md-4 shipper_heading_collect">
                                         prepaid
@@ -1024,17 +1108,17 @@ class invoicecontroller extends Controller
                                         <div class="col-md-2" style="width:20%;float:left;">
                                             <div class="total_heading">Total:</div>
                                         </div>
-                                        <div class="col-md-10" style="width:80%;border-top:1px solid #0654b2;">
+                                        <div class="col-md-10" style="width:80%;border-top:1px solid #00306A;">
                                             <div class=""> </div>
                                         </div>
                                     </div>
                                     <div class="border-top pt-3 ">
                                         <div class="freight_payable_at_heading col-md-6">Freight Payable at:</div>
-                                        <div class="col-md-6" style="color:black;">' . $invoice->freight_payable_at . '</div>
+                                        <div class="col-md-6" style="color:black; padding: 2px 5px;">' . $invoice->freight_payable_at . '</div>
                                         <div class="row">
                                             <div class=" col-md-6" style="width:50%;margin-top:10px;">
-                                               <div class="shipper_heading"> Mode of Shipment:</div>
-                                               <div style="color:black;">FCL/FCL</div>
+                                               <div class="shipper_heading">Mode of Shipment:</div>
+                                               <div style="color:black; padding: 0 5px">FCL/FCL</div>
                                             </div>
                                            
                                             <div class="col-md-6" style="width:50%;">
@@ -1047,14 +1131,14 @@ class invoicecontroller extends Controller
                                     </div>
                                 </div>
                             </div> 
-                            <div class="col-md-6 gradient_border_2 shipper_place_text" style="width:57.5%;border-bottom:5px solid #0654b2;height:290px;">
-                                <div style="font-size:11px;padding-left:15px;border-top:1px solid #0654b2;padding-top:10px;">
+                            <div class="col-md-6 gradient_border_2 shipper_place_text" style="width:57.5%;border-bottom:5px solid #00306A;height:290px;">
+                                <div style="font-size:11px;padding-left:10px;border-top:1px solid #00306A;padding-top:5px;">
                                     Received by the carrier the Goods as specified above in apparent good order and condition unless otherwise stated, to be transported to such place as agreed, authorised or permitted herein and subject to all the terms and conditions appearing on the front
                                     and reverse of this bill of lading to which the merchant agrees by accepting the bill of lading, any local privileges and customs notwithstanding, The particulars given above stated by the shipper and the weight, measure, quantity,
                                     condition, contents and value of the goods are unknown to the carrier. In WITNESS whereof one (1) original bill of lading has been signed if not otherwise stated above, the same being accomplished the other(s) if any, to be void, if
                                     required by the carrier one (1) original bill of lading must be surrendered duly endorsed in exchange for the Goods or delivery order.
                                     <div class="place_date_text mt-3">
-                                    <div style="font-weight:bold;"> Place and date of issue :</div>
+                                    <div style="font-weight:bold;"> Place and date of issue:</div>
                                     </div><div style="color:black;">' . $invoice->place_of_issue . ' ' . $invoice->place_of_date . '</div>
                                     <div class="mt-5" style="text-align:left;margin-top:15px;">
                                         <div>Signed as Agents of the Carrier / Agents</div>
