@@ -19,6 +19,8 @@ use Illuminate\Support\Facades\Validator;
 class invoicecontroller extends Controller
 {
     public function index($billno){
+
+        
       
         $curl = curl_init();
         curl_setopt_array($curl, array(
