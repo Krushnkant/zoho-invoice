@@ -445,13 +445,27 @@
     $('body').on('click', '#printBtn', function(e) {
         e.preventDefault();
         var invoice_id = $(this).attr('data-id');
-        var url = "{{ url('admin/invoice/pdf') }}" + "/" + invoice_id;
-        window.open(url, "_blank");
-    });
+        // var url = "{{ url('admin/invoice/pdf') }}" + "/" + invoice_id;
+        // window.open(url, "_blank");
+        printDiv(invoice_id); 
+       });
 
     // $("#add").click(function(){
     // $("#add").on("click",function() {
-   
+        function printDiv(invoice_id) {
+        //Get the HTML of div
+        
+        var divElements = document.getElementById(invoice_id).innerHTML;
+        //Get the HTML of whole page
+        var oldPage = document.body.innerHTML;
+        //Reset the page's HTML with div's HTML only
+        document.body.innerHTML = '<html><head><title></title></head><body><div class="invoiceheader"><h2>INVOICE</h2></div>' + divElements + '</body></html>';
+        //Print Page
+        window.print();
+        //Restore orignal HTML
+        document.body.innerHTML = oldPage;
+        location.reload();
+    }
 </script>
 <!-- Invoice JS end -->
 @endsection

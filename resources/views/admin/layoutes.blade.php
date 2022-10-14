@@ -26,7 +26,7 @@
 {{--    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.4/css/jquery.dataTables.min.css">--}}
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     {{--    <script type="text/javascript" language="javascript" src="https://cdn.datatables.net/1.11.4/js/jquery.dataTables.min.js"></script>--}}
-
+    <link href="{{ asset('public/plugins/summernote/dist/summernote.css') }}" rel="stylesheet">
 </head>
 
 <body>
@@ -216,7 +216,8 @@
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 @yield('js')
-
+<script src="{{ asset('public/plugins/summernote/dist/summernote.min.js') }}"></script>
+<script src="{{ asset('public/plugins/summernote/dist/summernote-init.js') }}"></script>
 </body>
 </html>
 

@@ -58,7 +58,7 @@
               <div class="form-group">
                 <label for="saddress" class="form-label">Shipper Address <span class="text-danger">*</span></label>
 
-                <textarea rows="4" class="form-control" cols="50" id="saddress" name="saddress" required></textarea>
+                <textarea rows="4" class="form-control summernote" cols="50" id="saddress" name="saddress" required></textarea>
                 <label id="saddress-error" class="error invalid-feedback animated fadeInDown" for="saddress"></label>
               </div>
             </div>
@@ -66,7 +66,7 @@
               <div class="form-group">
                 <label for="caddress" class="form-label">Consignee Address <span class="text-danger">*</span></label>
 
-                <textarea rows="4" class="form-control" cols="50" id="caddress" name="caddress" required>
+                <textarea  class="form-control summernote" id="caddress" name="caddress" required>
 </textarea>
                 <label id="caddress-error" class="error invalid-feedback animated fadeInDown" for="caddress"></label>
               </div>
@@ -80,8 +80,10 @@
                   <label for="select">Same as Consignee </label>
                   <input type="radio" id="javascript" name="check_notify" value="3" class="check_notify" checked>
                   <label for="javascript">Create Notify Address</label>
-                <textarea rows="4" class="form-control" cols="50" id="naddress" name="naddress" required></textarea>
+                <div class="naddress">
+                <textarea rows="4" class="form-control summernote" cols="50" id="naddress" name="naddress" required></textarea>
                 <label id="naddress-error" class="error invalid-feedback animated fadeInDown" for="naddress"></label>
+              </div>
               </div>
             </div>
             <!-- <div class="col-md-6">
@@ -594,6 +596,7 @@
           <script>
             $('body').on('click', '#saveInvoiceBtn', function() {
               // $(".loadericonfa").removeClass("hide");
+           
               $('#saveInvoiceBtn').prop('disabled', true);
               $('#saveInvoiceBtn').find('.loadericonfa').show();
               var formData = new FormData($("#add_invoice_form")[0]);
@@ -852,7 +855,7 @@
 
             $('.check_notify').change(function() {
 
-              var textarea = $('#naddress');
+              var textarea = $('.naddress');
               var select = $(this).val();
 
               textarea.hide();
@@ -869,7 +872,7 @@
 
             })
 
-           
+          
 
             $("#addrow").click(function(){
       
@@ -896,7 +899,24 @@
                 }
             });
 });
-          </script>
+
+jQuery(document).ready(function() {
+    $(".summernote").summernote({
+       
+        height: 100,
+        minHeight: null,
+        maxHeight: null,
+        toolbar: false,
+        focus: !1
+    }), $(".inline-editor").summernote({
+        airMode: !0
+    })
+}), window.edit = function() {
+    $(".click2edit").summernote()
+}, window.save = function() {
+    $(".click2edit").summernote("destroy")
+};
+</script>
 
           @endsection
 
