@@ -1,0 +1,519 @@
+<html>
+
+        <head>
+            <meta name="viewport" content="width=device-width, initial-scale=1">
+
+            <link rel="stylesheet" href="css/style.css">
+<style type="text/css">
+
+            @page {
+                page-break-after: avoid;
+            }
+            body {
+                font-family: "Roboto", sans-serif;
+                page-break-after: always;
+            }
+            
+            .row {
+                margin: 0;
+            }
+            
+            .col-md-4 {
+                width: 33.33333333%;    
+            }
+            
+            .col-md-6 {
+                width: 50%;
+                float: left;
+            }
+            
+            .col-md-8 {
+                width: 66.66666667%;
+                float: left;
+            }
+            
+            .col-md-4 {
+                width: 33.33333333%;
+                float: left;
+            }
+            
+            .header {
+                background-color: #00306A;
+                margin-left: 0;
+            }
+            
+            .bill_of_heading {
+                color: #fff;
+                font-weight: 700;
+                font-size: 17px;
+            }
+            
+            .bill_of_paragraph {
+                color: #fff;
+                font-size: 14px;
+                font-weight: 600;
+            }
+            
+            .original_heading {
+                font-weight: 600;
+                font-size: 23px;
+                text-transform: uppercase;
+                color: #fff;
+            }
+            
+            .shipper_heading {
+                color: #00306A;
+                font-weight: 500;
+                padding: 2px 5px;
+            }
+            .align-items-center {
+                align-items: center!important;
+            }
+            .border-top {
+                border-top: 1px solid #00306A;
+            }
+            
+            .border-left {
+                border-left: 1px solid #00306A;
+            }
+            
+            .border-right {
+                border-right: 1px solid #00306A;
+            }
+            
+            .border-bottom {
+                border-bottom: 1px solid #00306A;
+            }
+            
+            .bill_logo {
+                width: 100%;
+                height: 198px;
+                object-fit: cover;
+            }
+            
+            .agent_details_heading {
+                text-transform: uppercase;
+            }
+            
+            .table_part_heading {
+                color: #00306A;
+                font-weight: 500;
+            }
+            
+            .table_part th {
+                text-align: center;
+                vertical-align: middle;
+                border-left: 1px solid #00306A !important;
+            }
+            
+            .table_part th:first-child {
+                border-left: 0 !important;
+            }
+            
+            .table_part td {
+                border-right: 1px solid #00306A !important;
+            }
+            
+            .table_bottom_text {
+                color: #000;
+                font-weight: 600;
+                text-align: center;
+                display: flex;
+                align-items: end;
+                height: 100%;
+                justify-content: center;
+            }
+            
+            .table {
+                border-bottom-color: currentColor;
+                padding: 0.5rem 0.5rem;
+                background-color: var(--bs-table-bg);
+                border-bottom-width: 1px;
+                --bs-table-bg: transparent;
+                --bs-table-accent-bg: transparent;
+                --bs-table-striped-color: #212529;
+                --bs-table-striped-bg: rgba(0, 0, 0, 0.05);
+                --bs-table-active-color: #212529;
+                --bs-table-active-bg: rgba(0, 0, 0, 0.1);
+                --bs-table-hover-color: #212529;
+                --bs-table-hover-bg: rgba(0, 0, 0, 0.075);
+                width: 100%;
+             
+            }
+            p {
+                margin-bottom:0;
+                margin-top:0;
+            }
+            .row>* {
+                flex-shrink: 0;
+                width: 100%;
+                max-width: 100%;
+                padding-right: calc(var(--bs-gutter-x) * .5);
+                padding-left: calc(var(--bs-gutter-x) * .5);
+                margin-top: var(--bs-gutter-y);
+            }
+            table {
+                caption-side: bottom;
+                border-collapse: collapse;
+            }
+            *,::after,::before {
+                box-sizing: border-box;
+            }
+            user agent stylesheet
+            table {
+                display: table;
+                border-collapse: separate;
+                box-sizing: border-box;
+                text-indent: initial;
+                border-spacing: 2px;
+                border-color: #000000;
+            }
+            .row {
+                --bs-gutter-x: 1.5rem;
+                --bs-gutter-y: 0;
+                display: flex;
+                flex-wrap: wrap;
+                margin-top: calc(var(--bs-gutter-y) * -1);
+                margin-right: calc(var(--bs-gutter-x) * -.5);
+                margin-left: calc(var(--bs-gutter-x) * -.5);
+            }
+       
+            body {
+                margin: 0;
+                font-family: var(--bs-font-sans-serif);
+                font-size: 1rem;
+                font-weight: 400;
+                line-height: 1.5;
+                color: #212529;
+                background-color: #fff;
+                -webkit-text-size-adjust: 100%;
+                -webkit-tap-highlight-color: transparent;
+            }
+           :root {
+                --bs-blue: #0d6efd;
+                --bs-indigo: #6610f2;
+                --bs-purple: #6f42c1;
+                --bs-pink: #d63384;
+                --bs-red: #dc3545;
+                --bs-orange: #fd7e14;
+                --bs-yellow: #ffc107;
+                --bs-green: #198754;
+                --bs-teal: #20c997;
+                --bs-cyan: #0dcaf0;
+                --bs-white: #fff;
+                --bs-gray: #6c757d;
+                --bs-gray-dark: #343a40;
+                --bs-primary: #0d6efd;
+                --bs-secondary: #6c757d;
+                --bs-success: #198754;
+                --bs-info: #0dcaf0;
+                --bs-warning: #ffc107;
+                --bs-danger: #dc3545;
+                --bs-light: #f8f9fa;
+                --bs-dark: #212529;
+                --bs-font-sans-serif: system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans","Liberation Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+                --bs-font-monospace: SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace;
+                --bs-gradient: linear-gradient(180deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0));
+            }
+            *,::after,::before {
+                box-sizing: border-box;
+            }
+            *,::after,::before {
+                box-sizing: border-box;
+            }
+
+            .table_freight_heading {
+                color: #00306A;
+            }
+            
+            .border-left-black {
+                border-left: 1px solid #00306A !important;
+            }
+            
+            .border-right-black {
+                border-right: 1px solid  #00306A !important;
+            }
+            .shipper_heading_collect {
+                text-transform: capitalize;
+                text-align: center;
+                height: 87px;
+            }
+            
+            .total_heading {
+                color: #00306A;
+                padding: 2px 5px;
+            }
+            
+            .place_date_text {
+                font-weight: 600;
+            }
+            .freight_payable_at_heading {
+                font-weight: 600;
+                padding: 2px 5px;
+            }
+            
+            .gradient_border_1 {
+                border-bottom: 5px  solid;
+            }
+            .align-items-center {
+                align-items: center!important;
+            }
+            .gradient_border_2 {
+                border-bottom: 5px  solid;
+            }
+            
+            .shipper_place_text {
+                font-size: 15px;
+            }
+            .itemTable tr td, .itemTable tr th {
+                padding: 3px 5px;
+            }
+            .text-val {
+                padding: 0 5px 5px;
+            }
+            
+            </style>
+            <title></title>
+            
+        </head>
+        
+        <body style="font-size:11px;">
+            <div class="container pagebreak">
+                <div class="header py-3">
+                    <div class="row px-4">
+                        <div class="col-md-6">
+                            <div class="bill_of_heading" style="padding-left:15px;font-size:15px;font-weight:bold;">
+                                BILL OF LADING
+                            </div>
+                            <div class="bill_of_paragraph" style="padding-left:15px;font-size:12px;">
+                                FOR COMBINED TRANSPORT OR PORT TO PORT SHIPMENT
+                            </div>
+                        </div>
+                        <div class="col-md-6 text-end" style="text-align:right;">
+                            <div class="original_heading" style="padding-right:15px;font-size:16px;font-weight:bold;"> 
+                                ORIGINAL
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-1 border-top">
+                    <div class="col-md-6 pe-0" style="">
+                        <div class="border-right" style="height: 85px;">
+                            <div class="shipper_heading">Shipper</div>
+                            <div class="text-val" style=""> 
+                        </div>
+                             
+                           
+                        </div>
+                        <div class="border-top border-right" style="height: 85px;">
+                            <div class="shipper_heading" style="">Consignee</div>
+                            <div class="text-val" style="">
+                            </div>
+                        </div>
+                        <div class="border-top border-right" style="height: 150px;">
+                            <div class="shipper_heading" style="">
+                                Notify Address (it is agreed that no responsibility shall attach to the carrier or its Agents for failure to notify)
+                            </div>
+                            <div class="text-val" style="">
+                            </div>
+                        </div>
+
+
+                       
+                        
+                    </div>
+                    <div class="col-md-6 ps-0">
+                        <div class="row" style="display:flex;width:100%;">
+                            <table>
+                            <tr>
+                                <td class="shipper_heading" style="padding-left:10px;width:50%;">Bill / Lading Number:</td>
+                                <td class="shipper_heading" style="border-left:1px solid #00306A;padding-left:10px;width:50%;">No of Original Bill of Lading:</td>
+                            </tr>
+                            <tr>
+                                <td class="" style="padding-left:10px;">' . $invoice->bill_number . '</td>
+                                <td style="border-left:1px solid #00306A;padding-left:10px;">' . $invoice->Bill_of_lading . '</td>
+                            </tr>
+                            </table>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12 border-top">
+                                <div class="">
+                                    <div class="shipper_heading" style="height:211px;">
+                                        <!-- <img src="" alt="" class="bill_logo"> -->
+                                    </div>
+                                </div>  
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12 border-top border-top">
+                                <div class="">
+                                    <div class="col-md-6  agent_details_heading" style="height:70px;">
+                                        <div class="shipper_heading">AGENT DETAILS</div>
+                                        <div class="text-val">
+                                        </div>
+                                    </div>
+                                 
+                                </div>
+                            </div>
+                        </div>
+                       
+                    </div>
+        
+                </div>
+                <table style="border-top:1px solid #00306A;">
+                    <tr>
+                        <td class="shipper_heading" style="width:25%;">Vessel</td>
+                        <td class="shipper_heading" style="width:25%;border-left:1px solid #00306A;padding-bottom:5px;">Voyage</td>
+                        <td class="shipper_heading" style="width:25%;border-left:1px solid #00306A;">Pre-carriage by </td>
+                        <td class="shipper_heading" style="border-left:1px solid #00306A;width:25%;">Pier or Port of Receipt</td>
+                    </tr>
+                    <tr>
+                        <td class="text-val" style="width:25%;">asdfa</td>  
+                        <td class="text-val" style="width:25%; border-left:1px solid #00306A;">asdf</td>
+                        <td class="text-val" style="width:25%; border-left:1px solid #00306A;">asdasd</td>
+                        <td class="text-val" style="border-left:1px solid #00306A; width:25%;">zasdfa</td>
+                    </tr>
+                    <tr style="">
+                        <td class="shipper_heading" style="width:25%;border-top:1px solid #00306A;">Port of Loading</td>
+                        <td class="shipper_heading" style="width:25%;border-left:1px solid #00306A;border-top:1px solid #00306A;">Port of Discharge</td>
+                        <td class="shipper_heading" style="width:25%;border-top:1px solid #00306A;border-left:1px solid #00306A;">Place of Delivery / Final Destination</td>
+                        <td class="shipper_heading" style="border-left:1px solid #00306A;width:25%;border-top:1px solid #00306A;"> Country of Origin</td>
+                    </tr>
+                    <tr style="border-top:1px solid #00306A;">
+                        <td class="text-val" style="width:25%;">2354235634534634634</td>
+                        <td class="text-val" style="border-left:1px solid #00306A; width:25%;">sdfasfasdf</td>
+                        <td class="text-val" style="width:25%;border-left:1px solid #00306A;">vcbxcbxcvbxcvb</td>
+                        <td class="text-val" style="border-left:1px solid #00306A; width:25%;">dfgsdfgsdfgsdfg</td>
+                    </tr>
+                </table>
+                <div class="header py-2" style="">
+                    <div class="row px-4">
+                        <div class="col-md-12 text-center">
+                            <div class="bill_of_heading;" style="color:white;text-align:center;font-weight:bold;padding:6px 0;">
+                                PARTICULARS FURNISHED BY THE SHIPPER - NOT CECKED BY CARRIER - CARRIER NOT RESPONSIBLE
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row ">
+                    <table class="table table_part itemTable" style="margin-bottom:0px;table-layout: fixed;">
+                        <thead>
+                            <tr style="font-size:12px;">
+                                <th class="table_part_heading" style="border-bottom:1px solid #00306A;border-left:0px !important">Container No. / Seal No. <br> Marks & Numbers</th>
+                                <th class="table_part_heading" style="border-bottom:1px solid #00306A;">Number of <br>containers or <br> Kind of packages</th>
+                                <th class="table_part_heading" style="border-bottom:1px solid #00306A;">Kind of packages / description of goods</th>
+                                <th class="table_part_heading" style="border-bottom:1px solid #00306A;">Gross Weight</th>
+                                <th class="table_part_heading" style="border-bottom:1px solid #00306A;">Measurement</th>
+                            </tr> 
+                        </thead>
+                        <tbody>
+
+                        <tr style="border-bottom:1px solid #00306A;">
+                                <td></td>
+                                <td></td>
+                                <td class="" style="text-align:center;">8 X 20 GP CONTAINER STC:</td>
+                                <td></td>
+                                <td style="border-right:0;"></td>
+                           </tr>
+                           <tr>
+                        <td style="width: 22%; word-wrap: break-word;"><div style="width: inherit;">12345678</div></td>
+                        <td style="width: 15%; word-wrap: break-word;"><div style="width: inherit;">b89123456789sdfg</div></td>
+                                   
+                                  
+                                   <td style="width: 33%;">1234567890</td>
+                                   <td style="width: 15%;">1234567890</td>
+                                   <td style="border-right:0; width: 15%;">123456</td>
+                        </tr>
+                      
+                        <tr style="border-bottom:1px solid #00306A;">
+                                <td></td>
+                                <td></td>
+                                <td class="" style="text-align:center; color:#00306A;">SHIPPER LOAD COUNT AND SEAL</td>
+                                <td></td>
+                                <td style="border-right:0;"></td>
+                           </tr>
+                        </tbody>
+                    </table>
+                    <div style="width: 100%;">
+                      <div style="width: 22%; float: left; display: inline-block; word-wrap: break-word;">TestTestTestTestTest TestTestTestTest</div>
+                      <div style="width: 15%; float: left;">1011111111111111</div>
+                      <div style="width: 33%; float: left;">222222222222222</div>
+                      <div style="width: 15%; float: left;">33333333333333333333333333</div>
+                      <div style="width: 14%; float: left; word-wrap: break-word;">44444444444444444444444444444444444</div>
+                    </div>
+                    
+                    <div class="row table_freight_heading  px-0">
+                            <div class="col-md-6 border-right-black gradient_border_1" style="width:42%;border-bottom:5px solid #40475f;height:290px;">
+                                <div class="row align-items-center">
+                                    <div class="col-md-6 " style="width:34%;float:left;border-top:1px solid #00306A; padding-left: 5px;">
+                                        Freight & Charges:
+                                    </div>
+                                    <div class="col-md-6 border-left-black" style="width:64%;">
+                                        <div style="border-top:1px solid #00306A;padding-left:10px;padding-right:10px;">
+                                            Cargo shall not delivered unless freight and charges not paid
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row border-top-black" style="height: 200px;border-top:1px solid #00306A;">
+                                    <div class="col-md-4 shipper_heading_collect">
+                                        Freight & Charges:
+                                    </div>
+                                    <div class="col-md-4 shipper_heading_collect">
+                                        prepaid
+                                    </div>
+                                    <div class="col-md-4 shipper_heading_collect">
+                                        Collect
+                                    </div>
+                                    <div class="row align-items-center px-0">
+                                    <div class="" style="color:black; margin-left:150px">'.$invoice->freight_charges.'</div>
+                                        <div class="col-md-2" style="width:20%;float:left;">
+                                            <div class="total_heading">Total:</div>
+                                        </div>
+                                        <div class="col-md-10" style="width:80%;border-top:1px solid #00306A;">
+                                            <div class=""> </div>
+                                        </div>
+                                    </div>
+                                    <div class="border-top pt-3 ">
+                                        <div class="freight_payable_at_heading col-md-6">Freight Payable at:</div>
+                                        <div class="col-md-6" style="color:black; padding: 2px 5px;">' . $invoice->freight_payable_at . '</div>
+                                        <div class="row">
+                                            <div class=" col-md-6" style="width:50%;margin-top:10px;">
+                                               <div class="shipper_heading">Mode of Shipment:</div>
+                                               <div style="color:black; padding: 0 5px">FCL/FCL</div>
+                                            </div>
+                                           
+                                            <div class="col-md-6" style="width:50%;">
+                                                <div class="shipper_headings">Shipped on board:</div>
+                                                <div style="color:black;">sdfgsadsf</div>
+                                            </div>
+                                            
+                                        </div>
+                                        <div></div>
+                                    </div>
+                                </div>
+                            </div> 
+                            <div class="col-md-6 gradient_border_2 shipper_place_text" style="width:57.5%;border-bottom:5px solid #00306A;height:290px;">
+                                <div style="font-size:11px;padding-left:10px;border-top:1px solid #00306A;padding-top:5px;">
+                                    Received by the carrier the Goods as specified above in apparent good order and condition unless otherwise stated, to be transported to such place as agreed, authorised or permitted herein and subject to all the terms and conditions appearing on the front
+                                    and reverse of this bill of lading to which the merchant agrees by accepting the bill of lading, any local privileges and customs notwithstanding, The particulars given above stated by the shipper and the weight, measure, quantity,
+                                    condition, contents and value of the goods are unknown to the carrier. In WITNESS whereof one (1) original bill of lading has been signed if not otherwise stated above, the same being accomplished the other(s) if any, to be void, if
+                                    required by the carrier one (1) original bill of lading must be surrendered duly endorsed in exchange for the Goods or delivery order.
+                                    <div class="place_date_text mt-3">
+                                    <div style="font-weight:bold;"> Place and date of issue:</div>
+                                    </div><div style="color:black;">dgfhfghdfghdfghdfghdfgh</div>
+                                    <div class="mt-5" style="text-align:left;margin-top:15px;">
+                                        <div>Signed as Agents of the Carrier / Agents</div>
+                                    </div>
+                                    <div class="float-end mt-3 col-md-12" style="text-align:right;margin-top:15px;">
+                                        Authorised Signatory
+                                    </div>
+                                </div>
+                            </div>
+                    </div>
+                </div>
+            </div>
+        
+        </body>
+        
+        
+        </html>

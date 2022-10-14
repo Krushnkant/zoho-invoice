@@ -1,5 +1,4 @@
 
-
         
 
 <div class="row">
@@ -32,7 +31,7 @@
   <div class="form-group">
     <label for="validationCustom03" class="form-label">Shipper Address <span class="text-danger">*</span></label>
 
-    <textarea rows="4"  class="form-control" cols="50"  id="validationCustom03" name="saddress" required>{{ $invoice->shipper_address	 }}
+    <textarea rows="4"  class="form-control summernote" cols="50"  id="validationCustom03" name="saddress" required>{{ $invoice->shipper_address	 }}
 </textarea>
 <label id="saddress-error" class="error invalid-feedback animated fadeInDown" for="saddress"></label>
   </div>
@@ -41,7 +40,7 @@
   <div class="form-group">
     <label for="validationCustom03" class="form-label">Consignee Address <span class="text-danger">*</span></label>
 
-    <textarea rows="4"  class="form-control" cols="50" id="validationCustom03" name="caddress" required>{{ $invoice->consignee_address }}
+    <textarea rows="4"  class="form-control summernote" cols="50" id="validationCustom03" name="caddress" required>{{ $invoice->consignee_address }}
 </textarea>
 <label id="caddress-error" class="error invalid-feedback animated fadeInDown" for="caddress"></label>
   </div>
@@ -50,7 +49,7 @@
   <div class="form-group">
     <label for="validationCustom03" class="form-label">Notify Address <span class="text-danger">*</span></label>
 
-    <textarea rows="4"  class="form-control" cols="50"   id="validationCustom03" name="naddress" required>{{ $invoice->notify_address }}
+    <textarea rows="4"  class="form-control summernote" cols="50"   id="validationCustom03" name="naddress" required>{{ $invoice->notify_address }}
 </textarea>
 <label id="naddress-error" class="error invalid-feedback animated fadeInDown" for="naddress"></label>
   </div>
@@ -257,4 +256,22 @@
 
 </div>
 </div>
+<script>
+  jQuery(document).ready(function() {
+    $(".summernote").summernote({
+       
+        height: 100,
+        minHeight: null,
+        maxHeight: null,
+        toolbar: false,
+        focus: !1
+    }), $(".inline-editor").summernote({
+        airMode: !0
+    })
+}), window.edit = function() {
+    $(".click2edit").summernote()
+}, window.save = function() {
+    $(".click2edit").summernote("destroy")
+};
+  </script>
 
