@@ -164,7 +164,7 @@
   <div class="form-group">
     <label for="agent" class="form-label">Agent Address <span class="text-danger">*</span></label>
 
-    <textarea rows="4"  class="form-control" cols="50"  id="agent" name="agaddress" required>{{ $invoice->agent_address }}</textarea>
+    <textarea rows="4"  class="form-control summernote" cols="50"  id="agent" name="agaddress" required>{{ $invoice->agent_address }}</textarea>
 <label id="agaddress-error" class="error invalid-feedback animated fadeInDown" for="agaddress"></label>
   </div>
 </div>

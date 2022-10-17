@@ -283,8 +283,11 @@ class invoicecontroller extends Controller
             $item_detail->container_no = $item;
             $item_detail->container_package = $request->countainerpackage[$key];
             $item_detail->description_goods = $request->description[$key];
+            $item_detail->container_type = $request->containertype[$key];
+            $item_detail->seal_no = $request->seal[$key];
             $item_detail->Gross_web  = $request->gross[$key];
             $item_detail->Measurment = $request->mesurment[$key];
+            $item_detail->net_weight = $request->netwt[$key];
             $item_detail->save();
             //}
 
@@ -613,8 +616,11 @@ class invoicecontroller extends Controller
             $item_detail->container_no = $item;
             $item_detail->container_package = $request->countainerpackage[$key];
             $item_detail->description_goods = $request->description[$key];
+            $item_detail->container_type = $request->containertype[$key];
+            $item_detail->seal_no = $request->seal[$key];
             $item_detail->Gross_web  = $request->gross[$key];
             $item_detail->Measurment = $request->mesurment[$key];
+            $item_detail->net_weight = $request->netwt[$key];
             $item_detail->save();
             // }
 
@@ -649,6 +655,9 @@ class invoicecontroller extends Controller
 
         $notify_count_address = substr_count($invoice->notify_address,"</p>");
         $notify_address_array = explode('</p>',$invoice->notify_address);
+
+        $agent_count_address = substr_count($invoice->agent_address,"</p>");
+        $agent_address_array = explode('</p>',$invoice->agent_address);
 
         $item_row = 28;
 
@@ -1070,8 +1079,11 @@ class invoicecontroller extends Controller
                         for($x = 0; $x < $consignee_count_address; $x++){
                             $HTMLContent .= ' '.   $consignee_address_array_new[$x] .'';
                         }
-                    }    
-                    $HTMLContent .= '</div>
+                    }
+                    
+                    
+                    
+                $HTMLContent .= '</div>
                 </div>
                 <div class="border-top border-right" style="height: 110px;">
                     <div class="shipper_heading">
@@ -1098,7 +1110,7 @@ class invoicecontroller extends Controller
                     }
                     
                    
-                    $$notify_count_address = count($notify_address_array_new);
+                    $notify_count_address = count($notify_address_array_new);
 
                     if($notify_count_address > 3){
                         for($x = 0; $x < 3; $x++){
@@ -1140,8 +1152,41 @@ class invoicecontroller extends Controller
                     <div class="col-md-12 border-top border-top px-0">
                         <div class="col-md-6 px-0 agent_details_heading" style="height:70px;">
                             <div class="shipper_heading">AGENT DETAILS</div>
-                            <div class="text-val">  ' . $invoice->agent_address . '
-                            </div>
+                            <div class="text-val">  ';
+                            $showAgentAddr = 0;
+
+                            $agent_address_array_new = array(); 
+                                        
+                            foreach($agent_address_array as $agent_address){
+                                if($agent_address != ""){
+                                    $addresscatcount =  round(strlen($agent_address) / 70);
+                                
+                                    if($addresscatcount == 0.0 || $addresscatcount == 1.0){
+                                      
+                                        $agent_address_array_new[] = $agent_address;
+                                    }else{
+                                        $result = substr($agent_address, 70);
+                                       
+                                        $agent_address_array_new[] = $result;
+                                    }
+                                }
+                            }
+                            
+                           
+                            $agent_count_address = count($agent_address_array_new);
+        
+                            if($agent_count_address > 2){
+                                for($x = 0; $x < 2; $x++){
+                                    $HTMLContent .= ' '.   $agent_address_array[$x] .'';
+                                }
+                                $HTMLContent .= '<p><b>****</b></p>';
+                            }else{
+                                $showAgentAddr = 1;
+                                for($x = 0; $x < $agent_count_address; $x++){
+                                    $HTMLContent .= ' '.   $agent_address_array[$x] .'';
+                                }
+                            }  
+                             $HTMLContent .= '</div>
                         </div>
                     </div>
                 </div>
@@ -1372,6 +1417,33 @@ class invoicecontroller extends Controller
                     </tr>';
                   }
 
+                  $agent_count = 0;
+                  if($agent_count_address > 2){
+                    $agent_count = $agent_count_address -2;
+                  }
+
+                  if($count < $item_row && $agent_count < $blankrow && $agent_count_address > 2){
+                    $showAgentAddr = 1;
+                    $HTMLContent .='<tr>
+                    
+                        <td style="word-break: break-all;">
+                            <div style="width: inherit;"></div>
+                        </td>
+                        <td style="word-break: break-all;"></td>
+                        <td style="">';
+                        //if($notify_count_address > 3){
+                            for($x = 2; $x < $agent_count_address; $x++){
+                                $count++;
+                                $blankrow--;
+                                $HTMLContent .= ' '.   $agent_address_array[$x] .'';
+                            }
+                       // }  
+                        $HTMLContent .='</td>
+                        <td style=""></td>
+                        <td style="border-right:0 !important;"></td>
+                    </tr>';
+                  }
+
                   for($user=$count;$user < $item_row;$user++){
                     $HTMLContent .='<tr>
                     <td><div style="height:12px;"></div></td>
@@ -1584,6 +1656,26 @@ class invoicecontroller extends Controller
                         for($x = 3; $x < $notify_count_address; $x++){
                             $count++;
                             $HTMLContent .= ' '.   $notify_address_array[$x] .'';
+                        }
+                    }  
+                    $HTMLContent .='</td>
+                    <td style=""></td>
+                    <td style="border-right:0 !important;"></td>
+                </tr>';
+            }
+
+            if($showAgentAddr == 0){
+                $HTMLContent .='<tr>
+                    <td style="word-break: break-all;">
+                        <div style="width: inherit;"></div>
+                    </td>
+                    <td style="word-break: break-all;"></td>
+                    <td style="">';
+                    if($agent_count_address > 2){
+                        $HTMLContent .= ' *** ';
+                        for($x = 2; $x < $agent_count_address; $x++){
+                            $count++;
+                            $HTMLContent .= ' '.   $agent_address_array[$x] .'';
                         }
                     }  
                     $HTMLContent .='</td>
