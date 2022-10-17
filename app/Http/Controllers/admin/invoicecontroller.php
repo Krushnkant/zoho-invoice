@@ -650,6 +650,8 @@ class invoicecontroller extends Controller
         $notify_count_address = substr_count($invoice->notify_address,"</p>");
         $notify_address_array = explode('</p>',$invoice->notify_address);
 
+        $item_row = 28;
+
         
         
         $HTMLContent = '<html>
@@ -659,314 +661,321 @@ class invoicecontroller extends Controller
 
             <link rel="stylesheet" href="css/style.css">';
 
-        $HTMLContent .= '<style type="text/css">
+            $HTMLContent .= '<style type="text/css">
 
-        @page {
-            page-break-after: avoid;
-        }
-        
-        body {
-            font-family: "Roboto", sans-serif;
-            page-break-after: always;
-        }
-        
-        .row {
-            margin: 0 !important;
-        }
-        
-        .col-md-4 {
-            width: 33.33333333%;
-        }
-        
-        .col-md-6 {
-            width: 50%;
-            float: left;
-        }
-        
-        .col-md-8 {
-            width: 66.66666667%;
-            float: left;
-        }
-        
-        .col-md-4 {
-            width: 33.33333333%;
-            float: left;
-        }
-        
-        .header {
-            background-color: #00306A;
-            margin-left: 0;
-        }
-        
-        .bill_of_heading {
-            color: #fff;
-            font-weight: 700;
-            font-size: 12px;
-        }
-        
-        .bill_of_paragraph {
-            color: #fff;
-            font-size: 14px;
-            font-weight: 600;
-        }
-        
-        .original_heading {
-            font-weight: 600;
-            font-size: 23px;
-            text-transform: uppercase;
-            color: #fff;
-        }
-        
-        .shipper_heading {
-            color: #00306A;
-            font-weight: 500;
-            padding: 2px 12px;
-            font-size: 12px;
-        }
-        
-        .align-items-center {
-            align-items: center!important;
-        }
-        
-        .border-top {
-            border-top: 1px solid #00306A;
-        }
-        
-        .border-left {
-            border-left: 1px solid #00306A;
-        }
-        
-        .border-right {
-            border-right: 1px solid #00306A;
-        }
-        
-        .border-bottom {
-            border-bottom: 1px solid #00306A;
-        }
-        
-        .bill_logo {
-            width: 100%;
-            height: 198px;
-            object-fit: cover;
-        }
-        
-        .agent_details_heading {
-            text-transform: uppercase;
-        }
-        
-        .table_part_heading {
-            color: #00306A;
-            font-weight: 500;
-        }
-        
-        .table_part th {
-            text-align: center;
-            vertical-align: middle;
-            border-left: 1px solid #00306A !important;
-        }
-        
-        .table_part th:first-child {
-            border-left: 0 !important;
-        }
-        
-        .table_part td {
-            border-right: 1px solid #00306A !important;
-            font-size: 12px;
-        }
-        
-        .table_bottom_text {
-            color: #000;
-            font-weight: 600;
-            text-align: center;
-            display: flex;
-            align-items: end;
-            height: 100%;
-            justify-content: center;
-        }
-        
-        .table {
-            border-bottom-color: currentColor;
-            padding: 0.5rem 0.5rem;
-            background-color: var(--bs-table-bg);
-            border-bottom-width: 1px;
-            --bs-table-bg: transparent;
-            --bs-table-accent-bg: transparent;
-            --bs-table-striped-color: #212529;
-            --bs-table-striped-bg: rgba(0, 0, 0, 0.05);
-            --bs-table-active-color: #212529;
-            --bs-table-active-bg: rgba(0, 0, 0, 0.1);
-            --bs-table-hover-color: #212529;
-            --bs-table-hover-bg: rgba(0, 0, 0, 0.075);
-            width: 100%;
-        }
-        
-        p {
-            margin-bottom: 0;
-            margin-top: 0;
-        }
-        
-        .row>* {
-            flex-shrink: 0;
-            width: 100%;
-            max-width: 100%;
-            padding-right: calc(var(--bs-gutter-x) * .5);
-            padding-left: calc(var(--bs-gutter-x) * .5);
-            margin-top: var(--bs-gutter-y);
-        }
-        
-        table {
-            caption-side: bottom;
-            border-collapse: collapse;
-        }
-        
-        *,
-         ::after,
-         ::before {
-            box-sizing: border-box;
-        }
-        
-        user agent stylesheet table {
-            display: table;
-            border-collapse: separate;
-            box-sizing: border-box;
-            text-indent: initial;
-            border-spacing: 2px;
-            border-color: #000000;
-        }
-        
-        .row {
-            --bs-gutter-x: 1.5rem;
-            --bs-gutter-y: 0;
-            display: flex;
-            flex-wrap: wrap;
-            margin-top: calc(var(--bs-gutter-y) * -1);
-            margin-right: calc(var(--bs-gutter-x) * -.5);
-            margin-left: calc(var(--bs-gutter-x) * -.5);
-        }
-        
-        body {
-            margin: 0;
-            font-family: var(--bs-font-sans-serif);
-            font-size: 1rem;
-            font-weight: 400;
-            line-height: 1.5;
-            color: #212529;
-            background-color: #fff;
-            -webkit-text-size-adjust: 100%;
-            -webkit-tap-highlight-color: transparent;
-        }
-        
-         :root {
-            --bs-blue: #0d6efd;
-            --bs-indigo: #6610f2;
-            --bs-purple: #6f42c1;
-            --bs-pink: #d63384;
-            --bs-red: #dc3545;
-            --bs-orange: #fd7e14;
-            --bs-yellow: #ffc107;
-            --bs-green: #198754;
-            --bs-teal: #20c997;
-            --bs-cyan: #0dcaf0;
-            --bs-white: #fff;
-            --bs-gray: #6c757d;
-            --bs-gray-dark: #343a40;
-            --bs-primary: #0d6efd;
-            --bs-secondary: #6c757d;
-            --bs-success: #198754;
-            --bs-info: #0dcaf0;
-            --bs-warning: #ffc107;
-            --bs-danger: #dc3545;
-            --bs-light: #f8f9fa;
-            --bs-dark: #212529;
-            --bs-font-sans-serif: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-            --bs-font-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-            --bs-gradient: linear-gradient(180deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0));
-        }
-        
-        *,
-         ::after,
-         ::before {
-            box-sizing: border-box;
-        }
-        
-        *,
-         ::after,
-         ::before {
-            box-sizing: border-box;
-        }
-        
-        .table_freight_heading {
-            color: #00306A;
-            font-size: 12px;
-        }
-        
-        .border-left-black {
-            border-left: 1px solid #00306A !important;
-        }
-        
-        .border-right-black {
-            border-right: 1px solid #00306A !important;
-        }
-        
-        .shipper_heading_collect {
-            text-transform: capitalize;
-            text-align: center;
-            height: 87px;
-        }
-        
-        .total_heading {
-            color: #00306A;
-            padding: 2px 5px;
-        }
-        
-        .place_date_text {
-            font-weight: 600;
-        }
-        
-        .freight_payable_at_heading {
-            font-weight: 600;
-            padding: 2px 5px;
-            font-size: 12px;
-        }
-        
-        .gradient_border_1 {
-            border-bottom: 5px solid;
-        }
-        
-        .align-items-center {
-            align-items: center!important;
-        }
-        
-        .gradient_border_2 {
-            border-bottom: 5px solid;
-        }
-        
-        .shipper_place_text {
-            font-size: 15px;
-            padding: 0;
-        }
-        
-        .itemTable tr td,
-        .itemTable tr th {
-            padding: 3px 5px;
-        }
-        
-        .text-val {
-            padding: 0 0 5px 12px;
-            font-size: 12px;
-        }
-        
-        .bill-comman-class {
-            font-size: 12px;
-        }
-            </style>
-            <title></title>
+            @media print {
+                .pagebreak { page-break-before: always; } /* page-break-after works, as well */
+            }
+
+            @page {
+                page-break-after: avoid;
+            }
             
+            body {
+                font-family: "Roboto", sans-serif;
+                page-break-after: always;
+            }
+            
+            .row {
+                margin: 0 !important;
+            }
+            
+            .col-md-4 {
+                width: 33.33333333%;
+            }
+            
+            .col-md-6 {
+                width: 50%;
+                float: left;
+            }
+            
+            .col-md-8 {
+                width: 66.66666667%;
+                float: left;
+            }
+            
+            .col-md-4 {
+                width: 33.33333333%;
+                float: left;
+            }
+            
+            .header_s {
+                background-color: #00306A;
+                margin-left: 0;
+            }
+            
+            .bill_of_heading {
+                color: #fff;
+                font-weight: 700;
+                font-size: 12px;
+            }
+            
+            .bill_of_paragraph {
+                color: #fff;
+                font-size: 14px;
+                font-weight: 600;
+            }
+            
+            .original_heading {
+                font-weight: 600;
+                font-size: 23px;
+                text-transform: uppercase;
+                color: #fff;
+            }
+            
+            .shipper_heading {
+                color: #00306A;
+                font-weight: 500;
+                padding: 2px 12px;
+                font-size: 12px;
+            }
+            
+            .align-items-center {
+                align-items: center!important;
+            }
+            
+            .border-top {
+                border-top: 1px solid #00306A;
+            }
+            
+            .border-left {
+                border-left: 1px solid #00306A;
+            }
+            
+            .border-right {
+                border-right: 1px solid #00306A;
+            }
+            
+            .border-bottom {
+                border-bottom: 1px solid #00306A;
+            }
+            
+            .bill_logo {
+                width: 100%;
+                height: 198px;
+                object-fit: cover;
+            }
+            
+            .agent_details_heading {
+                text-transform: uppercase;
+            }
+            
+            .table_part_heading {
+                color: #00306A;
+                font-weight: 500;
+            }
+            
+            .table_part th {
+                text-align: center;
+                vertical-align: middle;
+                border-left: 1px solid #00306A !important;
+            }
+            
+            .table_part th:first-child {
+                border-left: 0 !important;
+            }
+            
+            .table_part td {
+                border-right: 1px solid #00306A !important;
+                font-size: 12px;
+            }
+            
+            .table_bottom_text {
+                color: #000;
+                font-weight: 600;
+                text-align: center;
+                display: flex;
+                align-items: end;
+                height: 100%;
+                justify-content: center;
+            }
+            
+            .table {
+                border-bottom-color: currentColor;
+                padding: 0.5rem 0.5rem;
+                background-color: var(--bs-table-bg);
+                border-bottom-width: 1px;
+                --bs-table-bg: transparent;
+                --bs-table-accent-bg: transparent;
+                --bs-table-striped-color: #212529;
+                --bs-table-striped-bg: rgba(0, 0, 0, 0.05);
+                --bs-table-active-color: #212529;
+                --bs-table-active-bg: rgba(0, 0, 0, 0.1);
+                --bs-table-hover-color: #212529;
+                --bs-table-hover-bg: rgba(0, 0, 0, 0.075);
+                width: 100%;
+            }
+            
+            p {
+                margin-bottom: 0;
+                margin-top: 0;
+            }
+            
+            .row>* {
+                flex-shrink: 0;
+                width: 100%;
+                max-width: 100%;
+                padding-right: calc(var(--bs-gutter-x) * .5);
+                padding-left: calc(var(--bs-gutter-x) * .5);
+                margin-top: var(--bs-gutter-y);
+            }
+            
+            table {
+                caption-side: bottom;
+                border-collapse: collapse;
+            }
+            
+            *,
+            ::after,
+            ::before {
+                box-sizing: border-box;
+            }
+            
+            user agent stylesheet table {
+                display: table;
+                border-collapse: separate;
+                box-sizing: border-box;
+                text-indent: initial;
+                border-spacing: 2px;
+                border-color: #000000;
+            }
+            
+            .row {
+                --bs-gutter-x: 1.5rem;
+                --bs-gutter-y: 0;
+                display: flex;
+                flex-wrap: wrap;
+                margin-top: calc(var(--bs-gutter-y) * -1);
+                margin-right: calc(var(--bs-gutter-x) * -.5);
+                margin-left: calc(var(--bs-gutter-x) * -.5);
+            }
+            
+            body {
+                margin: 0;
+                font-family: var(--bs-font-sans-serif);
+                font-size: 1rem;
+                font-weight: 400;
+                line-height: 1.5;
+                color: #212529;
+                background-color: #fff;
+                -webkit-text-size-adjust: 100%;
+                -webkit-tap-highlight-color: transparent;
+            }
+            
+            :root {
+                --bs-blue: #0d6efd;
+                --bs-indigo: #6610f2;
+                --bs-purple: #6f42c1;
+                --bs-pink: #d63384;
+                --bs-red: #dc3545;
+                --bs-orange: #fd7e14;
+                --bs-yellow: #ffc107;
+                --bs-green: #198754;
+                --bs-teal: #20c997;
+                --bs-cyan: #0dcaf0;
+                --bs-white: #fff;
+                --bs-gray: #6c757d;
+                --bs-gray-dark: #343a40;
+                --bs-primary: #0d6efd;
+                --bs-secondary: #6c757d;
+                --bs-success: #198754;
+                --bs-info: #0dcaf0;
+                --bs-warning: #ffc107;
+                --bs-danger: #dc3545;
+                --bs-light: #f8f9fa;
+                --bs-dark: #212529;
+                --bs-font-sans-serif: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+                --bs-font-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+                --bs-gradient: linear-gradient(180deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0));
+            }
+            
+            *,
+            ::after,
+            ::before {
+                box-sizing: border-box;
+            }
+            
+            *,
+            ::after,
+            ::before {
+                box-sizing: border-box;
+            }
+            
+            .table_freight_heading {
+                color: #00306A;
+                font-size: 12px;
+            }
+            
+            .border-left-black {
+                border-left: 1px solid #00306A !important;
+            }
+            
+            .border-right-black {
+                border-right: 1px solid #00306A !important;
+            }
+            
+            .shipper_heading_collect {
+                text-transform: capitalize;
+                text-align: center;
+                height: 87px;
+            }
+            
+            .total_heading {
+                color: #00306A;
+                padding: 2px 5px;
+            }
+            
+            .place_date_text {
+                font-weight: 600;
+            }
+            
+            .freight_payable_at_heading {
+                font-weight: 600;
+                padding: 2px 5px;
+                font-size: 12px;
+            }
+            
+            .gradient_border_1 {
+                border-bottom: 5px solid;
+            }
+            
+            .align-items-center {
+                align-items: center!important;
+            }
+            
+            .gradient_border_2 {
+                border-bottom: 5px solid;
+            }
+            
+            .shipper_place_text {
+                font-size: 15px;
+                padding: 0;
+            }
+            
+            .itemTable tr td,
+            .itemTable tr th {
+                padding: 3px 5px;
+            }
+            
+            .text-val {
+                padding: 0 0 5px 12px;
+                font-size: 12px;
+            }
+            
+            .bill-comman-class {
+                font-size: 12px;
+            }
+            .address-box p{
+                word-break: break-all;
+            }
+                </style>
+                <title></title>
+                
         </head>
         
         <body style="font-size:11px;">
-        <div class="container pagebreak">
-        <div class="header py-3">
+        <div class="container ">
+        <div class="header_s py-3" style="background: #00306A; margin-left: 0;">
             <div class="row ">
                 <div class="col-md-6 px-0">
                     <div class="bill_of_heading" style="padding-left:15px;font-size:15px;font-weight:bold;">
@@ -985,29 +994,125 @@ class invoicecontroller extends Controller
         </div>
         <div class="row mt-1 border-top">
             <div class="col-md-6 px-0">
-                <div class="border-right" style="height: 85px;">
+                <div class="border-right" style="height: 105px;">
                     <div class="shipper_heading">Shipper</div>
-                    <div class="text-val">' . $invoice->shipper_address . '
-                    </div>
+                    <div class="text-val address-box">';
+                    $showShipperAddr = 0; 
+                    
+                    $shipper_address_array_new = array(); 
+                                
+                    foreach($shipper_address_array as $shipper_address){
+                        if($shipper_address != ""){
+                            $addresscatcount =  round(strlen($shipper_address) / 70);
+                        
+                            if($addresscatcount == 0.0 || $addresscatcount == 1.0){
+                              
+                                $shipper_address_array_new[] = $shipper_address;
+                            }else{
+                                $result = substr($shipper_address, 70);
+                               
+                                $shipper_address_array_new[] = $result;
+                            }
+                        }
+                    }
+                    
+                   
+                    $shipper_count_address = count($shipper_address_array_new);
 
+                    if($shipper_count_address > 3){
+                        for($x = 0; $x < 3; $x++){
+                            $HTMLContent .= ' '.   $shipper_address_array_new[$x] .'';
+                        }
+                        $HTMLContent .= '<p><b>*</b></p>';
+                    }else{
+                        $showShipperAddr = 1; 
+                        for($x = 0; $x < $shipper_count_address; $x++){
+                            $HTMLContent .= ' '.   $shipper_address_array_new[$x] .'';
+                        }
+                    }    
+                    $HTMLContent .= '</div>
+
+                    
 
                 </div>
-                <div class="border-top border-right" style="height: 85px;">
+                <div class="border-top border-right" style="height: 105px;">
                     <div class="shipper_heading">Consignee</div>
-                    <div class="text-val">' . $invoice->consignee_address . '
-                    </div>
+                    <div class="text-val">';
+                    $showConsigneeAddr = 0;
+
+                    $consignee_address_array_new = array(); 
+                                
+                    foreach($consignee_address_array as $consignee_address){
+                        if($consignee_address != ""){
+                            $addresscatcount =  round(strlen($consignee_address) / 70);
+                        
+                            if($addresscatcount == 0.0 || $addresscatcount == 1.0){
+                              
+                                $consignee_address_array_new[] = $consignee_address;
+                            }else{
+                                $result = substr($consignee_address, 70);
+                               
+                                $consignee_address_array_new[] = $result;
+                            }
+                        }
+                    }
+                    
+                   
+                    $consignee_count_address = count($consignee_address_array_new);
+
+                    if($consignee_count_address > 3){
+                        for($x = 0; $x < 3; $x++){
+                            $HTMLContent .= ' '.   $consignee_address_array_new[$x] .'';
+                        }
+                        $HTMLContent .= '<p><b>**</b></p>';
+                    }else{
+                        $showConsigneeAddr = 1;
+                        for($x = 0; $x < $consignee_count_address; $x++){
+                            $HTMLContent .= ' '.   $consignee_address_array_new[$x] .'';
+                        }
+                    }    
+                    $HTMLContent .= '</div>
                 </div>
-                <div class="border-top border-right" style="height: 150px;">
+                <div class="border-top border-right" style="height: 110px;">
                     <div class="shipper_heading">
                         Notify Address (it is agreed that no responsibility shall attach to the carrier or its Agents for failure to notify)
                     </div>
-                    <div class="text-val">' . $invoice->notify_address . '
-                    </div>
+                    <div class="text-val">';
+                    $showNotifyAddr = 0;
+
+                    $notify_address_array_new = array(); 
+                                
+                    foreach($notify_address_array as $notify_address){
+                        if($notify_address != ""){
+                            $addresscatcount =  round(strlen($notify_address) / 70);
+                        
+                            if($addresscatcount == 0.0 || $addresscatcount == 1.0){
+                              
+                                $notify_address_array_new[] = $notify_address;
+                            }else{
+                                $result = substr($notify_address, 70);
+                               
+                                $notify_address_array_new[] = $result;
+                            }
+                        }
+                    }
+                    
+                   
+                    $$notify_count_address = count($notify_address_array_new);
+
+                    if($notify_count_address > 3){
+                        for($x = 0; $x < 3; $x++){
+                            $HTMLContent .= ' '.   $notify_address_array[$x] .'';
+                        }
+                        $HTMLContent .= '<p><b>***</b></p>';
+                    }else{
+                        $showNotifyAddr = 1;
+                        for($x = 0; $x < $notify_count_address; $x++){
+                            $HTMLContent .= ' '.   $notify_address_array[$x] .'';
+                        }
+                    }    
+                    $HTMLContent .= '</div>
                 </div>
-
-
-
-
             </div>
             <div class="col-md-6 px-0">
                 <div class="row" style="display:flex;width:100%;">
@@ -1026,7 +1131,7 @@ class invoicecontroller extends Controller
                     <div class="col-md-12 border-top">
                         <div class="">
                             <div class="shipper_heading" style="height:211px;">
-                                <!-- <img src="" alt="" class="bill_logo"> -->
+                                 <img src="'. url("public/images/avatar.png") .'" alt="" class="bill_logo"> 
                             </div>
                         </div>
                     </div>
@@ -1069,11 +1174,13 @@ class invoicecontroller extends Controller
                 <td class="text-val" style="width:25%;border-left:1px solid #00306A;">' . $invoice->delivery_place . '</td>
                 <td class="text-val" style="border-left:1px solid #00306A; width:25%;">' . $invoice->contry_origin . '</td>
             </tr>
+  
+
         </table>
-        <div class="header py-2" style="height: auto;">
+        <div class="header_s py-2" style="height: auto;" style="background: #00306A;">
             <div class="row px-4">
                 <div class="col-md-12 text-center">
-                    <div class="bill_of_heading" style="color:white;text-align:center;font-weight:bold;padding:6px 0;">
+                    <div class="bill_of_heading" style="color:white;text-align:center;font-weight:bold;padding:6px 0; style="background: #00306A;" >
                         PARTICULARS FURNISHED BY THE SHIPPER - NOT CECKED BY CARRIER - CARRIER NOT RESPONSIBLE
                     </div>
                 </div>
@@ -1099,33 +1206,180 @@ class invoicecontroller extends Controller
                         <td></td>
                         <td style="border-right:0 !important;"></td>
                     </tr>';
-                    foreach($users->item as $user){
-                        if($user->container_no != ""){
-                          $HTMLContent .='<tr>
-                           <td style="word-break: break-all;"><div style="width: inherit;">'.$user->container_no.','.$user->container_type.'</div></td>
-                              <td style="word-break: break-all;">'.$user->seal_no.','.$user->container_package.'</td>
-                              
-                              <td>'.$user->description_goods.'</td>
-                              <td style="">'.$user->Gross_web.','.$user->net_weight.'</td>
-                              <td style="border-right:0 !important;">'.$user->Measurment.'</td>
-                          </tr>';
-                      }
-                  }
-                  $count = count($users->item);
-                     
-                //   for ($x = 0; $x < 4; $x++) {
-                    for($x = 0; $x < 4; $x++)
-                  for($user=$count;$user<35;$user++){
-                    $HTMLContent .='<tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                 
+                    $count = count($users->item);
+
+                    if(count($users->item) > $item_row){
+                        $i = 1;
+                        
+                            foreach($users->item as $user){
+                                if($i <= $item_row){
+                                if($user->container_no != ""){
+                                   $counttotal = strlen($user->container_no.$user->container_type);
+                                  
+                                   if($counttotal < strlen($user->seal_no.$user->container_package)){
+                                    $counttotal = strlen($user->seal_no.$user->container_package);
+                                   } 
+                                   if($counttotal < strlen($user->description_goods)){
+                                    $counttotal = strlen($user->description_goods);
+                                   } 
+                                   if($counttotal < strlen($user->Gross_web.$user->net_weight)){
+                                    $counttotal = strlen($user->Gross_web.$user->net_weight);
+                                   } 
+                                   if($counttotal < strlen($user->Measurment)){
+                                    $counttotal = strlen($user->Measurment);
+                                   }
+                                   
+                                   $counttotal1 = round($counttotal / 45);
+                                 
+                                   if($counttotal1 > 1){
+                                    $count = $count + $counttotal1;
+                                   }
+                                    
+                                $HTMLContent .='<tr>
+                                <td style="word-break: break-all;"><div style="width: inherit;">'.$user->container_no.','.$user->container_type.'</div></td>
+                                    <td style="word-break: break-all;">'.$user->seal_no.','.$user->container_package.'</td>
+                                    
+                                    <td>'.$user->description_goods.'</td>
+                                    <td style="">'.$user->Gross_web.','.$user->net_weight.'</td>
+                                    <td style="border-right:0 !important;">'.$user->Measurment.'</td>
+                                </tr>';
+                                }
+                                $i++;
+                            }
+                           
+                        }
+                    }else{
+                        foreach($users->item as $user){
+                            if($user->container_no != ""){
+                                $counttotal = strlen($user->container_no.$user->container_type);
+                                  
+                                if($counttotal < strlen($user->seal_no.$user->container_package)){
+                                $counttotal = strlen($user->seal_no.$user->container_package);
+                                } 
+                                if($counttotal < strlen($user->description_goods)){
+                                $counttotal = strlen($user->description_goods);
+                                } 
+                                if($counttotal < strlen($user->Gross_web.$user->net_weight)){
+                                $counttotal = strlen($user->Gross_web.$user->net_weight);
+                                } 
+                                if($counttotal < strlen($user->Measurment)){
+                                $counttotal = strlen($user->Measurment);
+                                }
+                                
+                                $counttotal1 = round($counttotal / 45);
+                                
+                                if($counttotal1 > 1){
+                                $count = $count + $counttotal1 - 1;
+                                }
+                              $HTMLContent .='<tr>
+                               <td style="word-break: break-all;"><div style="width: inherit;">'.$user->container_no.','.$user->container_type.'</div></td>
+                                  <td style="word-break: break-all;">'.$user->seal_no.','.$user->container_package.'</td>
+                                  
+                                  <td>'.$user->description_goods.'</td>
+                                  <td style="">'.$user->Gross_web.','.$user->net_weight.'</td>
+                                  <td style="border-right:0 !important;">'.$user->Measurment.'</td>
+                              </tr>';
+                            }
+                        }
+                    }
+                   
+                    //dump('count '.$count);
+                    //dump('shipper_count_address '.$shipper_count_address);
                     
-                    </tr>';
+                    $shipper_count = 0;
+                    if($shipper_count_address > 3){
+                        $shipper_count = $shipper_count_address -3;
+                    }
+                    
+                  $blankrow = $item_row - $count;
+                 // dd('blankrow '.$blankrow);
                   
+                  if($count < $item_row && $shipper_count < $blankrow && $shipper_count_address > 3){
+                  $showShipperAddr = 1; 
+                    $HTMLContent .='<tr>
+                    
+                        <td style="word-break: break-all;">
+                            <div style="width: inherit;"></div>
+                        </td>
+                        <td style="word-break: break-all;"></td>
+                        <td style="">';
+                       // if($shipper_count_address > 3){
+                            for($x = 3; $x < $shipper_count_address; $x++){
+                                $count++;
+                                $blankrow--;
+                                $HTMLContent .= ' '.   $shipper_address_array[$x] .'';
+                            }
+                       // }  
+                        $HTMLContent .='</td>
+                        <td style=""></td>
+                        <td style="border-right:0 !important;"></td>
+                    </tr>';
+                    
+                  }
+                  
+                  $consignee_count = 0;
+                  if($consignee_count_address > 3){
+                    $consignee_count = $consignee_count_address -3;
+                  }
+                  
+                  if($count < $item_row && $consignee_count < $blankrow && $consignee_count_address > 3){
+                    $showConsigneeAddr = 1;
+                    $HTMLContent .='<tr>
+                    
+                        <td style="word-break: break-all;">
+                            <div style="width: inherit;"></div>
+                        </td>
+                        <td style="word-break: break-all;"></td>
+                        <td style="">';
+                       // if($consignee_count_address > 3){
+                            for($x = 3; $x < $consignee_count_address; $x++){
+                                $count++;
+                                $blankrow--;
+                                $HTMLContent .= ' '.   $consignee_address_array[$x] .'';
+                            }
+                       // }  
+                        $HTMLContent .='</td>
+                        <td style=""></td>
+                        <td style="border-right:0 !important;"></td>
+                    </tr>';
+                  }
+
+                  $notify_count = 0;
+                  if($notify_count_address > 3){
+                    $notify_count = $notify_count_address -3;
+                  }
+                  
+                  
+                  if($count < $item_row && $notify_count < $blankrow && $notify_count_address > 3){
+                    $showNotifyAddr = 1;
+                    $HTMLContent .='<tr>
+                    
+                        <td style="word-break: break-all;">
+                            <div style="width: inherit;"></div>
+                        </td>
+                        <td style="word-break: break-all;"></td>
+                        <td style="">';
+                        //if($notify_count_address > 3){
+                            for($x = 3; $x < $notify_count_address; $x++){
+                                $count++;
+                                $blankrow--;
+                                $HTMLContent .= ' '.   $notify_address_array[$x] .'';
+                            }
+                       // }  
+                        $HTMLContent .='</td>
+                        <td style=""></td>
+                        <td style="border-right:0 !important;"></td>
+                    </tr>';
+                  }
+
+                  for($user=$count;$user < $item_row;$user++){
+                    $HTMLContent .='<tr>
+                    <td><div style="height:12px;"></div></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td style="border-right:0 !important;"></td>
+                    </tr>';
 
                   }
                 //   $HTMLContent .='<tr>
@@ -1246,10 +1500,101 @@ class invoicecontroller extends Controller
                             Authorised Signatory
                         </div> -->
                 </div>
-            </div>
+            </div>';
+            if($showShipperAddr == 0 || $showConsigneeAddr == 0 || $showNotifyAddr == 0 || $count > $item_row){
+                
+            $HTMLContent .='
+            <table style="border-top:1px solid #00306A;width: 100%;">
+           
+            <div class="pagebreak" style="margin-top:50px;">';
+            if($count > $item_row){
+                $i = 1;
+                $HTMLContent .='<div >';
+                    foreach($users->item as $user){
+                        if($i >= 26){
+                        if($user->container_no != ""){
+                        $HTMLContent .='<tr>
+                        <td style="word-break: break-all;">'.$user->container_no.','.$user->container_type.'</td>
+                            <td style="word-break: break-all;">'.$user->seal_no.','.$user->container_package.'</td>
+                            
+                            <td>'.$user->description_goods.'</td>
+                            <td style="">'.$user->Gross_web.','.$user->net_weight.'</td>
+                            <td style="border-right:0 !important;">'.$user->Measurment.'</td>
+                        </tr>';
+                         }
+                        }
+                   
+                    $i++;
+                }
+                $HTMLContent .='</div>';
+            }
 
-        </div>
-    </div>
+            
+
+            if($showShipperAddr == 0){
+                $HTMLContent .='<div >';
+                $HTMLContent .='<tr>
+                    <td style="word-break: break-all;">
+                        <div style="width: inherit;"></div>
+                    </td>
+                    <td style="word-break: break-all;"></td>
+                    <td style="">';
+                    if($shipper_count_address > 3){
+                        $HTMLContent .= ' * ';
+                        for($x = 3; $x < $shipper_count_address; $x++){
+                            $count++;
+                            $HTMLContent .= ' '.   $shipper_address_array_new[$x] .'';
+                        }
+                    }  
+                    $HTMLContent .='</td>
+                    <td style=""></td>
+                    <td style="border-right:0 !important;"></td>
+                </tr></div>';
+            }
+
+            if($showConsigneeAddr == 0){
+                $HTMLContent .='<tr>
+                    <td style="word-break: break-all;">
+                        <div style="width: inherit;"></div>
+                    </td>
+                    <td style="word-break: break-all;"></td>
+                    <td style="">';
+                    if($consignee_count_address > 3){
+                        $HTMLContent .= ' ** ';
+                        for($x = 3; $x < $consignee_count_address; $x++){
+                            $count++;
+                            $HTMLContent .= ' '.   $consignee_address_array[$x] .'';
+                        }
+                    }  
+                    $HTMLContent .='</td>
+                    <td style=""></td>
+                    <td style="border-right:0 !important;"></td>
+                </tr>';
+            }
+
+            if($showNotifyAddr == 0){
+                $HTMLContent .='<tr>
+                    <td style="word-break: break-all;">
+                        <div style="width: inherit;"></div>
+                    </td>
+                    <td style="word-break: break-all;"></td>
+                    <td style="">';
+                    if($notify_count_address > 3){
+                        $HTMLContent .= ' *** ';
+                        for($x = 3; $x < $notify_count_address; $x++){
+                            $count++;
+                            $HTMLContent .= ' '.   $notify_address_array[$x] .'';
+                        }
+                    }  
+                    $HTMLContent .='</td>
+                    <td style=""></td>
+                    <td style="border-right:0 !important;"></td>
+                </tr>';
+            }
+
+            $HTMLContent .='</div>';
+        }
+            $HTMLContent .='</div>
         
         </body>
         
@@ -1257,11 +1602,11 @@ class invoicecontroller extends Controller
         </html>';
 
 
-      
+      return $HTMLContent;
 
-        $filename = "Invoice_abc.pdf";
-        $mpdf = new Mpdf(["autoScriptToLang" => true, "autoLangToFont" => true, 'mode' => 'utf-8', 'format' => 'A4', 'margin_left' => 5, 'margin_right' => 5, 'margin_top' => 5, 'margin_bottom' => 5, 'margin_header' => 0, 'margin_footer' => 0]);
-        $mpdf->WriteHTML($HTMLContent);
-        $mpdf->Output($filename, "I");
+        // $filename = "Invoice_abc.pdf";
+        // $mpdf = new Mpdf(["autoScriptToLang" => true, "autoLangToFont" => true, 'mode' => 'utf-8', 'format' => 'A4', 'margin_left' => 5, 'margin_right' => 5, 'margin_top' => 5, 'margin_bottom' => 5, 'margin_header' => 0, 'margin_footer' => 0]);
+        // $mpdf->WriteHTML($HTMLContent);
+        // $mpdf->Output($filename, "I");
     }
 }

@@ -453,18 +453,29 @@
     // $("#add").click(function(){
     // $("#add").on("click",function() {
         function printDiv(invoice_id) {
+            $.ajax({
+            type: 'GET',
+            url:  "{{ url('admin/invoice/pdf') }}" + "/" + invoice_id,
+            success: function (res) {
+               
+             
+                document.body.innerHTML = res;
+                window.print();
+            }
+        });   
+
         //Get the HTML of div
         
-        var divElements = document.getElementById(invoice_id).innerHTML;
+        //var divElements = document.getElementById(invoice_id).innerHTML;
         //Get the HTML of whole page
-        var oldPage = document.body.innerHTML;
+       // var oldPage = document.body.innerHTML;
         //Reset the page's HTML with div's HTML only
-        document.body.innerHTML = '<html><head><title></title></head><body><div class="invoiceheader"><h2>INVOICE</h2></div>' + divElements + '</body></html>';
+       // document.body.innerHTML = '<html><head><title></title></head><body><div class="invoiceheader"><h2>INVOICE</h2></div>Test</body></html>';
         //Print Page
-        window.print();
+      //  window.print();
         //Restore orignal HTML
-        document.body.innerHTML = oldPage;
-        location.reload();
+       // document.body.innerHTML = oldPage;
+        //location.reload();
     }
 </script>
 <!-- Invoice JS end -->
