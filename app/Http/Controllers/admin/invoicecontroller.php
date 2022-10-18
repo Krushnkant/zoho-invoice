@@ -1161,7 +1161,7 @@ class invoicecontroller extends Controller
                     <div class="col-md-12 border-top">
                         <div class="">
                             <div class="shipper_heading" style="height:150px;">
-                                 <img src="'. url("public/images/avatar.png") .'" alt="" style="height:150px;" class="bill_logo"> 
+                                 <img src="https://matoresell.com/zoho-invoice/public/images/invoice/logo.jpg" alt="" style="height:150px;" class="bill_logo"> 
                             </div>
                         </div>
                     </div>
