@@ -1168,7 +1168,7 @@ class invoicecontroller extends Controller
                 </div>
                 <div class="row">
                     <div class="col-md-12 border-top border-top px-0">
-                        <div class="col-md-6 px-0 agent_details_heading" style="height:131px;">
+                        <div class="col-md-12 px-0 agent_details_heading" style="height:131px;">
                             <div class="shipper_heading">AGENT DETAILS</div>
                             <div class="text-val">  ';
                             $showAgentAddr = 0;
@@ -1192,6 +1192,7 @@ class invoicecontroller extends Controller
                             
                            
                             $agent_count_address = count($agent_address_array_new);
+                            
                             $HTMLContent .= ' '.$invoice->agent_name.' ';
                             if($agent_count_address > $agent_row  + 1){
                                 for($x = 0; $x < $agent_row; $x++){
