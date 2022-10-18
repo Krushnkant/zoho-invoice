@@ -392,7 +392,7 @@ class invoicecontroller extends Controller
   <div class="col-md-4 mt-2">
     <div class="form-group">
       <label for="des" class="form-label">Marks & numbers/Kind of packages/description of goods</label>
-      <textarea rows="5" class="form-control" name="description[]" cols="45" id="des" name="comment" required>
+      <textarea rows="5" class="form-control summernote" name="description[]" cols="45" id="des" name="comment" required>
       </textarea>
       <label id="description-error" class="error invalid-feedback animated fadeInDown" for="description"></label>
       
@@ -577,6 +577,7 @@ class invoicecontroller extends Controller
         $invoice->consignee_name = $request->input('cname');
         $invoice->consignee_address = $request->input('caddress');
         $invoice->notify_address = $request->input('naddress');
+        $invoice->check_notify_address = $request->input('check_notify');
         // $invoice->agent_name = $request->input('aname');
         //$invoice->agent_address = $response1['Vessel'];
         $invoice->bill_number  = "PSLPKLJPR" . date('Y-m-d') .   $last_id;
@@ -594,6 +595,8 @@ class invoicecontroller extends Controller
         // $invoice->description_goods = $request->input('dog');
         // $invoice->Gross_web  = $request->input('grossweb');
         $invoice->freight_charges = $request->input('freight');
+
+        
 
         if ($data['freight'] == "prepaid") {
             $invoice->freight_payable_at = $var4;
@@ -660,6 +663,10 @@ class invoicecontroller extends Controller
         $agent_address_array = explode('</p>',$invoice->agent_address);
 
         $item_row = 28;
+        $shipper_row = 2;
+        $consignee_row = 2;
+        $notify_row = 2;
+        $agent_row = 4;
 
         
         
@@ -671,6 +678,10 @@ class invoicecontroller extends Controller
             <link rel="stylesheet" href="css/style.css">';
 
             $HTMLContent .= '<style type="text/css">
+           
+            @page {
+                margin: 0;  /* this affects the margin in the printer settings */
+            }
 
             @media print {
                 .pagebreak { page-break-before: always; } /* page-break-after works, as well */
@@ -1027,13 +1038,14 @@ class invoicecontroller extends Controller
                     
                    
                     $shipper_count_address = count($shipper_address_array_new);
-
-                    if($shipper_count_address > 3){
-                        for($x = 0; $x < 3; $x++){
+                    $HTMLContent .= ' '.$invoice->shipper_name.' ';
+                    if($shipper_count_address > $shipper_row + 1){
+                        for($x = 0; $x < $shipper_row; $x++){
                             $HTMLContent .= ' '.   $shipper_address_array_new[$x] .'';
                         }
                         $HTMLContent .= '<p><b>*</b></p>';
                     }else{
+                        $shipper_row = $shipper_row + 1;
                         $showShipperAddr = 1; 
                         for($x = 0; $x < $shipper_count_address; $x++){
                             $HTMLContent .= ' '.   $shipper_address_array_new[$x] .'';
@@ -1068,13 +1080,14 @@ class invoicecontroller extends Controller
                     
                    
                     $consignee_count_address = count($consignee_address_array_new);
-
-                    if($consignee_count_address > 3){
-                        for($x = 0; $x < 3; $x++){
+                    $HTMLContent .= ' '.$invoice->consignee_name.' ';
+                    if($consignee_count_address > $consignee_row + 1){
+                        for($x = 0; $x < $consignee_row; $x++){
                             $HTMLContent .= ' '.   $consignee_address_array_new[$x] .'';
                         }
                         $HTMLContent .= '<p><b>**</b></p>';
                     }else{
+                        $consignee_row = $consignee_row + 1;
                         $showConsigneeAddr = 1;
                         for($x = 0; $x < $consignee_count_address; $x++){
                             $HTMLContent .= ' '.   $consignee_address_array_new[$x] .'';
@@ -1111,17 +1124,22 @@ class invoicecontroller extends Controller
                     
                    
                     $notify_count_address = count($notify_address_array_new);
-
-                    if($notify_count_address > 3){
-                        for($x = 0; $x < 3; $x++){
-                            $HTMLContent .= ' '.   $notify_address_array[$x] .'';
+                    
+                    if($invoice->check_notify_address != 2){
+                        if($notify_count_address > $notify_row  + 1){
+                            for($x = 0; $x < $notify_row; $x++){
+                                $HTMLContent .= ' '.   $notify_address_array[$x] .'';
+                            }
+                            $HTMLContent .= '<p><b>***</b></p>';
+                        }else{
+                            $notify_row = $notify_row + 1;
+                            $showNotifyAddr = 1;
+                            for($x = 0; $x < $notify_count_address; $x++){
+                                $HTMLContent .= ' '.   $notify_address_array[$x] .'';
+                            }
                         }
-                        $HTMLContent .= '<p><b>***</b></p>';
                     }else{
-                        $showNotifyAddr = 1;
-                        for($x = 0; $x < $notify_count_address; $x++){
-                            $HTMLContent .= ' '.   $notify_address_array[$x] .'';
-                        }
+                        $HTMLContent .= ' Same As Consignee';
                     }    
                     $HTMLContent .= '</div>
                 </div>
@@ -1142,15 +1160,15 @@ class invoicecontroller extends Controller
                 <div class="row">
                     <div class="col-md-12 border-top">
                         <div class="">
-                            <div class="shipper_heading" style="height:211px;">
-                                 <img src="'. url("public/images/avatar.png") .'" alt="" class="bill_logo"> 
+                            <div class="shipper_heading" style="height:150px;">
+                                 <img src="'. url("public/images/avatar.png") .'" alt="" style="height:150px;" class="bill_logo"> 
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-md-12 border-top border-top px-0">
-                        <div class="col-md-6 px-0 agent_details_heading" style="height:70px;">
+                        <div class="col-md-6 px-0 agent_details_heading" style="height:131px;">
                             <div class="shipper_heading">AGENT DETAILS</div>
                             <div class="text-val">  ';
                             $showAgentAddr = 0;
@@ -1174,13 +1192,14 @@ class invoicecontroller extends Controller
                             
                            
                             $agent_count_address = count($agent_address_array_new);
-        
-                            if($agent_count_address > 2){
-                                for($x = 0; $x < 2; $x++){
+                            $HTMLContent .= ' '.$invoice->agent_name.' ';
+                            if($agent_count_address > $agent_row  + 1){
+                                for($x = 0; $x < $agent_row; $x++){
                                     $HTMLContent .= ' '.   $agent_address_array[$x] .'';
                                 }
                                 $HTMLContent .= '<p><b>****</b></p>';
                             }else{
+                                $agent_row = $agent_row + 1;
                                 $showAgentAddr = 1;
                                 for($x = 0; $x < $agent_count_address; $x++){
                                     $HTMLContent .= ' '.   $agent_address_array[$x] .'';
@@ -1235,16 +1254,15 @@ class invoicecontroller extends Controller
             <table class="table table_part itemTable" style="margin-bottom:0px;table-layout: fixed;">
                 <thead>
                     <tr style="font-size:12px;">
-                        <th class="table_part_heading" style="width: 22%; border-bottom:1px solid #00306A;border-left:0px !important">Container No. / Container Type</th>
-                        <th class="table_part_heading" style="width: 15%; border-bottom:1px solid #00306A;">Seal No/Number of <br>containers </th>
+                        <th class="table_part_heading" style="width: 22%; border-bottom:1px solid #00306A;border-left:0px !important">Container No. / Type</th>
+                        <th class="table_part_heading" style="width: 15%; border-bottom:1px solid #00306A;">Seal No/Number of <br>Packages </th>
                         <th class="table_part_heading" style="width: 33%; border-bottom:1px solid #00306A;">Marks & Numbers/Kind of packages/description of goods</th>
                         <th class="table_part_heading" style="width: 15%; border-bottom:1px solid #00306A;">Gross Weight/Net Weight</th>
                         <th class="table_part_heading" style="width: 15%; border-bottom:1px solid #00306A;">Measurement</th>
                     </tr>
                 </thead>
                 <tbody>
-
-                    <tr style="border-bottom:1px solid #00306A;">
+                    <tr>
                         <td></td>
                         <td></td>
                         <td class="" style="text-align:center;">8 X 20 GP CONTAINER STC:</td>
@@ -1266,6 +1284,10 @@ class invoicecontroller extends Controller
                                    } 
                                    if($counttotal < strlen($user->description_goods)){
                                     $counttotal = strlen($user->description_goods);
+
+                                        $description_good_address = substr_count($user->description_goods,"</p>");
+                                        $description_good_array = explode('</p>',$user->description_goods);
+                                        $count = $count + $description_good_address;
                                    } 
                                    if($counttotal < strlen($user->Gross_web.$user->net_weight)){
                                     $counttotal = strlen($user->Gross_web.$user->net_weight);
@@ -1281,12 +1303,12 @@ class invoicecontroller extends Controller
                                    }
                                     
                                 $HTMLContent .='<tr>
-                                <td style="word-break: break-all;"><div style="width: inherit;">'.$user->container_no.','.$user->container_type.'</div></td>
-                                    <td style="word-break: break-all;">'.$user->seal_no.','.$user->container_package.'</td>
+                                <td style="word-break: break-all;"><div style="width: inherit;">'.$user->container_no.'|'.$user->container_type.'</div></td>
+                                    <td style="word-break: break-all;">'.$user->seal_no.'|'.$user->container_package.'</td>
                                     
-                                    <td>'.$user->description_goods.'</td>
-                                    <td style="">'.$user->Gross_web.','.$user->net_weight.'</td>
-                                    <td style="border-right:0 !important;">'.$user->Measurment.'</td>
+                                    <td style="word-break: break-all;" >'.$user->description_goods.'</td>
+                                    <td style="word-break: break-all;">'.$user->Gross_web.'|'.$user->net_weight.'</td>
+                                    <td style="word-break: break-all; border-right:0 !important;">'.$user->Measurment.'</td>
                                 </tr>';
                                 }
                                 $i++;
@@ -1299,13 +1321,13 @@ class invoicecontroller extends Controller
                                 $counttotal = strlen($user->container_no.$user->container_type);
                                   
                                 if($counttotal < strlen($user->seal_no.$user->container_package)){
-                                $counttotal = strlen($user->seal_no.$user->container_package);
+                                   $counttotal = strlen($user->seal_no.$user->container_package);
                                 } 
                                 if($counttotal < strlen($user->description_goods)){
-                                $counttotal = strlen($user->description_goods);
+                                   $counttotal = strlen($user->description_goods);
                                 } 
                                 if($counttotal < strlen($user->Gross_web.$user->net_weight)){
-                                $counttotal = strlen($user->Gross_web.$user->net_weight);
+                                   $counttotal = strlen($user->Gross_web.$user->net_weight);
                                 } 
                                 if($counttotal < strlen($user->Measurment)){
                                 $counttotal = strlen($user->Measurment);
@@ -1317,12 +1339,12 @@ class invoicecontroller extends Controller
                                 $count = $count + $counttotal1 - 1;
                                 }
                               $HTMLContent .='<tr>
-                               <td style="word-break: break-all;"><div style="width: inherit;">'.$user->container_no.','.$user->container_type.'</div></td>
-                                  <td style="word-break: break-all;">'.$user->seal_no.','.$user->container_package.'</td>
+                               <td style="word-break: break-all;"><div style="width: inherit;">'.$user->container_no.'| '.$user->container_type.'</div></td>
+                                  <td style="word-break: break-all;">'.$user->seal_no.'| '.$user->container_package.'</td>
                                   
-                                  <td>'.$user->description_goods.'</td>
-                                  <td style="">'.$user->Gross_web.','.$user->net_weight.'</td>
-                                  <td style="border-right:0 !important;">'.$user->Measurment.'</td>
+                                  <td style="word-break: break-all;">'.$user->description_goods.'</td>
+                                  <td style="word-break: break-all;">'.$user->Gross_web.'| '.$user->net_weight.'</td>
+                                  <td style="word-break: break-all;border-right:0 !important;">'.$user->Measurment.'</td>
                               </tr>';
                             }
                         }
@@ -1332,15 +1354,16 @@ class invoicecontroller extends Controller
                     //dump('shipper_count_address '.$shipper_count_address);
                     
                     $shipper_count = 0;
-                    if($shipper_count_address > 3){
-                        $shipper_count = $shipper_count_address -3;
+                    if($shipper_count_address > $shipper_row){
+                        $shipper_count = $shipper_count_address - $shipper_row;
                     }
                     
                   $blankrow = $item_row - $count;
                  // dd('blankrow '.$blankrow);
                   
-                  if($count < $item_row && $shipper_count < $blankrow && $shipper_count_address > 3){
-                  $showShipperAddr = 1; 
+                    if($count < $item_row && $shipper_count < $blankrow && $shipper_count_address > $shipper_row){
+                    $showShipperAddr = 1; 
+                    $blankrow--;
                     $HTMLContent .='<tr>
                     
                         <td style="word-break: break-all;">
@@ -1349,7 +1372,8 @@ class invoicecontroller extends Controller
                         <td style="word-break: break-all;"></td>
                         <td style="">';
                        // if($shipper_count_address > 3){
-                            for($x = 3; $x < $shipper_count_address; $x++){
+                        $HTMLContent .= ' * ';
+                            for($x = $shipper_row; $x < $shipper_count_address; $x++){
                                 $count++;
                                 $blankrow--;
                                 $HTMLContent .= ' '.   $shipper_address_array[$x] .'';
@@ -1363,12 +1387,13 @@ class invoicecontroller extends Controller
                   }
                   
                   $consignee_count = 0;
-                  if($consignee_count_address > 3){
-                    $consignee_count = $consignee_count_address -3;
+                  if($consignee_count_address > $consignee_row){
+                    $consignee_count = $consignee_count_address - $consignee_row;
                   }
                   
-                  if($count < $item_row && $consignee_count < $blankrow && $consignee_count_address > 3){
+                  if($count < $item_row && $consignee_count < $blankrow && $consignee_count_address > $consignee_row){
                     $showConsigneeAddr = 1;
+                    $blankrow--;
                     $HTMLContent .='<tr>
                     
                         <td style="word-break: break-all;">
@@ -1377,7 +1402,8 @@ class invoicecontroller extends Controller
                         <td style="word-break: break-all;"></td>
                         <td style="">';
                        // if($consignee_count_address > 3){
-                            for($x = 3; $x < $consignee_count_address; $x++){
+                        $HTMLContent .= ' ** ';
+                            for($x = $consignee_row; $x < $consignee_count_address; $x++){
                                 $count++;
                                 $blankrow--;
                                 $HTMLContent .= ' '.   $consignee_address_array[$x] .'';
@@ -1390,13 +1416,14 @@ class invoicecontroller extends Controller
                   }
 
                   $notify_count = 0;
-                  if($notify_count_address > 3){
-                    $notify_count = $notify_count_address -3;
+                  if($notify_count_address > $notify_row){
+                    $notify_count = $notify_count_address - $notify_row;
                   }
                   
                   
-                  if($count < $item_row && $notify_count < $blankrow && $notify_count_address > 3){
+                  if($count < $item_row && $notify_count < $blankrow && $notify_count_address > $notify_row){
                     $showNotifyAddr = 1;
+                    $blankrow--;
                     $HTMLContent .='<tr>
                     
                         <td style="word-break: break-all;">
@@ -1405,7 +1432,8 @@ class invoicecontroller extends Controller
                         <td style="word-break: break-all;"></td>
                         <td style="">';
                         //if($notify_count_address > 3){
-                            for($x = 3; $x < $notify_count_address; $x++){
+                            $HTMLContent .= ' *** ';
+                            for($x = $notify_row; $x < $notify_count_address; $x++){
                                 $count++;
                                 $blankrow--;
                                 $HTMLContent .= ' '.   $notify_address_array[$x] .'';
@@ -1418,12 +1446,13 @@ class invoicecontroller extends Controller
                   }
 
                   $agent_count = 0;
-                  if($agent_count_address > 2){
-                    $agent_count = $agent_count_address -2;
+                  if($agent_count_address > $agent_row){
+                    $agent_count = $agent_count_address - $agent_row;
                   }
 
-                  if($count < $item_row && $agent_count < $blankrow && $agent_count_address > 2){
+                  if($count < $item_row && $agent_count < $blankrow && $agent_count_address > $agent_row){
                     $showAgentAddr = 1;
+                    $blankrow--;
                     $HTMLContent .='<tr>
                     
                         <td style="word-break: break-all;">
@@ -1432,7 +1461,8 @@ class invoicecontroller extends Controller
                         <td style="word-break: break-all;"></td>
                         <td style="">';
                         //if($notify_count_address > 3){
-                            for($x = 2; $x < $agent_count_address; $x++){
+                            $HTMLContent .= ' **** ';
+                            for($x = $agent_row; $x < $agent_count_address; $x++){
                                 $count++;
                                 $blankrow--;
                                 $HTMLContent .= ' '.   $agent_address_array[$x] .'';
@@ -1500,12 +1530,12 @@ class invoicecontroller extends Controller
                         <div class="col-md-4 shipper_heading_collect" style="text-align: left;">
                             Freight & Charges:
                         </div>
-                        <div class="col-md-4 shipper_heading_collect" style="text-align: left;">
+                        <!-- <div class="col-md-4 shipper_heading_collect" style="text-align: left;">
                             prepaid
                         </div>
                         <div class="col-md-4 shipper_heading_collect" style="text-align: left;">
                             Collect
-                        </div>
+                        </div> -->
                     </div>
                     <div class="row align-items-center px-0">
                         <div class="" style="color:black; margin-left:150px">'.$invoice->freight_charges.'</div>
@@ -1545,7 +1575,7 @@ class invoicecontroller extends Controller
                             <div class="place_date_text mt-3">
                                 <div style="font-weight:bold;"> Place and date of issue:</div>
                             </div>
-                            <div style="color:black;">' . $invoice->place_of_issue . ' ' . $invoice->place_of_date . 'h</div>
+                            <div style="color:black;">' . $invoice->place_of_issue . ' ' . $invoice->place_of_date . '</div>
                         </div>
                         <div class="row px-0">
                             <div class="col-md-6 px-0">
@@ -1611,9 +1641,9 @@ class invoicecontroller extends Controller
                     </td>
                     <td style="word-break: break-all;"></td>
                     <td style="">';
-                    if($shipper_count_address > 3){
+                    if($shipper_count_address > $shipper_row){
                         $HTMLContent .= ' * ';
-                        for($x = 3; $x < $shipper_count_address; $x++){
+                        for($x = $shipper_row; $x < $shipper_count_address; $x++){
                             $count++;
                             $HTMLContent .= ' '.   $shipper_address_array_new[$x] .'';
                         }
@@ -1631,9 +1661,9 @@ class invoicecontroller extends Controller
                     </td>
                     <td style="word-break: break-all;"></td>
                     <td style="">';
-                    if($consignee_count_address > 3){
+                    if($consignee_count_address > $consignee_row){
                         $HTMLContent .= ' ** ';
-                        for($x = 3; $x < $consignee_count_address; $x++){
+                        for($x = $consignee_row; $x < $consignee_count_address; $x++){
                             $count++;
                             $HTMLContent .= ' '.   $consignee_address_array[$x] .'';
                         }
@@ -1651,9 +1681,9 @@ class invoicecontroller extends Controller
                     </td>
                     <td style="word-break: break-all;"></td>
                     <td style="">';
-                    if($notify_count_address > 3){
+                    if($notify_count_address > $notify_row){
                         $HTMLContent .= ' *** ';
-                        for($x = 3; $x < $notify_count_address; $x++){
+                        for($x = $notify_row; $x < $notify_count_address; $x++){
                             $count++;
                             $HTMLContent .= ' '.   $notify_address_array[$x] .'';
                         }
@@ -1671,9 +1701,9 @@ class invoicecontroller extends Controller
                     </td>
                     <td style="word-break: break-all;"></td>
                     <td style="">';
-                    if($agent_count_address > 2){
+                    if($agent_count_address > $agent_row){
                         $HTMLContent .= ' *** ';
-                        for($x = 2; $x < $agent_count_address; $x++){
+                        for($x = $agent_row; $x < $agent_count_address; $x++){
                             $count++;
                             $HTMLContent .= ' '.   $agent_address_array[$x] .'';
                         }

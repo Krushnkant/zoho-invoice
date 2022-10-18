@@ -137,7 +137,7 @@
   <div class="form-group">
     <label for="validationCustom03" class="form-label">Description of goods</label>
 
-    <textarea rows="5"  class="form-control" name="description[]"  cols="50" id="validationCustom03" name="comment" required>{{ $item->description_goods }} 
+    <textarea rows="5"  class="form-control summernote" name="description[]"  cols="50" id="validationCustom03" name="comment" required>{{ $item->description_goods }} 
 </textarea>
 <label id="dog-error" class="error invalid-feedback animated fadeInDown" for="dog"></label>
     </div>

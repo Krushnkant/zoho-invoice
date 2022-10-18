@@ -19,23 +19,14 @@ Route::get('logout', [\App\Http\Controllers\admin\AuthController::class, 'logout
 
 Route::group(['prefix'=>'admin','middleware'=>['auth'],'as'=>'admin.'],function () {
     Route::get('dashboard',[\App\Http\Controllers\admin\DashboardController::class,'index'])->name('dashboard');
-
-   
     Route::get('settings',[\App\Http\Controllers\admin\SettingsController::class,'index'])->name('settings.list');
     Route::post('updateInvoiceSetting',[\App\Http\Controllers\admin\SettingsController::class,'updateInvoiceSetting'])->name('settings.updateInvoiceSetting');
     Route::get('settings/edit',[\App\Http\Controllers\admin\SettingsController::class,'editSettings'])->name('settings.edit');
-
-    
-    
-  
     Route::get('invoice/list',[\App\Http\Controllers\admin\invoicecontroller::class,'list'])->name('invoice.list');
-
-   Route::post('allInvoicelist',[\App\Http\Controllers\admin\invoicecontroller::class,'allInvoicelist'])->name('allInvoicelist');
-
-   Route::get('invoice/edit/{id}',[\App\Http\Controllers\admin\invoicecontroller::class,'edit'])->name('invoice.edit');
-
-   Route::post('invoice/save',[\App\Http\Controllers\admin\invoicecontroller::class,'save'])->name('invoice.save');
-   Route::get('invoice/pdf/{id}',[\App\Http\Controllers\admin\invoicecontroller::class,'generate_pdf'])->name('invoice.pdf');
+    Route::post('allInvoicelist',[\App\Http\Controllers\admin\invoicecontroller::class,'allInvoicelist'])->name('allInvoicelist');
+    Route::get('invoice/edit/{id}',[\App\Http\Controllers\admin\invoicecontroller::class,'edit'])->name('invoice.edit');
+    Route::post('invoice/save',[\App\Http\Controllers\admin\invoicecontroller::class,'save'])->name('invoice.save');
+    Route::get('invoice/pdf/{id}',[\App\Http\Controllers\admin\invoicecontroller::class,'generate_pdf'])->name('invoice.pdf');
 });
 
 Route::get('invoice/create/{billno}',[\App\Http\Controllers\admin\invoicecontroller::class,'index'])->name('invoice.create');

@@ -51,8 +51,7 @@
               <div class="form-group">
                 <label for="caddress" class="form-label">Consignee Address <span class="text-danger">*</span></label>
 
-                <textarea  class="form-control summernote" id="caddress" name="caddress" required>
-</textarea>
+                <textarea  class="form-control summernote" id="caddress" name="caddress" required></textarea>
                 <label id="caddress-error" class="error invalid-feedback animated fadeInDown" for="caddress"></label>
               </div>
             </div>
@@ -113,16 +112,14 @@
 
             
               <div class="form-group">
-                <label for="contain1" class="form-label">Container no </label>
-                <input type="text" class="form-control" name="containerno[]" id="contain1" required>
+                <label for="containerno" class="form-label">Container no </label>
+                <input type="text" class="form-control" name="containerno[]" id="containerno" required>
                 <label id="containerno-error" class="error invalid-feedback animated fadeInDown" for="containerno"></label>
               </div>
 
-        
-
               <div class="form-group">
                 <label for="containg" class="form-label">Number of packages</label>
-                <input type="text" class="form-control" name="countainerpackage[]" id="containg" required>
+                <input type="text" class="form-control" name="countainerpackage[]" id="countainerpackage" required>
                 <label id="countainerpackage-error" class="error invalid-feedback animated fadeInDown" for="countainerpackage"></label>
               </div>
             </div>
@@ -130,15 +127,15 @@
 
             
           <div class="form-group">
-            <label for="contain1" class="form-label">Container type </label>
-            <input type="text" class="form-control" name="containertype[]" id="containtype" required>
+            <label for="containertype" class="form-label">Container type </label>
+            <input type="text" class="form-control" name="containertype[]" id="containertype" required>
             <label id="containertype-error" class="error invalid-feedback animated fadeInDown" for="containerno"></label>
           </div>
 
           <div class="form-group">
-            <label for="containf" class="form-label" style="margin-top:2px">Gross Weight</label>
+            <label for="gross" class="form-label" style="margin-top:2px">Gross Weight</label>
 
-            <input type="text" class="form-control" name="gross[]" id="containf" required>
+            <input type="text" class="form-control" name="gross[]" id="gross" required>
             <label id="gross-error" class="error invalid-feedback animated fadeInDown" for="gross"></label>
           </div>
           </div>
@@ -146,30 +143,30 @@
             
               
               <div class="form-group">
-                <label for="containf" class="form-label" style="margin-top:2px">Seal no</label>
+                <label for="seal" class="form-label" style="margin-top:2px">Seal no</label>
 
-                <input type="text" class="form-control" name="seal[]" id="containseal" required>
+                <input type="text" class="form-control" name="seal[]" id="seal" required>
                 <label id="seal-error" class="error invalid-feedback animated fadeInDown" for="gross"></label>
               </div>
               <div class="form-group">
                 <label for="netwt" class="form-label">Net Weight</label>
-                <input type="text" class="form-control" name="netwt[]" id="containet" required>
+                <input type="text" class="form-control" name="netwt[]" id="netwt" required>
                 <label id="netwt-error" class="error invalid-feedback animated fadeInDown" for="countainerpackage"></label>
               </div>
             </div> 
             <div class="col-lg-2 mt-4">
               
               <div class="form-group">
-                <label for="containd" class="form-label" style="margin-top:2px">Measurment</label>
+                <label for="mesurment" class="form-label" style="margin-top:2px">Measurment</label>
 
-                <input type="text" class="form-control" name="mesurment[]" id="containd" required>
+                <input type="text" class="form-control" name="mesurment[]" id="mesurment" required>
                 <label id="mesurment-error" class="error invalid-feedback animated fadeInDown" for="mesurment"></label>
               </div>
             </div>
             <div class="col-md-4 mt-2">
               <div class="form-group">
                 <label for="des" class="form-label">Marks & numbers/Kind of packages/description of goods</label>
-                <textarea rows="5" class="form-control" name="description[]" cols="45" id="des" name="comment" required></textarea>
+                <textarea rows="5" class="form-control summernote" name="description[]" cols="45" id="des" name="comment" required></textarea>
                 <label id="description-error" class="error invalid-feedback animated fadeInDown" for="description"></label>
                 
               </div>
@@ -239,55 +236,62 @@
               $('#saveInvoiceBtn').prop('disabled', true);
               $('#saveInvoiceBtn').find('.loadericonfa').show();
               var formData = new FormData($("#add_invoice_form")[0]);
-              var check=$('#contain1').val();
-              var check2=$('#containf').val();
-              var check3=$('#containg').val();
-              var check4=$('#containd').val();
-              var check5=$('#containseal').val();
-              var check6=$('#containtype').val();
-              var check7=$('#containet').val();
+              var check=$('#containerno').val();
+              var check2=$('#gross').val();
+              var check3=$('#countainerpackage').val();
+              //var check4=$('#mesurment').val();
+              var check5=$('#seal').val();
+              //var check6=$('#netwt').val();
+              var check7=$('#containertype').val();
          
               //alert(aboutme);
               var is_valid = true
               if(check == ""){
                   var is_valid = false; 
                   $('#containerno-error').show().text('this field is required');
-                 
+              }else{
+                  $('#containerno-error').show().text('');
               }
               if(check2 == ""){
                   var is_valid = false; 
-                  $('#gross-error').show().text('this field is required');
-                 
+                  $('#gross-error').show().text('this field is required');  
+              }else{
+                  $('#gross-error').show().text('');
               }
               if(check3 == ""){
                   var is_valid = false; 
                   $('#countainerpackage-error').show().text('this field is required');
-                 
+              }else{
+                  $('#countainerpackage-error').show().text('');
               }
-              if(check4 == ""){
-                  var is_valid = false; 
-                  $('#mesurment-error').show().text('this field is required');
+              // if(check4 == ""){
+              //     var is_valid = false; 
+              //     $('#mesurment-error').show().text('this field is required');
                  
-              }
+              // }
               if(check5 == ""){
                   var is_valid = false; 
                   $('#seal-error').show().text('this field is required');
-                 
+              }else{
+                  $('#seal-error').show().text('');
               }
-              if(check6 == ""){
-                  var is_valid = false; 
-                  $('#netwt-error').show().text('this field is required');
+              // if(check6 == ""){
+              //     var is_valid = false; 
+              //     $('#netwt-error').show().text('this field is required');
                  
-              }
+              // }
               if(check7 == ""){
                   var is_valid = false; 
-                  $('#containertype-error').show().text('this field is required');
-                 
+                  $('#containertype-error').show().text('this field is required'); 
+              }else{
+                  $('#containertype-error').show().text('');
               }
               if($("#des").val().trim().length < 1)
               {
                 var is_valid = false; 
                 $('#description-error').show().text('this field is required');
+              }else{
+                  $('#description-error').show().text('');
               }
 
               if(is_valid){
@@ -532,6 +536,22 @@
                         placeholder: "Select...",
                         allowClear: false
                     });
+                    jQuery(document).ready(function() {
+                      $(".summernote").summernote({
+                        
+                          height: 100,
+                          minHeight: null,
+                          maxHeight: null,
+                          toolbar: false,
+                          focus: !1
+                      }), $(".inline-editor").summernote({
+                          airMode: !0
+                      })
+                  }), window.edit = function() {
+                      $(".click2edit").summernote()
+                  }, window.save = function() {
+                      $(".click2edit").summernote("destroy")
+                  };
                 },
                 error: function (data) {
 

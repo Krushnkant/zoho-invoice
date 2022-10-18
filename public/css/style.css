@@ -14502,6 +14502,9 @@ input[type="checkbox"]:checked:after {
 .table th {
     border-color: #f3f3f3;
 }
+.itemTable  td{
+    border-bottom: 0 !important;
+}
 
 .table td {
     border-color: #00306A;
