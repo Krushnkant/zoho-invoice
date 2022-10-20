@@ -1161,8 +1161,8 @@ class invoicecontroller extends Controller
                 <div class="row">
                     <div class="col-md-12 border-top">
                         <div class="">
-                            <div class="shipper_heading" style="height:150px;">
-                                <img src="https://matoresell.com/zoho-invoice/public/images/invoice/logo_new.jpg" alt="" style="height:150px;" class="bill_logo"> 
+                            <div class="shipper_heading" style="height:150px; text-align: center;">
+                                <img src="https://matoresell.com/zoho-invoice/public/images/invoice/logo_new.jpg" alt="" style="height:150px;width: auto;object-fit: cover;" class="bill_logo"> 
                             </div>
                         </div>
                     </div>
@@ -1372,7 +1372,7 @@ class invoicecontroller extends Controller
                                <td style="word-break: break-all;"><div style="width: inherit;"></div></td>
                                   <td style="word-break: break-all;"></td>
                                   
-                                  <td style="word-break: break-all;">'.$total_lot.' LOT</td>
+                                  <td style="word-break: break-all;">Total Package : '.$total_lot.' LOT</td>
                                   <td style="word-break: break-all;"></td>
                                   <td style="word-break: break-all;border-right:0 !important;"></td>
                               </tr>';
@@ -1380,7 +1380,7 @@ class invoicecontroller extends Controller
                               <td style="word-break: break-all;"><div style="width: inherit;"></div></td>
                                  <td style="word-break: break-all;"></td>
                                  
-                                 <td style="word-break: break-all;">'.$total_Gross_web.' Kgs</td>
+                                 <td style="word-break: break-all;">Total Gross Weight : '.$total_Gross_web.' Kgs</td>
                                  <td style="word-break: break-all;"></td>
                                  <td style="word-break: break-all;border-right:0 !important;"></td>
                              </tr>';
@@ -1388,7 +1388,7 @@ class invoicecontroller extends Controller
                              <td style="word-break: break-all;"><div style="width: inherit;"></div></td>
                                 <td style="word-break: break-all;"></td>
                                 
-                                <td style="word-break: break-all;">'.$total_net_weight.' Kgs</td>
+                                <td style="word-break: break-all;">Total Net Weight : '.$total_net_weight.' Kgs</td>
                                 <td style="word-break: break-all;"></td>
                                 <td style="word-break: break-all;border-right:0 !important;"></td>
                             </tr>';
@@ -1396,7 +1396,7 @@ class invoicecontroller extends Controller
                             <td style="word-break: break-all;"><div style="width: inherit;"></div></td>
                                <td style="word-break: break-all;"></td>
                                
-                               <td style="word-break: break-all;">'.$total_Measurment.'</td>
+                               <td style="word-break: break-all;">Total Measurment :'.$total_Measurment.'</td>
                                <td style="word-break: break-all;"></td>
                                <td style="word-break: break-all;border-right:0 !important;"></td>
                            </tr>';                           
