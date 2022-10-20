@@ -47,12 +47,17 @@
 </div>
   <div class="col-md-12 mt-2">
   <div class="form-group">
-    <label for="validationCustom03" class="form-label">Notify Address <span class="text-danger">*</span></label>
-
+    <label for="validationCustom03" class="form-label">Notify Address <span class="text-danger">*</span></label><br>
+    <input type="radio" id="select" name="check_notify" value="2"  class="check_notify" <?php if($invoice->check_notify_address == "2"){ echo "checked"; } ?> >
+      <label for="select">Same as Consignee </label>
+      <input type="radio" id="javascript" name="check_notify" value="3" class="check_notify" <?php if($invoice->check_notify_address == "3"){ echo "checked"; } ?>>
+      <label for="javascript">Create Notify Address</label>
+    <div class="naddress" style="<?php if($invoice->check_notify_address == '2'){ echo "display:none"; } ?>">
     <textarea rows="4"  class="form-control summernote" cols="50"   id="validationCustom03" name="naddress" required>{{ $invoice->notify_address }}
 </textarea>
 <label id="naddress-error" class="error invalid-feedback animated fadeInDown" for="naddress"></label>
   </div>
+</div>
 </div>
 
  
@@ -61,14 +66,14 @@
   <div class="col-md-12  mt-2">
   <div class="form-group">
     <label for="pre" class="form-label">Pre carriage by</label>
-    <input type="text" class="form-control" name ="pcarriageby" value="{{ $invoice->pre_carriage_by }} " id="pre" required>
+    <input type="text" class="form-control" name ="pcarriageby" value="{{ $invoice->pre_carriage_by }}" id="pre" required>
     <label id="pcarriageby-error" class="error invalid-feedback animated fadeInDown" for="pcarriageby"></label>
 </div>
   </div>
   <div class="col-md-6  mt-2">
   <div class="form-group">
     <label for="pier" class="form-label">Pier or port of receipt</label>
-    <input type="text" class="form-control" name= "por" value="{{ $invoice->port_of_receipt }} " id="pier" required>
+    <input type="text" class="form-control" name= "por" value="{{ $invoice->port_of_receipt }}" id="pier" required>
     <label id="por-error" class="error invalid-feedback animated fadeInDown" for="por"></label>
     </div>
   </div>
@@ -84,12 +89,12 @@
   <div class="col-md-2 mt-2">
   <div class="form-group">
     <label for="validationCustom05" class="form-label">Container no</label>
-    <input type="text" class="form-control" name="containerno[]" value="{{ $item->container_no }} "id="validationCustom05" required>
+    <input type="text" class="form-control" name="containerno[]" value="{{ $item->container_no }}"id="validationCustom05" required>
     <label id="cn-error" class="error invalid-feedback animated fadeInDown" for="cn"></label>
   </div>
   <div class="form-group">
     <label for="validationCustom05" class="form-label">No of package</label>
-    <input type="number" class="form-control" name="countainerpackage[]" value="{{ $item->container_package }}  " id="validationCustom05" required>
+    <input type="number" class="form-control" name="countainerpackage[]" value="{{ $item->container_package }}" id="validationCustom05" required>
     <label id="nocp-error" class="error invalid-feedback animated fadeInDown" for="nocp"></label>
   </div>
   
@@ -120,7 +125,7 @@
 </div>
   <div class="form-group">
     <label for="validationCustom05" class="form-label">Net Weight</label>
-    <input type="number" class="form-control" name="netwt[]" value="{{ $item->net_weight }}  " id="validationCustom05" required>
+    <input type="number" class="form-control" name="netwt[]" value="{{ $item->net_weight}}" id="validationCustom05" required>
     <label id="nocp-error" class="error invalid-feedback animated fadeInDown" for="nocp"></label>
   </div>
 </div>
@@ -128,7 +133,7 @@
   <div class="form-group">
     <label for="validationCustom03" class="form-label">Measurment</label>
 
-    <input type="number" class="form-control" name="mesurment[]" value="{{ $item->Measurment }} " id="validationCustom05" required>
+    <input type="number" class="form-control" name="mesurment[]" value="{{ $item->Measurment}}" id="validationCustom05" required>
     <label id="mesurment-error" class="error invalid-feedback animated fadeInDown" for="gromesurmentssweb"></label>
     </div>
   </div>
@@ -179,7 +184,7 @@
   <div class="form-group">
     <label for="validationCustom03" class="form-label">Place of date <span class="text-danger">*</span></label>
 
-    <input type="date" class="form-control" name="pdate" value="{{ date('Y-m-d',strtotime($invoice->place_of_date)) }}" id="validationCustom05" required>
+    <input type="date" class="form-control" name="pdate" value="{{ ($invoice->place_of_date != "")?date('Y-m-d',strtotime($invoice->place_of_date)):"" }}" id="validationCustom05" required>
     <label id="pdate-error" class="error invalid-feedback animated fadeInDown" for="freight"></label>
     </div>
   </div>
@@ -273,5 +278,24 @@
 }, window.save = function() {
     $(".click2edit").summernote("destroy")
 };
+
+$('.check_notify').change(function() {
+
+var textarea = $('.naddress');
+var select = $(this).val();
+
+textarea.hide();
+
+if (select == '3') {
+  textarea.show();
+}
+if (select == '2') {
+  textarea.hide();
+}
+if (select == '1') {
+  textarea.hide();
+}
+
+})
   </script>
 

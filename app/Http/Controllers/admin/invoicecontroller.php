@@ -376,7 +376,7 @@ class invoicecontroller extends Controller
     </div>
     <div class="form-group">
       <label for="netwt" class="form-label">Net Weight</label>
-      <input type="text" class="form-control" name="netwt[]" id="containet" required>
+      <input type="number" class="form-control" name="netwt[]" id="containet" required>
       <label id="netwt-error" class="error invalid-feedback animated fadeInDown" for="countainerpackage"></label>
     </div>
   </div> 
