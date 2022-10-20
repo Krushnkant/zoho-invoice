@@ -343,7 +343,7 @@ class invoicecontroller extends Controller
 
     <div class="form-group">
       <label for="containg" class="form-label">Number of packages</label>
-      <input type="text" class="form-control" name="countainerpackage[]" id="containg" required>
+      <input type="number" class="form-control" name="countainerpackage[]" id="containg" required>
       <label id="countainerpackage-error" class="error invalid-feedback animated fadeInDown" for="countainerpackage"></label>
     </div>
   </div>
@@ -361,7 +361,7 @@ class invoicecontroller extends Controller
 <div class="form-group">
 <label for="containf" class="form-label" style="margin-top:2px">Gross Weight</label>
 
-<input type="text" class="form-control" name="gross[]" id="containf" required>
+<input type="number" class="form-control" name="gross[]" id="containf" required>
 <label id="gross-error" class="error invalid-feedback animated fadeInDown" for="gross"></label>
 </div>
 </div>
@@ -385,7 +385,7 @@ class invoicecontroller extends Controller
     <div class="form-group">
       <label for="containd" class="form-label" style="margin-top:2px">Measurment</label>
 
-      <input type="text" class="form-control" name="mesurment[]" id="containd" required>
+      <input type="number" class="form-control" name="mesurment[]" id="containd" required>
       <label id="mesurment-error" class="error invalid-feedback animated fadeInDown" for="mesurment"></label>
     </div>
   </div>
@@ -662,7 +662,7 @@ class invoicecontroller extends Controller
         $agent_count_address = substr_count($invoice->agent_address,"</p>");
         $agent_address_array = explode('</p>',$invoice->agent_address);
 
-        $item_row = 28;
+        $item_row = 24;
         $shipper_row = 2;
         $consignee_row = 2;
         $notify_row = 2;
@@ -1045,6 +1045,7 @@ class invoicecontroller extends Controller
                         }
                         $HTMLContent .= '<p><b>*</b></p>';
                     }else{
+                        
                         $shipper_row = $shipper_row + 1;
                         $showShipperAddr = 1; 
                         for($x = 0; $x < $shipper_count_address; $x++){
@@ -1153,7 +1154,7 @@ class invoicecontroller extends Controller
                         </tr>
                         <tr>
                             <td class="bill-comman-class" style="padding-left:10px;">' . $invoice->bill_number . '</td>
-                            <td class="bill-comman-class" style="border-left:1px solid #00306A;padding-left:10px;">' . $invoice->Bill_of_lading . '</td>
+                            <td class="bill-comman-class" style="border-left:1px solid #00306A;padding-left:10px;"></td>
                         </tr>
                     </table>
                 </div>
@@ -1161,7 +1162,7 @@ class invoicecontroller extends Controller
                     <div class="col-md-12 border-top">
                         <div class="">
                             <div class="shipper_heading" style="height:150px;">
-                                 <img src="https://matoresell.com/zoho-invoice/public/images/invoice/logo.jpg" alt="" style="height:150px;" class="bill_logo"> 
+                                <img src="https://matoresell.com/zoho-invoice/public/images/invoice/logo_new.jpg" alt="" style="height:150px;" class="bill_logo"> 
                             </div>
                         </div>
                     </div>
@@ -1257,7 +1258,7 @@ class invoicecontroller extends Controller
                     <tr style="font-size:12px;">
                         <th class="table_part_heading" style="width: 22%; border-bottom:1px solid #00306A;border-left:0px !important">Container No. / Type</th>
                         <th class="table_part_heading" style="width: 15%; border-bottom:1px solid #00306A;">Seal No/Number of <br>Packages </th>
-                        <th class="table_part_heading" style="width: 33%; border-bottom:1px solid #00306A;">Marks & Numbers/Kind of packages/description of goods</th>
+                        <th class="table_part_heading" style="width: 33%; border-bottom:1px solid #00306A;">Numbers/Kind of packages/description of goods</th>
                         <th class="table_part_heading" style="width: 15%; border-bottom:1px solid #00306A;">Gross Weight/Net Weight</th>
                         <th class="table_part_heading" style="width: 15%; border-bottom:1px solid #00306A;">Measurement</th>
                     </tr>
@@ -1266,29 +1267,38 @@ class invoicecontroller extends Controller
                     <tr>
                         <td></td>
                         <td></td>
-                        <td class="" style="text-align:center;">8 X 20 GP CONTAINER STC:</td>
+                        <td class="" style="text-align:center;">BOOKING VOLUM B Q CONTAINER STC.</td>
                         <td></td>
                         <td style="border-right:0 !important;"></td>
                     </tr>';
                     $count = count($users->item);
+                    $total_lot = 0;
+                    $total_Gross_web = 0;
+                    $total_net_weight = 0;
+                    $total_Measurment = 0;
 
                     if(count($users->item) > $item_row){
                         $i = 1;
-                        
+                            
                             foreach($users->item as $user){
                                 if($i <= $item_row){
                                 if($user->container_no != ""){
-                                   $counttotal = strlen($user->container_no.$user->container_type);
+
+                                    $total_lot = $total_lot + $user->container_package;
+                                    $total_Gross_web = $total_Gross_web + $user->Gross_web;
+                                    $total_net_weight = $total_net_weight + $user->net_weight;
+                                    $total_Measurment = $total_Measurment + $user->Measurment;
+
+                                    $counttotal = strlen($user->container_no.$user->container_type);
                                   
                                    if($counttotal < strlen($user->seal_no.$user->container_package)){
                                     $counttotal = strlen($user->seal_no.$user->container_package);
                                    } 
                                    if($counttotal < strlen($user->description_goods)){
                                     $counttotal = strlen($user->description_goods);
-
-                                        $description_good_address = substr_count($user->description_goods,"</p>");
-                                        $description_good_array = explode('</p>',$user->description_goods);
-                                        $count = $count + $description_good_address;
+                                    $description_good_address = substr_count($user->description_goods,"</p>");
+                                    $description_good_array = explode('</p>',$user->description_goods);
+                                    $count = $count + $description_good_address;
                                    } 
                                    if($counttotal < strlen($user->Gross_web.$user->net_weight)){
                                     $counttotal = strlen($user->Gross_web.$user->net_weight);
@@ -1305,12 +1315,13 @@ class invoicecontroller extends Controller
                                     
                                 $HTMLContent .='<tr>
                                 <td style="word-break: break-all;"><div style="width: inherit;">'.$user->container_no.'|'.$user->container_type.'</div></td>
-                                    <td style="word-break: break-all;">'.$user->seal_no.'|'.$user->container_package.'</td>
+                                    <td style="word-break: break-all;">'.$user->seal_no.'|'.$user->container_package.' LOT</td>
                                     
                                     <td style="word-break: break-all;" >'.$user->description_goods.'</td>
-                                    <td style="word-break: break-all;">'.$user->Gross_web.'|'.$user->net_weight.'</td>
+                                    <td style="word-break: break-all;">'.$user->Gross_web.' Kgs|'.$user->net_weight.' Kgs</td>
                                     <td style="word-break: break-all; border-right:0 !important;">'.$user->Measurment.'</td>
                                 </tr>';
+
                                 }
                                 $i++;
                             }
@@ -1319,6 +1330,12 @@ class invoicecontroller extends Controller
                     }else{
                         foreach($users->item as $user){
                             if($user->container_no != ""){
+
+                                $total_lot = $total_lot + (int)$user->container_package;
+                                $total_Gross_web = $total_Gross_web + (int)$user->Gross_web;
+                                $total_net_weight = $total_net_weight + (int)$user->net_weight;
+                                $total_Measurment = $total_Measurment + (int)$user->Measurment;
+
                                 $counttotal = strlen($user->container_no.$user->container_type);
                                   
                                 if($counttotal < strlen($user->seal_no.$user->container_package)){
@@ -1341,15 +1358,49 @@ class invoicecontroller extends Controller
                                 }
                               $HTMLContent .='<tr>
                                <td style="word-break: break-all;"><div style="width: inherit;">'.$user->container_no.'| '.$user->container_type.'</div></td>
-                                  <td style="word-break: break-all;">'.$user->seal_no.'| '.$user->container_package.'</td>
+                                  <td style="word-break: break-all;">'.$user->seal_no.'| '.$user->container_package.' LOT</td>
                                   
                                   <td style="word-break: break-all;">'.$user->description_goods.'</td>
-                                  <td style="word-break: break-all;">'.$user->Gross_web.'| '.$user->net_weight.'</td>
+                                  <td style="word-break: break-all;">'.$user->Gross_web.' Kgs| '.$user->net_weight.' Kgs</td>
                                   <td style="word-break: break-all;border-right:0 !important;">'.$user->Measurment.'</td>
                               </tr>';
                             }
                         }
                     }
+
+                    $HTMLContent .='<tr>
+                               <td style="word-break: break-all;"><div style="width: inherit;"></div></td>
+                                  <td style="word-break: break-all;"></td>
+                                  
+                                  <td style="word-break: break-all;">'.$total_lot.' LOT</td>
+                                  <td style="word-break: break-all;"></td>
+                                  <td style="word-break: break-all;border-right:0 !important;"></td>
+                              </tr>';
+                    $HTMLContent .='<tr>
+                              <td style="word-break: break-all;"><div style="width: inherit;"></div></td>
+                                 <td style="word-break: break-all;"></td>
+                                 
+                                 <td style="word-break: break-all;">'.$total_Gross_web.' Kgs</td>
+                                 <td style="word-break: break-all;"></td>
+                                 <td style="word-break: break-all;border-right:0 !important;"></td>
+                             </tr>';
+                    $HTMLContent .='<tr>
+                             <td style="word-break: break-all;"><div style="width: inherit;"></div></td>
+                                <td style="word-break: break-all;"></td>
+                                
+                                <td style="word-break: break-all;">'.$total_net_weight.' Kgs</td>
+                                <td style="word-break: break-all;"></td>
+                                <td style="word-break: break-all;border-right:0 !important;"></td>
+                            </tr>';
+                    $HTMLContent .='<tr>
+                            <td style="word-break: break-all;"><div style="width: inherit;"></div></td>
+                               <td style="word-break: break-all;"></td>
+                               
+                               <td style="word-break: break-all;">'.$total_Measurment.'</td>
+                               <td style="word-break: break-all;"></td>
+                               <td style="word-break: break-all;border-right:0 !important;"></td>
+                           </tr>';                           
+                                      
                    
                     //dump('count '.$count);
                     //dump('shipper_count_address '.$shipper_count_address);
@@ -1548,8 +1599,8 @@ class invoicecontroller extends Controller
                         </div>
                     </div>
                     <div class="border-top pt-3 row">
-                        <div class="freight_payable_at_heading col-md-6 px-0">Freight Payable at:</div>
-                        <div class="col-md-6 px-0" style="color:black;padding:2px 0;">' . $invoice->freight_payable_at . '</div>
+                        <div class="freight_payable_at_heading col-md-12 px-0">Freight Payable at : <span style="color:black;padding:2px 0;">' . $invoice->freight_payable_at . '</span></div>
+                        <!-- <div class="col-md-6 px-0" style="color:black;padding:2px 0;">' . $invoice->freight_payable_at . '</div> -->
                         <div class="row px-0">
                             <div class=" col-md-6 px-0 shipper_heading" style="width:50%;">
                                 <div class="shipper_heading px-0">Mode of Shipment:</div>
@@ -1557,8 +1608,8 @@ class invoicecontroller extends Controller
                             </div>
 
                             <div class="col-md-6 px-0" style="width:50%;padding:2px 0;">
-                                <div class="shipper_headings" style="padding:2px 0;">Shipped on board:</div>
-                                <div style="color:black;padding:2px 0;">' . $invoice->shipped_on_board . '</div>
+                                <div class="shipper_headings" style="padding:2px 0;">Shipped on board : <span style="color:black;padding:2px 0;">' . $invoice->shipped_on_board . '</span></div>
+                                <!-- <div style="color:black;padding:2px 0;">' . $invoice->shipped_on_board . '</div> -->
                             </div>
                         </div>
                     </div>

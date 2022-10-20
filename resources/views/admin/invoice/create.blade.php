@@ -119,7 +119,7 @@
 
               <div class="form-group">
                 <label for="containg" class="form-label">Number of packages</label>
-                <input type="text" class="form-control" name="countainerpackage[]" id="countainerpackage" required>
+                <input type="number" class="form-control" name="countainerpackage[]" id="countainerpackage" required>
                 <label id="countainerpackage-error" class="error invalid-feedback animated fadeInDown" for="countainerpackage"></label>
               </div>
             </div>
@@ -135,7 +135,7 @@
           <div class="form-group">
             <label for="gross" class="form-label" style="margin-top:2px">Gross Weight</label>
 
-            <input type="text" class="form-control" name="gross[]" id="gross" required>
+            <input type="number" class="form-control" name="gross[]" id="gross" required>
             <label id="gross-error" class="error invalid-feedback animated fadeInDown" for="gross"></label>
           </div>
           </div>
@@ -150,7 +150,7 @@
               </div>
               <div class="form-group">
                 <label for="netwt" class="form-label">Net Weight</label>
-                <input type="text" class="form-control" name="netwt[]" id="netwt" required>
+                <input type="number" class="form-control" name="netwt[]" id="netwt" required>
                 <label id="netwt-error" class="error invalid-feedback animated fadeInDown" for="countainerpackage"></label>
               </div>
             </div> 
@@ -159,7 +159,7 @@
               <div class="form-group">
                 <label for="mesurment" class="form-label" style="margin-top:2px">Measurment</label>
 
-                <input type="text" class="form-control" name="mesurment[]" id="mesurment" required>
+                <input type="number" class="form-control" name="mesurment[]" id="mesurment" required>
                 <label id="mesurment-error" class="error invalid-feedback animated fadeInDown" for="mesurment"></label>
               </div>
             </div>

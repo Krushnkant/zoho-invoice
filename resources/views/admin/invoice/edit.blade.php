@@ -89,7 +89,7 @@
   </div>
   <div class="form-group">
     <label for="validationCustom05" class="form-label">No of package</label>
-    <input type="text" class="form-control" name="countainerpackage[]" value="{{ $item->container_package }}  " id="validationCustom05" required>
+    <input type="number" class="form-control" name="countainerpackage[]" value="{{ $item->container_package }}  " id="validationCustom05" required>
     <label id="nocp-error" class="error invalid-feedback animated fadeInDown" for="nocp"></label>
   </div>
   
@@ -105,7 +105,7 @@
   <div class="form-group">
     <label for="validationCustom03" class="form-label">Gross Weight</label>
 
-    <input type="text" class="form-control" name="gross[]" value="{{ $item->Gross_web }}" id="validationCustom05" required>
+    <input type="number" class="form-control" name="gross[]" value="{{ $item->Gross_web }}" id="validationCustom05" required>
     <label id="grossweb-error" class="error invalid-feedback animated fadeInDown" for="grossweb"></label>
     </div>
     
@@ -120,7 +120,7 @@
 </div>
   <div class="form-group">
     <label for="validationCustom05" class="form-label">Net Weight</label>
-    <input type="text" class="form-control" name="netwt[]" value="{{ $item->net_weight }}  " id="validationCustom05" required>
+    <input type="number" class="form-control" name="netwt[]" value="{{ $item->net_weight }}  " id="validationCustom05" required>
     <label id="nocp-error" class="error invalid-feedback animated fadeInDown" for="nocp"></label>
   </div>
 </div>
@@ -128,7 +128,7 @@
   <div class="form-group">
     <label for="validationCustom03" class="form-label">Measurment</label>
 
-    <input type="text" class="form-control" name="mesurment[]" value="{{ $item->Measurment }} " id="validationCustom05" required>
+    <input type="number" class="form-control" name="mesurment[]" value="{{ $item->Measurment }} " id="validationCustom05" required>
     <label id="mesurment-error" class="error invalid-feedback animated fadeInDown" for="gromesurmentssweb"></label>
     </div>
   </div>
