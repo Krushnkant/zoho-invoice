@@ -17,6 +17,7 @@ use Spipu\Html2Pdf\Exception\Html2PdfException;
 use Spipu\Html2Pdf\Html2Pdf;
 
 use Illuminate\Support\Facades\Validator;
+use Symfony\Component\Routing\Matcher\RedirectableUrlMatcher;
 
 class invoicecontroller extends Controller
 {
@@ -72,21 +73,17 @@ class invoicecontroller extends Controller
         curl_close($curl);
         $response1 = json_decode($response,true);
         
-        if($response1['code'] == 14 || $response1['code'] == 57)
-        {
+        if($response1['code'] == 14 || $response1['code'] == 57){
+           
             $this->accesstoken($request);
-            $this->index($request ,$billno);
-        }
-        else
-        {   
-            if($response1['message'] == "success")
-            {   
-                return view('admin.invoice.create',compact('billno'));
-            }
-            else
-            {
-                echo $response1['message'];
-            }
+            return redirect('invoice/create/'.$bill);
+
+        }else if($response1['code'] == 0){   
+
+            return view('admin.invoice.create',compact('billno'));
+            
+        }else{
+            echo $response1['message'];
         }
 
     }
